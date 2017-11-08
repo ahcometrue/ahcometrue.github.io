@@ -326,17 +326,6 @@
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/08/29/Linux命令-awk/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/08/29/Linux命令-awk/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -439,6 +428,8 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">~/Sites awk <span class="string">'gsub("3", "*") &#123;print $0&#125;'</span> 1.txt</div><div class="line">yan 10 199*</div><div class="line">jie 10 199*</div></pre></td></tr></table></figure>
 <p>查找包含“j”的行</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">~/Sites awk <span class="string">'/j/ &#123;print $0&#125;'</span> 1.txt</div><div class="line">jie 10 1993</div></pre></td></tr></table></figure>
+<p>分割</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">~/Sites awk <span class="string">'&#123;print $1&#125;'</span> | awk <span class="string">'&#123;split($0, a, ":"); print a[3]&#125;'</span> 1.txt</div></pre></td></tr></table></figure>
 
           
         
@@ -728,14 +719,6 @@
 
   
 
-    
-      <script id="dsq-count-scr" src="https://ahcometrue.disqus.com/count.js" async></script>
-    
-
-    
-
-  
-
 
 
 
@@ -748,6 +731,10 @@
   
 
 
+
+
+
+  
 
 
 

@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="小菜园">
 <meta property="og:description" content="前段时间导一些运营数据，使用awk进行了一些格式化处理、计算等，今天刚好有点空闲就记录巩固下 Help Help123456789[root@hg ~]# awk --help用法: awk [POSIX 或 GNU 风格选项] -f 脚本文件 [--] 文件 ...用法: awk [POSIX 或 GNU 风格选项] [--] &apos;程序&apos; 文件 ...gawk 是一个模式扫描及处理语言。缺省情况下">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-25T04:55:49.553Z">
+<meta property="og:updated_time" content="2017-11-08T09:59:38.255Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux命令-awk">
 <meta name="twitter:description" content="前段时间导一些运营数据，使用awk进行了一些格式化处理、计算等，今天刚好有点空闲就记录巩固下 Help Help123456789[root@hg ~]# awk --help用法: awk [POSIX 或 GNU 风格选项] -f 脚本文件 [--] 文件 ...用法: awk [POSIX 或 GNU 风格选项] [--] &apos;程序&apos; 文件 ...gawk 是一个模式扫描及处理语言。缺省情况下">
@@ -328,17 +328,6 @@
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/08/29/Linux命令-awk/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/08/29/Linux命令-awk/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -439,6 +428,8 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">~/Sites awk <span class="string">'gsub("3", "*") &#123;print $0&#125;'</span> 1.txt</div><div class="line">yan 10 199*</div><div class="line">jie 10 199*</div></pre></td></tr></table></figure>
 <p>查找包含“j”的行</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">~/Sites awk <span class="string">'/j/ &#123;print $0&#125;'</span> 1.txt</div><div class="line">jie 10 1993</div></pre></td></tr></table></figure>
+<p>分割</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">~/Sites awk <span class="string">'&#123;print $1&#125;'</span> | awk <span class="string">'&#123;split($0, a, ":"); print a[3]&#125;'</span> 1.txt</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -511,16 +502,6 @@
 
 
           
-
-  
-    <div class="comments" id="comments">
-      <div id="disqus_thread">
-        <noscript>
-          Please enable JavaScript to view the
-          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-        </noscript>
-      </div>
-    </div>
 
   
 
@@ -794,26 +775,6 @@
 
   
 
-    
-      <script id="dsq-count-scr" src="https://ahcometrue.disqus.com/count.js" async></script>
-    
-
-    
-      <script type="text/javascript">
-        var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2017/08/29/Linux命令-awk/';
-          this.page.identifier = '2017/08/29/Linux命令-awk/';
-          this.page.title = 'Linux命令-awk';
-        };
-        var d = document, s = d.createElement('script');
-        s.src = 'https://ahcometrue.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', '' + +new Date());
-        (d.head || d.body).appendChild(s);
-      </script>
-    
-
-  
-
 
 
 
@@ -826,6 +787,10 @@
   
 
 
+
+
+
+  
 
 
 
