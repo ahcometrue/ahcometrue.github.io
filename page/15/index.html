@@ -430,6 +430,8 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">~/Sites awk <span class="string">'/j/ &#123;print $0&#125;'</span> 1.txt</span><br><span class="line">jie 10 1993</span><br></pre></td></tr></table></figure>
 <p>分割</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~/Sites awk <span class="string">'&#123;print $1&#125;'</span> | awk <span class="string">'&#123;split($0, a, ":"); print a[3]&#125;'</span> 1.txt</span><br></pre></td></tr></table></figure>
+<p>去重</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//按第一列进行去重</span><br><span class="line">cat php_sort.log | awk <span class="string">'!a[$1]++&#123;print $0&#125;'</span> &gt; php_uniq.log</span><br></pre></td></tr></table></figure>
 
           
         

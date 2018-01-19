@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="小菜园">
 <meta property="og:description" content="前段时间导一些运营数据，使用awk进行了一些格式化处理、计算等，今天刚好有点空闲就记录巩固下 Help Help123456789[root@hg ~]# awk --help用法: awk [POSIX 或 GNU 风格选项] -f 脚本文件 [--] 文件 ...用法: awk [POSIX 或 GNU 风格选项] [--] &apos;程序&apos; 文件 ...gawk 是一个模式扫描及处理语言。缺省情况下">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-08T09:59:38.255Z">
+<meta property="og:updated_time" content="2018-01-19T11:40:11.732Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux命令-awk">
 <meta name="twitter:description" content="前段时间导一些运营数据，使用awk进行了一些格式化处理、计算等，今天刚好有点空闲就记录巩固下 Help Help123456789[root@hg ~]# awk --help用法: awk [POSIX 或 GNU 风格选项] -f 脚本文件 [--] 文件 ...用法: awk [POSIX 或 GNU 风格选项] [--] &apos;程序&apos; 文件 ...gawk 是一个模式扫描及处理语言。缺省情况下">
@@ -430,6 +430,8 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">~/Sites awk <span class="string">'/j/ &#123;print $0&#125;'</span> 1.txt</span><br><span class="line">jie 10 1993</span><br></pre></td></tr></table></figure>
 <p>分割</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~/Sites awk <span class="string">'&#123;print $1&#125;'</span> | awk <span class="string">'&#123;split($0, a, ":"); print a[3]&#125;'</span> 1.txt</span><br></pre></td></tr></table></figure>
+<p>去重</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//按第一列进行去重</span><br><span class="line">cat php_sort.log | awk <span class="string">'!a[$1]++&#123;print $0&#125;'</span> &gt; php_uniq.log</span><br></pre></td></tr></table></figure>
 
       
     </div>
