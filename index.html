@@ -278,7 +278,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/01/29/Ownership/" itemprop="url">Ownership</a></h1>
+                <a class="post-title-link" href="/2018/01/29/Ownership/" itemprop="url">Rust Ownership</a></h1>
         
 
         <div class="post-meta">
@@ -340,7 +340,7 @@
 <p>下面这段代码可以正常执行：</p>
 <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> x = <span class="number">5</span>;</span><br><span class="line"><span class="keyword">let</span> y = x;</span><br><span class="line"></span><br><span class="line"><span class="built_in">println!</span>(<span class="string">"x = &#123;&#125;, y = &#123;&#125;"</span>, x, y);</span><br></pre></td></tr></table></figure>
 <p>原因是在编译时对于已知大小的整数类型完全存储在堆栈中，因此对实际值的<code>clone</code>会很快完成，使用深度或浅度的<code>clone</code>并没有不同。</p>
-<p>以下是类型是<code>Copy</code>：</p>
+<p>以下类型是<code>Copy</code>：</p>
 <ul>
 <li>所有的整型。如：u32</li>
 <li>布尔类型。</li>
@@ -348,6 +348,12 @@
 <li>浮点类型。</li>
 <li>元组类型，但仅仅是相同的类型。如：(i32, i32)，而(i32, String)并不会<code>Copy</code></li>
 </ul>
+<p>对于函数的调用进行Ownership，也是大同小异。</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">main</span> </span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> s = <span class="built_in">String</span>::from(<span class="string">"Hello"</span>);</span><br><span class="line"></span><br><span class="line">    takes_ownership(s);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">"s is &#123;&#125;"</span>, s);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">takes_ownership</span></span>(some_string: <span class="built_in">String</span>) &#123;</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">"some_string value is &#123;&#125;"</span>, some_string);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>编译时将会报错，因为s的所有权移交给了函数<code>takes_ownership</code>。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> --&gt; src/main.rs:<span class="number">6</span>:<span class="number">28</span></span><br><span class="line">  |</span><br><span class="line"><span class="number">4</span> |     takes_ownership(s);             <span class="comment">// s's value moves into the function...</span></span><br><span class="line">  |                     - value moved here</span><br><span class="line"><span class="number">5</span> |     <span class="comment">// ... and so is no longer valid here.</span></span><br><span class="line"><span class="number">6</span> |     <span class="built_in">println!</span>(<span class="string">"s value &#123;&#125;"</span>, s);</span><br><span class="line">  |                            ^ value used here after <span class="keyword">move</span></span><br><span class="line">  |</span><br><span class="line">  = note: move occurs because `s` has type `std::string::String`, which does not implement the `Copy` trait</span><br></pre></td></tr></table></figure>
+<p>如果想让s在<code>main</code>函数中正常访问，只需让<code>takes_ownership</code>函数返回值即可。</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">main</span> </span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> s = <span class="built_in">String</span>::from(<span class="string">"Hello"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> s = takes_ownership(s);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">"s is &#123;&#125;"</span>, s);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">takes_ownership</span></span>(some_string: <span class="built_in">String</span>) -&gt; <span class="built_in">String</span> &#123;</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">"some_string value is &#123;&#125;"</span>, some_string);</span><br><span class="line">    <span class="keyword">let</span> some_string = some_string;</span><br><span class="line">    some_string</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
           
         
