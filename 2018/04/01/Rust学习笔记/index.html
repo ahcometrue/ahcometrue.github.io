@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Rust," />
 
 
 
@@ -79,13 +79,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="小菜园">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="模式匹配两个数进行对比使用模式匹配，如果简单的使用if比较值是否相等，编译会认为不安全的代码 1234567891011121314151617181920use std::cmp::Ordering;fn main() &amp;#123;    let a1 = vec![121, 144, 19, 161, 19, 144, 19, 11];    let a2 = vec![11*1111];">
+<meta name="keywords" content="Rust">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Rust学习笔记">
+<meta property="og:url" content="http://yoursite.com/2018/04/01/Rust学习笔记/index.html">
 <meta property="og:site_name" content="小菜园">
+<meta property="og:description" content="模式匹配两个数进行对比使用模式匹配，如果简单的使用if比较值是否相等，编译会认为不安全的代码 1234567891011121314151617181920use std::cmp::Ordering;fn main() &amp;#123;    let a1 = vec![121, 144, 19, 161, 19, 144, 19, 11];    let a2 = vec![11*1111];">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-05-07T15:59:07.902Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="小菜园">
+<meta name="twitter:title" content="Rust学习笔记">
+<meta name="twitter:description" content="模式匹配两个数进行对比使用模式匹配，如果简单的使用if比较值是否相等，编译会认为不安全的代码 1234567891011121314151617181920use std::cmp::Ordering;fn main() &amp;#123;    let a1 = vec![121, 144, 19, 161, 19, 144, 19, 11];    let a2 = vec![11*1111];">
 
 
 
@@ -115,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/04/01/Rust学习笔记/"/>
 
 
 
 
 
-  <title>小菜园</title>
+  <title>Rust学习笔记 | 小菜园</title>
   
 
 
@@ -150,8 +155,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -244,9 +248,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -276,9 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/01/Rust学习笔记/" itemprop="url">Rust学习笔记</a></h1>
+          <h1 class="post-title" itemprop="name headline">Rust学习笔记</h1>
         
 
         <div class="post-meta">
@@ -350,9 +352,7 @@
       
 
       
-        
-          
-            <h4 id="模式匹配"><a href="#模式匹配" class="headerlink" title="模式匹配"></a>模式匹配</h4><p>两个数进行对比使用模式匹配，如果简单的使用<code>if</code>比较值是否相等，编译会认为不安全的代码</p>
+        <h4 id="模式匹配"><a href="#模式匹配" class="headerlink" title="模式匹配"></a>模式匹配</h4><p>两个数进行对比使用模式匹配，如果简单的使用<code>if</code>比较值是否相等，编译会认为不安全的代码</p>
 <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> std::cmp::Ordering;</span><br><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">main</span></span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> a1 = <span class="built_in">vec!</span>[<span class="number">121</span>, <span class="number">144</span>, <span class="number">19</span>, <span class="number">161</span>, <span class="number">19</span>, <span class="number">144</span>, <span class="number">19</span>, <span class="number">11</span>];</span><br><span class="line">    <span class="keyword">let</span> a2 = <span class="built_in">vec!</span>[<span class="number">11</span>*<span class="number">1111</span>];</span><br><span class="line">    <span class="keyword">let</span> ret = comp(a1, a2);</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">"&#123;:?&#125;"</span>, ret);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">comp</span></span>(a: <span class="built_in">Vec</span>&lt;<span class="built_in">i64</span>&gt;, b: <span class="built_in">Vec</span>&lt;<span class="built_in">i64</span>&gt;) -&gt; <span class="built_in">bool</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> &amp;a &#123;</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> &amp;b &#123;</span><br><span class="line">            <span class="keyword">match</span> i.cmp(&amp;j) &#123;</span><br><span class="line">              Ordering::Less    =&gt; &#123;&#125;,  </span><br><span class="line">              Ordering::Greater =&gt; &#123;&#125;,  </span><br><span class="line">              Ordering::Equal   =&gt; <span class="keyword">return</span> <span class="literal">true</span>,</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h4><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">main</span></span>() &#123;</span><br><span class="line">  <span class="keyword">let</span> test_data1 = <span class="built_in">vec!</span>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>];</span><br><span class="line">  <span class="built_in">println!</span>(<span class="string">"&#123;:?&#125;"</span>, count_positives_sum_negatives(test_data1));</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">count_positives_sum_negatives</span></span>(input: <span class="built_in">Vec</span>&lt;<span class="built_in">i32</span>&gt;) -&gt; <span class="built_in">Vec</span>&lt;<span class="built_in">i32</span>&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> input.is_empty() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">vec!</span>[];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//`into_iter` 和 `iter`的区别，`iter`需要传引用</span></span><br><span class="line">  input.into_iter().fold(<span class="built_in">vec!</span>[<span class="number">0</span>, <span class="number">0</span>], |<span class="keyword">mut</span> acc, x| &#123;</span><br><span class="line">    <span class="keyword">if</span> x &gt; <span class="number">0</span> &#123;</span><br><span class="line">      acc[<span class="number">0</span>] += <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      acc[<span class="number">1</span>] += x;</span><br><span class="line">    &#125;</span><br><span class="line">    acc</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h4><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">main</span></span>() &#123;</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">"&#123;:?&#125;"</span>,  get_age(<span class="string">""</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">get_age</span></span>(age: &amp;<span class="built_in">str</span>) -&gt; <span class="built_in">u32</span> &#123;</span><br><span class="line">    <span class="comment">//age.chars().next().unwrap().to_digit(10).unwrap()</span></span><br><span class="line">    <span class="keyword">let</span> (a, _) =  age.split_at(<span class="number">1</span>);</span><br><span class="line">    a.parse::&lt;<span class="built_in">u32</span>&gt;().unwrap()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -371,8 +371,6 @@
 <p><code>#![allow(dead_code)]</code></p>
 <p><code>#![allow(unreachable_code)]</code></p>
 
-          
-        
       
     </div>
     
@@ -387,14 +385,36 @@
 
     <footer class="post-footer">
       
-
+        <div class="post-tags">
+          
+            <a href="/tags/Rust/" rel="tag"># Rust</a>
+          
+        </div>
       
 
       
+      
+      
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/31/RustInteractiveCommandLine/" rel="next" title="Rust交互命令行源码分析">
+                <i class="fa fa-chevron-left"></i> Rust交互命令行源码分析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
       
-        <div class="post-eof"></div>
+
+      
       
     </footer>
   </div>
@@ -404,14 +424,11 @@
   </article>
 
 
-    
-  </section>
 
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
-
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -419,6 +436,15 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTM3Ni8xMTkxMg=="></div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -439,8 +465,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -504,6 +539,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#模式匹配"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x6A21;&#x5F0F;&#x5339;&#x914D;" class="headerlink" title="&#x6A21;&#x5F0F;&#x5339;&#x914D;"></a>&#x6A21;&#x5F0F;&#x5339;&#x914D;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#迭代"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x8FED;&#x4EE3;" class="headerlink" title="&#x8FED;&#x4EE3;"></a>&#x8FED;&#x4EE3;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类型转换"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x7C7B;&#x578B;&#x8F6C;&#x6362;" class="headerlink" title="&#x7C7B;&#x578B;&#x8F6C;&#x6362;"></a>&#x7C7B;&#x578B;&#x8F6C;&#x6362;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#结构体"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x7ED3;&#x6784;&#x4F53;" class="headerlink" title="&#x7ED3;&#x6784;&#x4F53;"></a>&#x7ED3;&#x6784;&#x4F53;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#枚举"><span class="nav-number">5.</span> <span class="nav-text"><a href="#&#x679A;&#x4E3E;" class="headerlink" title="&#x679A;&#x4E3E;"></a>&#x679A;&#x4E3E;</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -644,6 +695,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -672,6 +727,17 @@
 
 
 
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
   
 
 
