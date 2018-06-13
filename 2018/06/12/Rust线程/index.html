@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Rust," />
 
 
 
@@ -79,13 +79,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="小菜园">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="现在是越来越喜欢Rust了，敲了很多PHP代码，然而对多线程的了解却少之又少。 Rust并发为什么可以做的好？摘自官方文档的说明：  Initially, the Rust team thought that ensuring memory safety and preventing concurrency problems were two separate challenges to be s">
+<meta name="keywords" content="Rust">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Rust线程">
+<meta property="og:url" content="http://yoursite.com/2018/06/12/Rust线程/index.html">
 <meta property="og:site_name" content="小菜园">
+<meta property="og:description" content="现在是越来越喜欢Rust了，敲了很多PHP代码，然而对多线程的了解却少之又少。 Rust并发为什么可以做的好？摘自官方文档的说明：  Initially, the Rust team thought that ensuring memory safety and preventing concurrency problems were two separate challenges to be s">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-06-13T14:59:15.919Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="小菜园">
+<meta name="twitter:title" content="Rust线程">
+<meta name="twitter:description" content="现在是越来越喜欢Rust了，敲了很多PHP代码，然而对多线程的了解却少之又少。 Rust并发为什么可以做的好？摘自官方文档的说明：  Initially, the Rust team thought that ensuring memory safety and preventing concurrency problems were two separate challenges to be s">
 
 
 
@@ -115,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/12/Rust线程/"/>
 
 
 
 
 
-  <title>小菜园</title>
+  <title>Rust线程 | 小菜园</title>
   
 
 
@@ -150,8 +155,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -244,9 +248,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -276,9 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/12/Rust线程/" itemprop="url">Rust线程</a></h1>
+          <h1 class="post-title" itemprop="name headline">Rust线程</h1>
         
 
         <div class="post-meta">
@@ -350,9 +352,7 @@
       
 
       
-        
-          
-            <p>现在是越来越喜欢Rust了，敲了很多PHP代码，然而对多线程的了解却少之又少。</p>
+        <p>现在是越来越喜欢Rust了，敲了很多PHP代码，然而对多线程的了解却少之又少。</p>
 <h2 id="Rust并发为什么可以做的好？"><a href="#Rust并发为什么可以做的好？" class="headerlink" title="Rust并发为什么可以做的好？"></a>Rust并发为什么可以做的好？</h2><p>摘自官方文档的说明：</p>
 <blockquote>
 <p>Initially, the Rust team thought that ensuring memory safety and preventing concurrency problems were two separate challenges to be solved with different methods. Over time, the team discovered that the ownership and type systems are a powerful set of tools to help manage memory safety and concurrency problems! By leveraging ownership and type checking, many concurrency errors are compile-time errors in Rust rather than runtime errors. Therefore, rather than making you spend lots of time trying to reproduce the exact circumstances under which a runtime concurrency bug occurs, incorrect code will refuse to compile and present an error explaining the problem. As a result, you can fix your code while you’re working on it rather than potentially after it has been shipped to production. We’ve nicknamed this aspect of Rust fearless concurrency. Fearless concurrency allows you to write code that is free of subtle bugs and is easy to refactor without introducing new bugs.</p>
@@ -397,8 +397,6 @@
 </li>
 </ul>
 
-          
-        
       
     </div>
     
@@ -413,14 +411,36 @@
 
     <footer class="post-footer">
       
-
+        <div class="post-tags">
+          
+            <a href="/tags/Rust/" rel="tag"># Rust</a>
+          
+        </div>
       
 
       
+      
+      
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/01/Rust学习笔记/" rel="next" title="Rust学习笔记">
+                <i class="fa fa-chevron-left"></i> Rust学习笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
       
-        <div class="post-eof"></div>
+
+      
       
     </footer>
   </div>
@@ -430,14 +450,11 @@
   </article>
 
 
-    
-  </section>
 
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/29/">29</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
-
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -445,6 +462,15 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTM3Ni8xMTkxMg=="></div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -465,8 +491,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -530,6 +565,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Rust并发为什么可以做的好？"><span class="nav-number">1.</span> <span class="nav-text"><a href="#Rust&#x5E76;&#x53D1;&#x4E3A;&#x4EC0;&#x4E48;&#x53EF;&#x4EE5;&#x505A;&#x7684;&#x597D;&#xFF1F;" class="headerlink" title="Rust&#x5E76;&#x53D1;&#x4E3A;&#x4EC0;&#x4E48;&#x53EF;&#x4EE5;&#x505A;&#x7684;&#x597D;&#xFF1F;"></a>Rust&#x5E76;&#x53D1;&#x4E3A;&#x4EC0;&#x4E48;&#x53EF;&#x4EE5;&#x505A;&#x7684;&#x597D;&#xFF1F;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程小试"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x7EBF;&#x7A0B;&#x5C0F;&#x8BD5;" class="headerlink" title="&#x7EBF;&#x7A0B;&#x5C0F;&#x8BD5;"></a>&#x7EBF;&#x7A0B;&#x5C0F;&#x8BD5;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用spawn创建新线程"><span class="nav-number">2.1.</span> <span class="nav-text"><a href="#&#x4F7F;&#x7528;spawn&#x521B;&#x5EFA;&#x65B0;&#x7EBF;&#x7A0B;" class="headerlink" title="&#x4F7F;&#x7528;spawn&#x521B;&#x5EFA;&#x65B0;&#x7EBF;&#x7A0B;"></a>&#x4F7F;&#x7528;<code>spawn</code>&#x521B;&#x5EFA;&#x65B0;&#x7EBF;&#x7A0B;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用join等待所有线程结束"><span class="nav-number">2.2.</span> <span class="nav-text"><a href="#&#x4F7F;&#x7528;join&#x7B49;&#x5F85;&#x6240;&#x6709;&#x7EBF;&#x7A0B;&#x7ED3;&#x675F;" class="headerlink" title="&#x4F7F;&#x7528;join&#x7B49;&#x5F85;&#x6240;&#x6709;&#x7EBF;&#x7A0B;&#x7ED3;&#x675F;"></a>&#x4F7F;&#x7528;<code>join</code>&#x7B49;&#x5F85;&#x6240;&#x6709;&#x7EBF;&#x7A0B;&#x7ED3;&#x675F;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程与move闭包"><span class="nav-number">2.3.</span> <span class="nav-text"><a href="#&#x7EBF;&#x7A0B;&#x4E0E;move&#x95ED;&#x5305;" class="headerlink" title="&#x7EBF;&#x7A0B;&#x4E0E;move&#x95ED;&#x5305;"></a>&#x7EBF;&#x7A0B;&#x4E0E;<code>move</code>&#x95ED;&#x5305;</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -670,6 +721,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -698,6 +753,17 @@
 
 
 
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
   
 
 
