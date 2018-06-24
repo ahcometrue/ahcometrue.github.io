@@ -353,8 +353,8 @@
         
           
             <p>为什么小时候感觉一年的时间很长，现在却越来越短？是不是对这个世界了解的越多，人生越短暂？</p>
-<h2 id="什么是装饰器"><a href="#什么是装饰器" class="headerlink" title="什么是装饰器"></a>什么是装饰器</h2><p>如果我们需要对一个函数在调用前后自动打印日志，但又不希望修改现有函数的定义，这种在代码运行期间动态增加功能的方式，<br>称之为“装饰器”。</p>
-<p>装饰器本质上就是一个函数，只是python对它进行了简化，形成的现今的语法糖模式，装饰器的返回值<br>也是一个函数对象。装饰器的作用就是为了已经存在的函数或对象添加额外的功能。</p>
+<h2 id="什么是装饰器"><a href="#什么是装饰器" class="headerlink" title="什么是装饰器"></a>什么是装饰器</h2><p>如果我们需要对一个函数在调用前后自动打印日志，但又不希望修改现有函数的定义，这种在代码运行期间动态增加功能的方式，称之为“装饰器”。</p>
+<p>装饰器本质上就是一个函数，只是python对它进行了简化，形成的现今的语法糖模式，装饰器的返回值也是一个函数对象。装饰器的作用就是为了已经存在的函数或对象添加额外的功能。</p>
 <p>下面开始举栗子：<br>如果我们执行<code>foo</code>函数时，需要记录日志。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span>:</span></span><br><span class="line">	print(<span class="string">'function is foo'</span>)</span><br></pre></td></tr></table></figure></p>
 <p>不用装饰器的模式，我们需要这样写：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span>:</span></span><br><span class="line">	print(<span class="string">'function is foo'</span>)</span><br><span class="line">	log.debug(<span class="string">'foo'</span>)</span><br></pre></td></tr></table></figure></p>
 <h2 id="为什么需要装饰器"><a href="#为什么需要装饰器" class="headerlink" title="为什么需要装饰器"></a>为什么需要装饰器</h2><p>装饰器可以简化代码复杂度，可以抽离大量与函数功能本身无关的雷同的代码并继续重用。<br>举个栗子：<br>在接口调用时进行权限校验，如果没有权限抛出异常，有权限则继续进行。</p>
