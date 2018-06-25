@@ -259,7 +259,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/05/redis源码1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/21/Linux文件处理杂记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="韩">
@@ -278,7 +278,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/11/05/redis源码1/" itemprop="url">Redis源码-简单字符串SDS</a></h1>
+                <a class="post-title-link" href="/2017/11/21/Linux文件处理杂记/" itemprop="url">Linux文件处理杂记</a></h1>
         
 
         <div class="post-meta">
@@ -290,8 +290,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-05T11:18:43+08:00">
-                2017-11-05
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-21T15:51:50+08:00">
+                2017-11-21
               </time>
             
 
@@ -300,28 +300,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Redis/" itemprop="url" rel="index">
-                    <span itemprop="name">Redis</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -352,17 +330,15 @@
       
         
           
-            <h3 id="结构体定义"><a href="#结构体定义" class="headerlink" title="结构体定义"></a>结构体定义</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">struct sdshdr &#123;</span><br><span class="line"></span><br><span class="line">    //记录buf中已占用空间的长度</span><br><span class="line">    //5 表示这个sds保存了一个五字节长的字符串</span><br><span class="line"></span><br><span class="line">    int len;</span><br><span class="line"></span><br><span class="line">    // 记录buf中剩余可用空间的长度</span><br><span class="line">    //0 表示这个sds没有分配任何未使用的空间</span><br><span class="line"></span><br><span class="line">    int free;</span><br><span class="line"></span><br><span class="line">    // 数据空间</span><br><span class="line">    //redis字符串在buf中是一个数组,[&apos;r&apos;,&apos;e&apos;,&apos;d&apos;,&apos;i&apos;,&apos;s&apos;]</span><br><span class="line">    //最后一位&apos;\0&apos;是空字符，不记在len中</span><br><span class="line"></span><br><span class="line">    char buf[];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h3 id="SDS与C字符串实现的区别"><a href="#SDS与C字符串实现的区别" class="headerlink" title="SDS与C字符串实现的区别"></a>SDS与C字符串实现的区别</h3><h4 id="记录字符长度"><a href="#记录字符长度" class="headerlink" title="记录字符长度"></a>记录字符长度</h4><p>常规C字符串不记录字符串本身长度，所以取C中的字符串必须遍历整个字符串，操作复杂度为O(N)。</p>
-<p>而SDS实现了字符串长度记录，可直接读取len，操作复杂度为O(1)。确保了redis获得长度而成为redis性能瓶颈。</p>
-<h4 id="杜绝了缓冲区溢出"><a href="#杜绝了缓冲区溢出" class="headerlink" title="杜绝了缓冲区溢出"></a>杜绝了缓冲区溢出</h4><p>因为C不记录字符串长度，所以进程字符串复制、修改时，如果内存分配失误，便有可能产生缓冲溢出。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//追加字符串t到s的尾部</span><br><span class="line">sds sdscat(sds s, const char *t) &#123;</span><br><span class="line">    return sdscatlen(s, t, strlen(t));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">sds sdscatlen(sds s, const void *t, size_t len) &#123;</span><br><span class="line"></span><br><span class="line">    struct sdshdr *sh;</span><br><span class="line"></span><br><span class="line">    // 原有字符串长度</span><br><span class="line">    size_t curlen = sdslen(s);</span><br><span class="line"></span><br><span class="line">    // 扩展 sds 空间</span><br><span class="line">    // T = O(N)</span><br><span class="line">    s = sdsMakeRoomFor(s,len);</span><br><span class="line"></span><br><span class="line">    // 内存不足？直接返回</span><br><span class="line">    if (s == NULL) return NULL;</span><br><span class="line"></span><br><span class="line">    // 复制 t 中的内容到字符串后部</span><br><span class="line">    // T = O(N)</span><br><span class="line">    sh = (void*) (s-(sizeof(struct sdshdr)));</span><br><span class="line">    memcpy(s+curlen, t, len);</span><br><span class="line"></span><br><span class="line">    // 更新属性</span><br><span class="line">    sh-&gt;len = curlen+len;</span><br><span class="line">    sh-&gt;free = sh-&gt;free-len;</span><br><span class="line"></span><br><span class="line">    // 添加新结尾符号</span><br><span class="line">    s[curlen+len] = &apos;\0&apos;;</span><br><span class="line"></span><br><span class="line">    // 返回新 sds</span><br><span class="line">    return s;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">sds sdsMakeRoomFor(sds s, size_t addlen) &#123;</span><br><span class="line"></span><br><span class="line">    struct sdshdr *sh, *newsh;</span><br><span class="line"></span><br><span class="line">    // 获取 s 目前的空余空间长度</span><br><span class="line">    size_t free = sdsavail(s);</span><br><span class="line"></span><br><span class="line">    size_t len, newlen;</span><br><span class="line"></span><br><span class="line">    // s 目前的空余空间已经足够，无须再进行扩展，直接返回</span><br><span class="line">    if (free &gt;= addlen) return s;</span><br><span class="line"></span><br><span class="line">    // 获取 s 目前已占用空间的长度</span><br><span class="line">    len = sdslen(s);</span><br><span class="line">    sh = (void*) (s-(sizeof(struct sdshdr)));</span><br><span class="line"></span><br><span class="line">    // s 最少需要的长度</span><br><span class="line">    newlen = (len+addlen);</span><br><span class="line"></span><br><span class="line">    // 根据新长度，为 s 分配新空间所需的大小</span><br><span class="line">    if (newlen &lt; SDS_MAX_PREALLOC)</span><br><span class="line">        // 如果新长度小于 SDS_MAX_PREALLOC </span><br><span class="line">        // 那么为它分配两倍于所需长度的空间</span><br><span class="line">        newlen *= 2;</span><br><span class="line">    else</span><br><span class="line">        // 否则，分配长度为目前长度加上 SDS_MAX_PREALLOC</span><br><span class="line">        newlen += SDS_MAX_PREALLOC;</span><br><span class="line">    // T = O(N)</span><br><span class="line">    newsh = zrealloc(sh, sizeof(struct sdshdr)+newlen+1);</span><br><span class="line"></span><br><span class="line">    // 内存不足，分配失败，返回</span><br><span class="line">    if (newsh == NULL) return NULL;</span><br><span class="line"></span><br><span class="line">    // 更新 sds 的空余长度</span><br><span class="line">    newsh-&gt;free = newlen - len;</span><br><span class="line"></span><br><span class="line">    // 返回 sds</span><br><span class="line">    return newsh-&gt;buf;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="编译测试"><a href="#编译测试" class="headerlink" title="编译测试"></a>编译测试</h3><p>根据sds.c的定义即可知道<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">#include &lt;ctype.h&gt;</span><br><span class="line">#include &lt;assert.h&gt;</span><br><span class="line">#include &quot;sds.h&quot;</span><br><span class="line">#include &quot;zmalloc.h&quot;</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line"></span><br><span class="line">#ifdef SDS_TEST_MAIN</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &quot;testhelp.h&quot;</span><br><span class="line">#include &quot;limits.h&quot;</span><br><span class="line"></span><br><span class="line">int main(void) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br></pre></td></tr></table></figure></p>
-<p>使用gcc编译<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 直接编译</span></span><br><span class="line">gcc zmalloc.c testhelp.h sds.c -D SDS_TEST_MAIN</span><br><span class="line"><span class="comment"># gdb编译</span></span><br><span class="line">gcc -g zmalloc.c testhelp.h sds.c -D SDS_TEST_MAIN</span><br></pre></td></tr></table></figure></p>
-<p>运行a.out</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">~/Sites/redis-3.0-annotated/src(unstable ✗) ./a.out</span><br><span class="line">1 - Create a string and obtain the length: PASSED</span><br><span class="line">2 - Create a string with specified length: PASSED</span><br><span class="line">3 - Strings concatenation: PASSED</span><br><span class="line">4 - sdscpy() against an originally longer string: PASSED</span><br><span class="line">5 - sdscpy() against an originally shorter string: PASSED</span><br><span class="line">6 - sdscatprintf() seems working <span class="keyword">in</span> the base <span class="keyword">case</span>: PASSED</span><br><span class="line">7 - sdscatfmt() seems working <span class="keyword">in</span> the base <span class="keyword">case</span>: PASSED</span><br><span class="line">8 - sdscatfmt() seems working with unsigned numbers: PASSED</span><br><span class="line">9 - sdstrim() correctly trims characters: PASSED</span><br><span class="line">10 - sdsrange(...,1,1): PASSED</span><br><span class="line">11 - sdsrange(...,1,-1): PASSED</span><br><span class="line">12 - sdsrange(...,-2,-1): PASSED</span><br><span class="line">13 - sdsrange(...,2,1): PASSED</span><br><span class="line">14 - sdsrange(...,1,100): PASSED</span><br><span class="line">15 - sdsrange(...,100,100): PASSED</span><br><span class="line">16 - sdscmp(foo,foa): PASSED</span><br><span class="line">17 - sdscmp(bar,bar): PASSED</span><br><span class="line">18 - sdscmp(bar,bar): PASSED</span><br><span class="line">19 - sdscatrepr(...data...): PASSED</span><br><span class="line">20 - sdsnew() free/len buffers: PASSED</span><br><span class="line">21 - sdsMakeRoomFor(): PASSED</span><br><span class="line">22 - sdsIncrLen() -- content: PASSED</span><br><span class="line">23 - sdsIncrLen() -- len: PASSED</span><br><span class="line">24 - sdsIncrLen() -- free: PASSED</span><br><span class="line">25 tests, 24 passed, 0 failed</span><br></pre></td></tr></table></figure>
+            <ul>
+<li>取前30行</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">head -n 30 sort_chat_num_1027_before.csv &gt; top30_before.csv</span><br></pre></td></tr></table></figure>
+<ul>
+<li>文件按第三列排序</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//源文件</span><br><span class="line">~/Desktop cat 1027_later.csv | more</span><br><span class="line">2017-10-27, 1900086667, 3</span><br><span class="line">2017-10-27, 1900088305, 0</span><br><span class="line">2017-10-29, 1900092050, 1</span><br><span class="line">2017-11-01, 1900101877, 0</span><br><span class="line">2017-11-01, 1900102164, 0</span><br><span class="line">2017-11-01, 1900102646, 0</span><br><span class="line">2017-11-03, 1900105446, 3</span><br><span class="line">2017-11-03, 1900106760, 10</span><br><span class="line">2017-11-04, 1900108652, 0</span><br><span class="line">2017-11-04, 1900108943, 3</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sort -t ',' -k 3 -nr 1027_later.csv &gt; sort_chat_num_1027_later.csv</span><br></pre></td></tr></table></figure>
           
         
       
@@ -401,7 +377,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/10/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/29/">29</a><a class="extend next" rel="next" href="/page/12/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/10/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/12/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -451,7 +427,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-count">30</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -473,7 +449,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
