@@ -259,7 +259,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/15/python异常处理/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/18/vim使用记录/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="韩">
@@ -278,7 +278,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/12/15/python异常处理/" itemprop="url">Python异常处理</a></h1>
+                <a class="post-title-link" href="/2017/12/18/vim使用记录/" itemprop="url">vim使用记录</a></h1>
         
 
         <div class="post-meta">
@@ -290,8 +290,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-15T23:30:48+08:00">
-                2017-12-15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-18T10:18:08+08:00">
+                2017-12-18
               </time>
             
 
@@ -313,8 +313,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
+                  <a href="/categories/VIM/" itemprop="url" rel="index">
+                    <span itemprop="name">VIM</span>
                   </a>
                 </span>
 
@@ -352,74 +352,62 @@
       
         
           
-            <p>最近研究了下python的异常处理，现记录下。python的异常设计还是不错的。</p>
-<h3 id="常见异常"><a href="#常见异常" class="headerlink" title="常见异常"></a>常见异常</h3><table>
-<thead>
-<tr>
-<th>常见异常</th>
-<th>解释</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>IOError</td>
-<td>输入\输出异常；基本是无法打开文件</td>
-</tr>
-<tr>
-<td>ImportError</td>
-<td>无法引入模块或包；基本上是路径问题或名称错误</td>
-</tr>
-<tr>
-<td>IndexError</td>
-<td>下表索引超出序列边界</td>
-</tr>
-<tr>
-<td>KeyError</td>
-<td>试图访问字典里不存在的键</td>
-</tr>
-<tr>
-<td>NameError</td>
-<td>使用一个还未被赋予对象的变量</td>
-</tr>
-<tr>
-<td>IndentationError</td>
-<td>语法错误(的子类)；代码没有正确对齐</td>
-</tr>
-<tr>
-<td>SyntaxError</td>
-<td>python代码非法，代码不能编译</td>
-</tr>
-<tr>
-<td>KeyboardInterrupt</td>
-<td>Ctrl+C被按下</td>
-</tr>
-<tr>
-<td>EOFError</td>
-<td>Ctrl+D被按下</td>
-</tr>
-<tr>
-<td>UnboundLocalError</td>
-<td>试图访问一个还未被设置的局部变量，基本上是由于另一个同名的全局变量，导致以为正在访问它</td>
-</tr>
-<tr>
-<td>AttrbuteError</td>
-<td>试图访问一个对象没有的属性</td>
-</tr>
-<tr>
-<td>ValueError</td>
-<td>传入一个调用者不期望的值，即使值的类型是正确的</td>
-</tr>
-<tr>
-<td>TypeError</td>
-<td>传入对象的类型与要求的不符合</td>
-</tr>
-</tbody>
-</table>
-<h3 id="异常的捕捉"><a href="#异常的捕捉" class="headerlink" title="异常的捕捉"></a>异常的捕捉</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">	a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">	a[<span class="number">3</span>]</span><br><span class="line"><span class="keyword">except</span> IndexError:</span><br><span class="line">	print(<span class="string">'IndexError'</span>)</span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">	print(<span class="string">'finally'</span>)</span><br></pre></td></tr></table></figure>
-<p>except后面可以不再加异常也可加多个异常。</p>
-<p>else: 没有发现异常是会执行<br>finally: 无论是否发生异常都会执行</p>
-<h3 id="定制自己的异常"><a href="#定制自己的异常" class="headerlink" title="定制自己的异常"></a>定制自己的异常</h3><p>虽然python内置的异常已经很多，但有时我们需要实现自己的异常功能。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">class HException(Exception):</span><br><span class="line">	pass</span><br><span class="line">try:</span><br><span class="line">	name = raw_input(&apos;name:&apos;).strip()</span><br><span class="line">	if name != &apos;han&apos;:</span><br><span class="line">		raise HException</span><br><span class="line">except HException:</span><br><span class="line">	print(&apos;No valid name sepecfied...&apos;)</span><br></pre></td></tr></table></figure>
+            <h3 id="使用的插件及配置"><a href="#使用的插件及配置" class="headerlink" title="使用的插件及配置"></a>使用的插件及配置</h3><p>github：<a href="https://github.com/spf13/spf13-vim" target="_blank" rel="noopener">https://github.com/spf13/spf13-vim</a></p>
+<h3 id="命令小记"><a href="#命令小记" class="headerlink" title="命令小记"></a>命令小记</h3><p><code>:args</code>  查看已打开的文件列</p>
+<p><code>:hide edit foo.txt</code> 不保存，隐藏当前的文件，编辑foo.txt</p>
+<p><code>:wnext</code>  保存当前，并进入下一个文件</p>
+<p><code>:wprevious</code> 保存当前，并进入上一个文件</p>
+<p><code>:last</code>  移动到列表最后一个</p>
+<p><code>:first</code>  移动到列表第一个</p>
+<p><code>:vertical diffsplit FILE_RIGHT</code>对比文件</p>
+<p>`“ 跳到上次离开这个文件的位置</p>
+<p>`. 跳到这个文件最后一次修改的位置</p>
+<p><code>mx</code>   文件标记</p>
+<p><code>50%mJ</code>  在这个文件做一个标记，在其他地方可以使用 `{mark} 跳回到该位置，此时mark就是J</p>
+<p><code>:marks J</code>  查看J标记在什么地方</p>
+<p><code>:%s/allen/tony/g</code> 全局替换，将文本中所有的 allen 替换为 tony</p>
+<p><code>9y</code> 拷贝第9行，不必移动光标</p>
+<p><code>ggvG</code> 全选文件内容</p>
+<p><code>gg=G</code> 格式化文件</p>
+<p><code>=</code> 格式化选定文本</p>
+<p><code>vip</code> 选取当前光标所在段落</p>
+<p><code>&lt;</code> 取消缩进文本</p>
+<p><code>5&lt;&lt;</code> 对5行文本取消缩进</p>
+<p><code>:marks</code> 查看所有书签</p>
+<p><code>delm X</code> 删除书签X</p>
+<p><code>:ls</code> 查看缓冲区</p>
+<p><code>:bN</code> 打开缓冲区N</p>
+<p><code>vim -o *.php</code> 打开当前目录下全部.php文件</p>
+<p><code>:qa</code> 退出全部窗口</p>
+<p><code>:1?xxx / G?xxx</code> 从文件末尾开始查找</p>
+<p><code>J</code> 合并行</p>
+<p><code>gj / gk</code> 对于换行的段落的行移动</p>
+<p><code>:sh</code> 暂时离开vi，进入shell</p>
+<p><code>:!ls</code> !表示要执行一个shell命令</p>
+<p><code>q:</code> 调出历史命令窗口</p>
+<p><code>cc</code> 替换一行，清空一行</p>
+<p><code>ew</code> 替换一个单词，进入插入模式</p>
+<p><code>ea</code> 在当前单词最后插入</p>
+<p><code>VU</code> 全选一行，转换成大写</p>
+<p><code>Vu</code> 全选一行，转换成小写</p>
+<p><code>:5,12 co 13</code> 将5至12行复制到第13行下</p>
+<p><code>%</code> 匹配括号移动</p>
+<p><code>*</code> 和 <code>#</code> 匹配光标当前所在的单词，移动到下(上)一个匹配的单词</p>
+<p><code>,c&lt;空格&gt;</code> 被选区域被注释，则取消，反之，注释</p>
+<p><code>,cc</code> 注释当前行和选中行</p>
+<h4 id="插件使用"><a href="#插件使用" class="headerlink" title="插件使用"></a>插件使用</h4><ul>
+<li>SESSION</li>
+</ul>
+<p><code>,sl</code> session list</p>
+<p><code>,ss</code> session save</p>
+<p><code>,sc</code> session close</p>
+<ul>
+<li>NERDTree</li>
+</ul>
+<p><code>ma</code> 新建文件或目录</p>
+<ul>
+<li>Bookmark</li>
+</ul>
 
           
         
@@ -459,7 +447,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -509,7 +497,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
