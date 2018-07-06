@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Redis," />
 
 
 
@@ -79,13 +79,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="小菜园">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="昨天在公司做一次redis分享，之前做的源码分享同事反馈实用性太弱算法不好理解，我就来讲讲实战方面的。 设想数据级别在上亿级别，以下key都在同一台redis实例中。 部分数据   id name sex age languages location     1 常 汉子 20 JS + Node + Java + PHP (121.45, 31.20)   2 青 汉子 20 JS + Node">
+<meta name="keywords" content="Redis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="redis应用实例">
+<meta property="og:url" content="http://yoursite.com/2018/07/06/redis应用实例/index.html">
 <meta property="og:site_name" content="小菜园">
+<meta property="og:description" content="昨天在公司做一次redis分享，之前做的源码分享同事反馈实用性太弱算法不好理解，我就来讲讲实战方面的。 设想数据级别在上亿级别，以下key都在同一台redis实例中。 部分数据   id name sex age languages location     1 常 汉子 20 JS + Node + Java + PHP (121.45, 31.20)   2 青 汉子 20 JS + Node">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-07-06T06:50:46.751Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="小菜园">
+<meta name="twitter:title" content="redis应用实例">
+<meta name="twitter:description" content="昨天在公司做一次redis分享，之前做的源码分享同事反馈实用性太弱算法不好理解，我就来讲讲实战方面的。 设想数据级别在上亿级别，以下key都在同一台redis实例中。 部分数据   id name sex age languages location     1 常 汉子 20 JS + Node + Java + PHP (121.45, 31.20)   2 青 汉子 20 JS + Node">
 
 
 
@@ -115,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/06/redis应用实例/"/>
 
 
 
 
 
-  <title>小菜园</title>
+  <title>redis应用实例 | 小菜园</title>
   
 
 
@@ -150,8 +155,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -244,9 +248,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -276,9 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/06/redis应用实例/" itemprop="url">redis应用实例</a></h1>
+          <h1 class="post-title" itemprop="name headline">redis应用实例</h1>
         
 
         <div class="post-meta">
@@ -350,9 +352,7 @@
       
 
       
-        
-          
-            <p>昨天在公司做一次redis分享，之前做的源码分享同事反馈实用性太弱算法不好理解，我就来讲讲实战方面的。</p>
+        <p>昨天在公司做一次redis分享，之前做的源码分享同事反馈实用性太弱算法不好理解，我就来讲讲实战方面的。</p>
 <p>设想数据级别在上亿级别，以下key都在同一台redis实例中。</p>
 <h3 id="部分数据"><a href="#部分数据" class="headerlink" title="部分数据"></a>部分数据</h3><table>
 <thead>
@@ -513,8 +513,6 @@
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$nearby = $redis-&gt;GEORADIUSBYMEMBER(<span class="string">'geo'</span>, <span class="number">7</span>, <span class="number">111</span>, <span class="string">'km'</span>);</span><br><span class="line">$str = <span class="string">'亮111km以内有：'</span>;</span><br><span class="line"><span class="keyword">foreach</span> ($nearby <span class="keyword">as</span> $id) &#123;</span><br><span class="line">    <span class="keyword">if</span> ($id != <span class="number">7</span>) &#123;</span><br><span class="line">        $str .= $id_name[(int)$id].<span class="string">' '</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">echo</span> $str;</span><br></pre></td></tr></table></figure>
 
-          
-        
       
     </div>
     
@@ -529,14 +527,36 @@
 
     <footer class="post-footer">
       
-
+        <div class="post-tags">
+          
+            <a href="/tags/Redis/" rel="tag"># Redis</a>
+          
+        </div>
       
 
       
+      
+      
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/30/读研/" rel="next" title="读研">
+                <i class="fa fa-chevron-left"></i> 读研
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
       
-        <div class="post-eof"></div>
+
+      
       
     </footer>
   </div>
@@ -546,14 +566,11 @@
   </article>
 
 
-    
-  </section>
 
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/32/">32</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
-
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -561,6 +578,15 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTM3Ni8xMTkxMg=="></div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -581,8 +607,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -646,6 +681,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#部分数据"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x90E8;&#x5206;&#x6570;&#x636E;" class="headerlink" title="&#x90E8;&#x5206;&#x6570;&#x636E;"></a>&#x90E8;&#x5206;&#x6570;&#x636E;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#产品需求"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x4EA7;&#x54C1;&#x9700;&#x6C42;" class="headerlink" title="&#x4EA7;&#x54C1;&#x9700;&#x6C42;"></a>&#x4EA7;&#x54C1;&#x9700;&#x6C42;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关注关系的实现"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x5173;&#x6CE8;&#x5173;&#x7CFB;&#x7684;&#x5B9E;&#x73B0;" class="headerlink" title="&#x5173;&#x6CE8;&#x5173;&#x7CFB;&#x7684;&#x5B9E;&#x73B0;"></a>&#x5173;&#x6CE8;&#x5173;&#x7CFB;&#x7684;&#x5B9E;&#x73B0;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户标签的聚合"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x7528;&#x6237;&#x6807;&#x7B7E;&#x7684;&#x805A;&#x5408;" class="headerlink" title="&#x7528;&#x6237;&#x6807;&#x7B7E;&#x7684;&#x805A;&#x5408;"></a>&#x7528;&#x6237;&#x6807;&#x7B7E;&#x7684;&#x805A;&#x5408;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#准备数据"><span class="nav-number">4.1.</span> <span class="nav-text"><a href="#&#x51C6;&#x5907;&#x6570;&#x636E;" class="headerlink" title="&#x51C6;&#x5907;&#x6570;&#x636E;"></a>&#x51C6;&#x5907;&#x6570;&#x636E;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决问题"><span class="nav-number">4.2.</span> <span class="nav-text"><a href="#&#x89E3;&#x51B3;&#x95EE;&#x9898;" class="headerlink" title="&#x89E3;&#x51B3;&#x95EE;&#x9898;"></a>&#x89E3;&#x51B3;&#x95EE;&#x9898;</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#距离关系"><span class="nav-number">5.</span> <span class="nav-text"><a href="#&#x8DDD;&#x79BB;&#x5173;&#x7CFB;" class="headerlink" title="&#x8DDD;&#x79BB;&#x5173;&#x7CFB;"></a>&#x8DDD;&#x79BB;&#x5173;&#x7CFB;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#准备数据-1"><span class="nav-number">5.1.</span> <span class="nav-text"><a href="#&#x51C6;&#x5907;&#x6570;&#x636E;-1" class="headerlink" title="&#x51C6;&#x5907;&#x6570;&#x636E;"></a>&#x51C6;&#x5907;&#x6570;&#x636E;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决问题-1"><span class="nav-number">5.2.</span> <span class="nav-text"><a href="#&#x89E3;&#x51B3;&#x95EE;&#x9898;-1" class="headerlink" title="&#x89E3;&#x51B3;&#x95EE;&#x9898;"></a>&#x89E3;&#x51B3;&#x95EE;&#x9898;</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -786,6 +837,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -814,6 +869,17 @@
 
 
 
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
   
 
 
