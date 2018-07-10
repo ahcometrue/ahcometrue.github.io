@@ -360,12 +360,15 @@
 <p>奇偶校验是两种校验方式，接收方和发送方确认其中一种校验方式后，进行奇偶校验。</p>
 <p>比如被校验的数据是：10110101。如果采用奇校验，根据规则编码之后的码流为：<red style="color:#f00"><strong>0</strong></red>10110101。在高位添加校验码0。</p>
 <h4 id="实例分析"><a href="#实例分析" class="headerlink" title="实例分析"></a>实例分析</h4><ol>
-<li>采用奇校验，正确码流为<code>010110101</code>。(5个<code>1</code>)</li>
+<li><p>采用奇校验，正确码流为<code>010110101</code>。(5个<code>1</code>)</p>
+<ol>
+<li>错1位：01011010<red style="color:#f00"><strong>0</strong></red>，接收方计算出是偶数(4)个<code>1</code>与预期不符，说明码流有问题。</li>
+<li>错2位：0101101<red style="color:#f00"><strong>10</strong></red>，接收方计算出奇数(5)个<code>1</code>，虽然与预期相符，但码流的确不正确。</li>
+<li>错3位：010110<red style="color:#f00"><strong>010</strong></red>，接收方计算出是偶数(4)个<code>1</code>与预期不符，说明码流有问题。</li>
 </ol>
-<pre><code>1. 错1位：01011010&lt;red style=&quot;color:#f00&quot;&gt;__0__&lt;/red&gt;，接收方计算出是偶数(4)个`1`与预期不符，说明码流有问题。
-1. 错2位：0101101&lt;red style=&quot;color:#f00&quot;&gt;__10__&lt;/red&gt;，接收方计算出奇数(5)个`1`，虽然与预期相符，但码流的确不正确。
-1. 错3位：010110&lt;red style=&quot;color:#f00&quot;&gt;__010__&lt;/red&gt;，接收方计算出是偶数(4)个`1`与预期不符，说明码流有问题。
-</code></pre><ol>
+</li>
+</ol>
+<ol>
 <li><p>采用偶校验，正确码流为<code>110110101</code>。(6个<code>1</code>)</p>
 <ol>
 <li>错1位：11011010<red style="color:#f00"><strong>0</strong></red>，接收方计算出是奇数(5)个<code>1</code>与预期不符，说明码流有问题。</li>
@@ -675,7 +678,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
