@@ -307,7 +307,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/12/Rust线程/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/25/hbase/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="韩">
@@ -326,8 +326,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/06/12/Rust线程/" itemprop="url">
-                  Rust线程
+                <a class="post-title-link" href="/2018/06/25/hbase/" itemprop="url">
+                  Hbase小试牛刀
                 </a>
               
             
@@ -353,7 +353,7 @@
                 
               
 
-              <time title="创建时间：2018-06-12 21:34:41" itemprop="dateCreated datePublished" datetime="2018-06-12T21:34:41+08:00">2018-06-12</time>
+              <time title="创建时间：2018-06-25 23:04:49" itemprop="dateCreated datePublished" datetime="2018-06-25T23:04:49+08:00">2018-06-25</time>
             
 
             
@@ -370,7 +370,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-06-13 22:59:15" itemprop="dateModified" datetime="2018-06-13T22:59:15+08:00">2018-06-13</time>
+                <time title="修改时间：2018-06-26 00:06:41" itemprop="dateModified" datetime="2018-06-26T00:06:41+08:00">2018-06-26</time>
               
             
           </span>
@@ -387,7 +387,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Rust/" itemprop="url" rel="index"><span itemprop="name">Rust</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
 
                 
                 
@@ -423,50 +423,64 @@
       
         
           
-            <p>现在是越来越喜欢Rust了，敲了很多PHP代码，然而对多线程的了解却少之又少。</p>
-<h2 id="Rust并发为什么可以做的好？"><a href="#Rust并发为什么可以做的好？" class="headerlink" title="Rust并发为什么可以做的好？"></a>Rust并发为什么可以做的好？</h2><p>摘自官方文档的说明：</p>
-<blockquote>
-<p>Initially, the Rust team thought that ensuring memory safety and preventing concurrency problems were two separate challenges to be solved with different methods. Over time, the team discovered that the ownership and type systems are a powerful set of tools to help manage memory safety and concurrency problems! By leveraging ownership and type checking, many concurrency errors are compile-time errors in Rust rather than runtime errors. Therefore, rather than making you spend lots of time trying to reproduce the exact circumstances under which a runtime concurrency bug occurs, incorrect code will refuse to compile and present an error explaining the problem. As a result, you can fix your code while you’re working on it rather than potentially after it has been shipped to production. We’ve nicknamed this aspect of Rust fearless concurrency. Fearless concurrency allows you to write code that is free of subtle bugs and is easy to refactor without introducing new bugs.</p>
+            <p>心痒难耐就研究了下Hbase，算是对NoSQL知识的一点扩充吧。</p>
+<h3 id="系统信息"><a href="#系统信息" class="headerlink" title="系统信息"></a>系统信息</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">系统环境：腾讯云主机</span><br><span class="line">系统版本：CentOS Linux release 7.5.1804</span><br></pre></td></tr></table></figure>
+<h3 id="软件包准备"><a href="#软件包准备" class="headerlink" title="软件包准备"></a>软件包准备</h3><p>java安装包： <a href="http://download.oracle.com/otn-pub/java/jdk/8u172-b11/a58eab1ec242421181065cdc37240b08/jdk-8u172-linux-x64.rpm?AuthParam=1529832388_57ec8562a1b96efef55463680b946e13" target="_blank" rel="noopener">jdk-8u172-linux-x64.rpm</a></p>
+<p>Hbase：<a href="http://mirrors.hust.edu.cn/apache/hbase/2.0.1/hbase-2.0.1-bin.tar.gz" target="_blank" rel="noopener">hbase-2.0.1-bin.tar.gz</a></p>
+<p>Phoenix：<a href="//mirrors.hust.edu.cn/apache/phoenix/apache-phoenix-5.0.0-alpha-HBase-2.0/bin/apache-phoenix-5.0.0-alpha-HBase-2.0-bin.tar.gz">apache-phoenix-5.0.0-alpha-HBase-2.0-bin.tar.gz</a></p>
+<h3 id="安装Java"><a href="#安装Java" class="headerlink" title="安装Java"></a>安装Java</h3><blockquote>
+<p>默认安装到 /usr/java/中</p>
 </blockquote>
-<p>重点是这句：</p>
-<blockquote>
-<p>ownership and type systems are a powerful set of tools to help manage memory safety and concurrency problems</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># rpm -ivh jdk-8u172-linux-x64.rpm</span></span><br></pre></td></tr></table></figure>
+<h4 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># java -version</span></span><br><span class="line">java version <span class="string">"1.8.0_172"</span></span><br><span class="line">Java(TM) SE Runtime Environment (build 1.8.0_172-b11)</span><br><span class="line">Java HotSpot(TM) 64-Bit Server VM (build 25.172-b11, mixed mode)</span><br></pre></td></tr></table></figure>
+<h4 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile</span><br></pre></td></tr></table></figure>
+<ul>
+<li>向文件追加一下内容：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">JAVA_HOME=/usr/java/jdk1.8.0_172-amd64</span><br><span class="line">JRE_HOME=/usr/java/jdk1.8.0_172-amd64/jre</span><br><span class="line">PATH=<span class="variable">$PATH</span>:<span class="variable">$JAVA_HOME</span>/bin:<span class="variable">$JRE_HOME</span>/bin</span><br><span class="line">CLASSPATH=.:<span class="variable">$JAVA_HOME</span>/lib/dt.jar:<span class="variable">$JAVA_HOME</span>/lib/tools.jar:<span class="variable">$JRE_HOME</span>/lib</span><br><span class="line"><span class="built_in">export</span> JAVA_HOME JRE_HOME PATH CLASSPATH</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使修改立即生效</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># source /etc/profile</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>查看PATH值</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># echo $PATH</span></span><br><span class="line">/usr/java/jdk1.8.0_172-amd64/jre/bin:/root/bin</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查看JAVA_HOME</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># echo $JAVA_HOME</span></span><br><span class="line">/usr/java/jdk1.8.0_172-amd64</span><br></pre></td></tr></table></figure>
+<h3 id="安装Hbase"><a href="#安装Hbase" class="headerlink" title="安装Hbase"></a>安装Hbase</h3><blockquote>
+<p>将文件解压到目录：/root/hbase</p>
 </blockquote>
-<p>所有权和类型系统的设计解决了内存安全和并发问题。</p>
-<h2 id="线程小试"><a href="#线程小试" class="headerlink" title="线程小试"></a>线程小试</h2><h3 id="使用spawn创建新线程"><a href="#使用spawn创建新线程" class="headerlink" title="使用spawn创建新线程"></a>使用<code>spawn</code>创建新线程</h3><ul>
-<li>例子000：</li>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxf hbase-2.0.1-bin.tar.gz</span><br></pre></td></tr></table></figure>
+<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim hbase-2.0.1/conf/hbase-env.sh</span><br></pre></td></tr></table></figure>
+<p>找到JAVA_HOME，打开JAVA_HOME行的注释并修改</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/java/jdk1.8.0_172-amd64/</span><br></pre></td></tr></table></figure>
+<p>保存退出</p>
+<p>保存数据的目录配置：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim hbase-2.0.1/conf/hbase-site.xml</span><br></pre></td></tr></table></figure>
+<p>在configuration标签中添加：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.rootdir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>file:///root/hbase/data/hbase<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.zookeeper.property.dataDir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>/root/hbase/data/zookeeper<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="验证-1"><a href="#验证-1" class="headerlink" title="验证"></a>验证</h4><p>启动Hbase</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/root/hbase/hbase-2.0.1/bin/start-hbase.sh</span><br></pre></td></tr></table></figure>
+<p>没有报错即配置OK</p>
+<h3 id="安装Phoenix"><a href="#安装Phoenix" class="headerlink" title="安装Phoenix"></a>安装Phoenix</h3><blockquote>
+<p>将文件解压到目录：/root/phoenix</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar zxfv apache-phoenix-5.0.0-alpha-HBase-2.0-bin.tar.gz</span><br></pre></td></tr></table></figure>
+<p>拷贝<code>phoenix-5.0.0-alpha-HBase-2.0-server.jar</code>到Hbase下lib目录中</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /root/phoenix/phoenix-5.0.0-alpha-HBase-2.0-server.jar /root/hbase/hbase-2.0.1/lib/</span><br></pre></td></tr></table></figure>
+<h4 id="验证-2"><a href="#验证-2" class="headerlink" title="验证"></a>验证</h4><p>重启Hbase</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> /root/hbase/hbase-2.0.1/bin/stop-hbase.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> /root/hbase/hbase-2.0.1/bin/start-hbase.sh</span></span><br></pre></td></tr></table></figure>
+<p>重启成功后，启动Phoenix</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/root/phoenix/bin/sqlline.py localhost</span><br></pre></td></tr></table></figure>
+<p>当出现版本号<code>sqlline version 1.2.0</code>说明启动成功</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">Building list of tables and columns for tab-completion (set fastconnect to true to skip)...</span><br><span class="line">92/92 (100%) Done</span><br><span class="line">Done</span><br><span class="line">sqlline version 1.2.0</span><br><span class="line">0: jdbc:phoenix:localhost&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="使用Phoenix"><a href="#使用Phoenix" class="headerlink" title="使用Phoenix"></a>使用Phoenix</h3><ul>
+<li>使用<code>!table</code>命令</li>
 </ul>
-<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> std::thread;</span><br><span class="line"><span class="keyword">use</span> std::time::Duration;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">main</span></span>() &#123;</span><br><span class="line">    thread::spawn(|| &#123;</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span>..<span class="number">10</span> &#123;</span><br><span class="line">            <span class="built_in">println!</span>(<span class="string">"hi number &#123;&#125; from the spawned thread!"</span>, i);</span><br><span class="line">            thread::sleep(Duration::from_millis(<span class="number">1</span>));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span>..<span class="number">5</span> &#123;</span><br><span class="line">        <span class="built_in">println!</span>(<span class="string">"hi number &#123;&#125; from the main thread!"</span>, i);</span><br><span class="line">        thread::sleep(Duration::from_millis(<span class="number">1</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>主线程只循环次数低于新线程，所以主线程结束后新线程随即也会结束。</p>
-<ul>
-<li>结果：</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">hi number 1 from the main thread!</span><br><span class="line">hi number 1 from the spawned thread!</span><br><span class="line">hi number 2 from the spawned thread!</span><br><span class="line">hi number 2 from the main thread!</span><br><span class="line">hi number 3 from the spawned thread!</span><br><span class="line">hi number 3 from the main thread!</span><br><span class="line">hi number 4 from the main thread!</span><br><span class="line">hi number 4 from the spawned thread!</span><br></pre></td></tr></table></figure>
-<p>由于新线程需要系统的调度，并不能确保执行顺序一致，那么如何保证数据的安全性不被更改呢？后面我们将使用<code>lock</code>的方式进行保证。</p>
-<h3 id="使用join等待所有线程结束"><a href="#使用join等待所有线程结束" class="headerlink" title="使用join等待所有线程结束"></a>使用<code>join</code>等待所有线程结束</h3><p>由于主线程结束，示例000中的代码大部分时候不光会提早结束新建线程，甚至不能实际保证新建线程会被执行。其原因在于无法保证线程运行的顺序！<br><code>thread::spawn</code>返回值类型是<code>JoinHandle</code>，是一个拥有所有权的值，当对其调用<code>join</code>方法是，它会等待其线程结束。</p>
-<ul>
-<li>例子：001<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> std::thread;</span><br><span class="line"><span class="keyword">use</span> std::time::Duration;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">main</span></span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> handle = thread::spawn(|| &#123;</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span>..<span class="number">10</span> &#123;</span><br><span class="line">            <span class="built_in">println!</span>(<span class="string">"hi number &#123;&#125; from the spawned thread!"</span>, i);</span><br><span class="line">            thread::sleep(Duration::from_millis(<span class="number">1</span>));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span>..<span class="number">5</span> &#123;</span><br><span class="line">        <span class="built_in">println!</span>(<span class="string">"hi number &#123;&#125; from the main thread!"</span>, i);</span><br><span class="line">        thread::sleep(Duration::from_millis(<span class="number">1</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    handle.join().unwrap();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>通过调用handle的<code>join</code>会阻塞当前线程直到handle所代表的线程结束。</p>
-<ul>
-<li>结果：<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">hi number 1 from the main thread!</span><br><span class="line">hi number 1 from the spawned thread!</span><br><span class="line">hi number 2 from the main thread!</span><br><span class="line">hi number 2 from the spawned thread!</span><br><span class="line">hi number 3 from the main thread!</span><br><span class="line">hi number 3 from the spawned thread!</span><br><span class="line">hi number 4 from the main thread!</span><br><span class="line">hi number 4 from the spawned thread!</span><br><span class="line">hi number 5 from the spawned thread!</span><br><span class="line">hi number 6 from the spawned thread!</span><br><span class="line">hi number 7 from the spawned thread!</span><br><span class="line">hi number 8 from the spawned thread!</span><br><span class="line">hi number 9 from the spawned thread!</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>如果把<code>handle.join().unwrap()</code>放到主线程之前会发生什么？</p>
-<ul>
-<li>结果：<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">hi number 1 from the spawned thread!</span><br><span class="line">hi number 2 from the spawned thread!</span><br><span class="line">hi number 3 from the spawned thread!</span><br><span class="line">hi number 4 from the spawned thread!</span><br><span class="line">hi number 5 from the spawned thread!</span><br><span class="line">hi number 6 from the spawned thread!</span><br><span class="line">hi number 7 from the spawned thread!</span><br><span class="line">hi number 8 from the spawned thread!</span><br><span class="line">hi number 9 from the spawned thread!</span><br><span class="line">hi number 1 from the main thread!</span><br><span class="line">hi number 2 from the main thread!</span><br><span class="line">hi number 3 from the main thread!</span><br><span class="line">hi number 4 from the main thread!</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="线程与move闭包"><a href="#线程与move闭包" class="headerlink" title="线程与move闭包"></a>线程与<code>move</code>闭包</h3><p><code>move</code>闭包与<code>thread::spawn</code>一起使用允许我们在一个线程中使用另一个线程的数据。<br><code>move</code>关键字可以强制闭包获取值的所有权，覆盖了rust默认保守的借用：其也不允许我们违反所有权规则。</p>
-<ul>
-<li>列子：002</li>
-</ul>
-<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> std::thread;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">main</span></span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> v = <span class="built_in">vec!</span>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> handle = thread::spawn(<span class="keyword">move</span> || &#123;</span><br><span class="line">        <span class="built_in">println!</span>(<span class="string">"Here's a vector: &#123;:?&#125;"</span>, v);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    handle.join().unwrap();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>结果：<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Here's a vector: [1, 2, 3]</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">0: jdbc:phoenix:localhost&gt; !table</span><br><span class="line">+------------+--------------+-------------+---------------+----------+------------+----------------------------+-----------------+--------------+-----------------+---------------+-+</span><br><span class="line">| TABLE_CAT  | TABLE_SCHEM  | TABLE_NAME  |  TABLE_TYPE   | REMARKS  | TYPE_NAME  | SELF_REFERENCING_COL_NAME  | REF_GENERATION  | INDEX_STATE  | IMMUTABLE_ROWS  | SALT_BUCKETS  | |</span><br><span class="line">+------------+--------------+-------------+---------------+----------+------------+----------------------------+-----------------+--------------+-----------------+---------------+-+</span><br><span class="line">|            | SYSTEM       | CATALOG     | SYSTEM TABLE  |          |            |                            |                 |              | false           | null          | |</span><br><span class="line">|            | SYSTEM       | FUNCTION    | SYSTEM TABLE  |          |            |                            |                 |              | false           | null          | |</span><br><span class="line">|            | SYSTEM       | SEQUENCE    | SYSTEM TABLE  |          |            |                            |                 |              | false           | null          | |</span><br><span class="line">|            | SYSTEM       | STATS       | SYSTEM TABLE  |          |            |                            |                 |              | false           | null          | |</span><br><span class="line">+------------+--------------+-------------+---------------+----------+------------+----------------------------+-----------------+--------------+-----------------+---------------+-+</span><br></pre></td></tr></table></figure>
 
           
         
@@ -509,7 +523,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/33/">33</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/34/">34</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -556,7 +570,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">33</span>
+                    <span class="site-state-item-count">34</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>

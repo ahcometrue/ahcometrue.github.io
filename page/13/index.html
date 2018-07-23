@@ -307,7 +307,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/15/C-gdb工具/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/15/python异常处理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="韩">
@@ -326,8 +326,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/12/15/C-gdb工具/" itemprop="url">
-                  gdb调试
+                <a class="post-title-link" href="/2017/12/15/python异常处理/" itemprop="url">
+                  Python异常处理
                 </a>
               
             
@@ -353,7 +353,7 @@
                 
               
 
-              <time title="创建时间：2017-12-15 14:35:25" itemprop="dateCreated datePublished" datetime="2017-12-15T14:35:25+08:00">2017-12-15</time>
+              <time title="创建时间：2017-12-15 23:30:48" itemprop="dateCreated datePublished" datetime="2017-12-15T23:30:48+08:00">2017-12-15</time>
             
 
             
@@ -370,7 +370,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-07-10 16:25:44" itemprop="dateModified" datetime="2018-07-10T16:25:44+08:00">2018-07-10</time>
+                <time title="修改时间：2017-12-18 10:56:43" itemprop="dateModified" datetime="2017-12-18T10:56:43+08:00">2017-12-18</time>
               
             
           </span>
@@ -387,7 +387,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a></span>
 
                 
                 
@@ -423,46 +423,74 @@
       
         
           
-            <p>最近研究Redis源码，对C语言也重温了下。小时候老爷子总和我说：三天不学习，赶不上刘少奇。我这C语言都不知还能赶上谁，<br>不过刘少奇我应该能赶上，因为他不懂。</p>
-<p>由于Mac平台没有安装GDB，安装步骤及方法网上教程很多，就不赘述了，记得重启taskgated进程。</p>
-<h4 id="待调式的代码如下"><a href="#待调式的代码如下" class="headerlink" title="待调式的代码如下"></a>待调式的代码如下</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> *uninit;</span><br><span class="line"><span class="keyword">int</span> *<span class="literal">nullptr</span> = <span class="literal">NULL</span>;</span><br><span class="line"><span class="keyword">void</span> *vptr;</span><br><span class="line"><span class="keyword">int</span> val = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> *iptr;</span><br><span class="line"><span class="keyword">int</span> *castptr;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">sayHello</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">sayHello</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"hello world\n"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    iptr = &amp;val;</span><br><span class="line">    vptr = iptr;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"iptr=%p, vptr=%p\n"</span>, iptr, vptr);</span><br><span class="line">    castptr = vptr;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"*castptr=%d\n"</span>, *castptr);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> myarray[<span class="number">4</span>] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">0</span>&#125;;</span><br><span class="line">    <span class="keyword">int</span> *han = myarray;</span><br><span class="line">    <span class="keyword">int</span> *han0 = &amp;myarray[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">int</span> *han1 = &amp;myarray[<span class="number">1</span>];</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"*han=%d\n"</span>, *han);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"*han0=%d\n"</span>, *han0);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"*han1=%d\n"</span>, *han1);</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">person</span> &#123;</span></span><br><span class="line">        <span class="keyword">int</span> age;</span><br><span class="line">        <span class="keyword">char</span> *name;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">person</span> <span class="title">first</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">person</span> *<span class="title">yan</span>;</span></span><br><span class="line">    first.age = <span class="number">21</span>;</span><br><span class="line">    <span class="keyword">char</span> *fullname = <span class="string">"yanyan"</span>;</span><br><span class="line">    first.name = fullname;</span><br><span class="line">    yan = &amp;first;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"age=%d, name=%s\n"</span>, first.age, yan-&gt;name);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"age=%d, name=%s\n"</span>, yan-&gt;age, yan-&gt;name);</span><br><span class="line"></span><br><span class="line">    sayHello();</span><br><span class="line">    <span class="keyword">void</span> (*sayHelloPtr)() = sayHello;</span><br><span class="line">    sayHelloPtr();</span><br><span class="line">    (*sayHelloPtr)();</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~/Sites/c_study gcc -g main.c -o main</span><br></pre></td></tr></table></figure>
-<h4 id="进入调式"><a href="#进入调式" class="headerlink" title="进入调式"></a>进入调式</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">~/Sites/c_study gdb main</span><br><span class="line">(gdb)</span><br></pre></td></tr></table></figure>
-<h4 id="命令介绍"><a href="#命令介绍" class="headerlink" title="命令介绍"></a>命令介绍</h4><ul>
-<li>r</li>
-</ul>
-<p>Run的简写，运行被调式的程序，如果没有断点执行完整程序；<br>有断点则执行到断点处停止</p>
-<ul>
-<li>b</li>
-</ul>
-<p>Breakpoint的简写，设置断点。可以使用<code>行号</code>、<code>函数名</code>、<code>地址</code><br>等方式设置断点位置。<br>b &lt;行号&gt;,<br>b &lt;函数名&gt;,<br>b *&lt;函数名&gt;,<br>b *&lt;代码地址&gt;,</p>
-<ul>
-<li>d</li>
-</ul>
-<p>Delete Breakpoint的简写，删除某个断点或所有断点。</p>
-<ul>
-<li>s, n</li>
-</ul>
-<p>s 执行一行源码，如果此行有函数，则进入该函数<br>n 执行一行源码，此行代码中的函数调用也一并执行。</p>
-<ul>
-<li>p</li>
-</ul>
-<p>Print的简写，显示指定变量的值。</p>
-<ul>
-<li>l</li>
-</ul>
-<p>List的简写，显示待调试的源文件代码</p>
-<ul>
-<li>q</li>
-</ul>
-<p>Quit的简写，退出GDB调试环境</p>
-<h4 id="调式目标"><a href="#调式目标" class="headerlink" title="调式目标"></a>调式目标</h4><ol>
-<li>18行变量<code>iptr</code>和<code>val</code>的值</li>
-<li>25行<code>han</code>和<code>myarray</code>的值</li>
-<li>36行<code>first</code>的结构信息</li>
-<li>38行的<code>first</code></li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line">(gdb) b 18</span><br><span class="line">Breakpoint 6 at 0x100000db5: file main.c, line 18.</span><br><span class="line">(gdb) b 25</span><br><span class="line">Breakpoint 7 at 0x100000e16: file main.c, line 25.</span><br><span class="line">(gdb) b 26</span><br><span class="line">Breakpoint 8 at 0x100000e1a: file main.c, line 26.</span><br><span class="line">(gdb) b 38</span><br><span class="line">Breakpoint 9 at 0x100000e76: file main.c, line 38.</span><br><span class="line">(gdb) r</span><br><span class="line">The program being debugged has been started already.</span><br><span class="line">Start it from the beginning? (y or n) y</span><br><span class="line">Starting program: /Users/hg/Sites/c_study/main</span><br><span class="line">[New Thread 0x1c03 of process 2071]</span><br><span class="line">warning: unhandled dyld version (15)</span><br><span class="line"></span><br><span class="line">Thread 2 hit Breakpoint 6, main () at main.c:18</span><br><span class="line">18	    iptr = &amp;val;</span><br><span class="line">(gdb) p iptr</span><br><span class="line"><span class="meta">$</span>32 = (int *) 0x0</span><br><span class="line">(gdb) p val</span><br><span class="line"><span class="meta">$</span>33 = 1</span><br><span class="line">(gdb) n</span><br><span class="line">19	    vptr = iptr;</span><br><span class="line">(gdb) p iptr</span><br><span class="line"><span class="meta">$</span>34 = (int *) 0x100001028 &lt;val&gt;</span><br><span class="line">(gdb) p val</span><br><span class="line"><span class="meta">$</span>35 = 1</span><br><span class="line">(gdb) n</span><br><span class="line">20	    printf("iptr=%p, vptr=%p\n", iptr, vptr);</span><br><span class="line">(gdb) n</span><br><span class="line">iptr=0x100001028, vptr=0x100001028</span><br><span class="line">21	    castptr = vptr;</span><br><span class="line">(gdb) n</span><br><span class="line">22	    printf("*castptr=%d\n", *castptr);</span><br><span class="line">(gdb) n</span><br><span class="line">*castptr=1</span><br><span class="line">24	    int myarray[4] = &#123;1, 2, 3, 0&#125;;</span><br><span class="line">(gdb) n</span><br><span class="line"></span><br><span class="line">Thread 2 hit Breakpoint 7, main () at main.c:25</span><br><span class="line">25	    int *han = myarray;</span><br><span class="line">(gdb) p han</span><br><span class="line"><span class="meta">$</span>36 = (int *) 0x0</span><br><span class="line">(gdb) p myarray</span><br><span class="line"><span class="meta">$</span>37 = &#123;1, 2, 3, 0&#125;</span><br><span class="line">(gdb) n</span><br><span class="line"></span><br><span class="line">Thread 2 hit Breakpoint 8, main () at main.c:26</span><br><span class="line">26	    int *han0 = &amp;myarray[0];</span><br><span class="line">(gdb) n</span><br><span class="line">27	    int *han1 = &amp;myarray[1];</span><br><span class="line">(gdb) n</span><br><span class="line">28	    printf("*han=%d\n", *han);</span><br><span class="line">(gdb) n</span><br><span class="line">*han=1</span><br><span class="line">29	    printf("*han0=%d\n", *han0);</span><br><span class="line">(gdb) n</span><br><span class="line">*han0=1</span><br><span class="line">30	    printf("*han1=%d\n", *han1);</span><br><span class="line">(gdb) n</span><br><span class="line">*han1=2</span><br><span class="line"></span><br><span class="line">Thread 2 hit Breakpoint 9, main () at main.c:38</span><br><span class="line">38	    first.age = 21;</span><br><span class="line">(gdb) p first</span><br><span class="line"><span class="meta">$</span>38 = &#123;age = 0, name = 0x100003248 "\031"&#125;</span><br><span class="line">(gdb) n</span><br><span class="line">39	    char *fullname = "yanyan";</span><br><span class="line">(gdb) p first</span><br><span class="line"><span class="meta">$</span>39 = &#123;age = 21, name = 0x100003248 "\031"&#125;</span><br><span class="line">(gdb)</span><br></pre></td></tr></table></figure>
+            <p>最近研究了下python的异常处理，现记录下。python的异常设计还是不错的。</p>
+<h3 id="常见异常"><a href="#常见异常" class="headerlink" title="常见异常"></a>常见异常</h3><table>
+<thead>
+<tr>
+<th>常见异常</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IOError</td>
+<td>输入\输出异常；基本是无法打开文件</td>
+</tr>
+<tr>
+<td>ImportError</td>
+<td>无法引入模块或包；基本上是路径问题或名称错误</td>
+</tr>
+<tr>
+<td>IndexError</td>
+<td>下表索引超出序列边界</td>
+</tr>
+<tr>
+<td>KeyError</td>
+<td>试图访问字典里不存在的键</td>
+</tr>
+<tr>
+<td>NameError</td>
+<td>使用一个还未被赋予对象的变量</td>
+</tr>
+<tr>
+<td>IndentationError</td>
+<td>语法错误(的子类)；代码没有正确对齐</td>
+</tr>
+<tr>
+<td>SyntaxError</td>
+<td>python代码非法，代码不能编译</td>
+</tr>
+<tr>
+<td>KeyboardInterrupt</td>
+<td>Ctrl+C被按下</td>
+</tr>
+<tr>
+<td>EOFError</td>
+<td>Ctrl+D被按下</td>
+</tr>
+<tr>
+<td>UnboundLocalError</td>
+<td>试图访问一个还未被设置的局部变量，基本上是由于另一个同名的全局变量，导致以为正在访问它</td>
+</tr>
+<tr>
+<td>AttrbuteError</td>
+<td>试图访问一个对象没有的属性</td>
+</tr>
+<tr>
+<td>ValueError</td>
+<td>传入一个调用者不期望的值，即使值的类型是正确的</td>
+</tr>
+<tr>
+<td>TypeError</td>
+<td>传入对象的类型与要求的不符合</td>
+</tr>
+</tbody>
+</table>
+<h3 id="异常的捕捉"><a href="#异常的捕捉" class="headerlink" title="异常的捕捉"></a>异常的捕捉</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">	a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">	a[<span class="number">3</span>]</span><br><span class="line"><span class="keyword">except</span> IndexError:</span><br><span class="line">	print(<span class="string">'IndexError'</span>)</span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">	print(<span class="string">'finally'</span>)</span><br></pre></td></tr></table></figure>
+<p>except后面可以不再加异常也可加多个异常。</p>
+<p>else: 没有发现异常是会执行<br>finally: 无论是否发生异常都会执行</p>
+<h3 id="定制自己的异常"><a href="#定制自己的异常" class="headerlink" title="定制自己的异常"></a>定制自己的异常</h3><p>虽然python内置的异常已经很多，但有时我们需要实现自己的异常功能。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">class HException(Exception):</span><br><span class="line">	pass</span><br><span class="line">try:</span><br><span class="line">	name = raw_input(&apos;name:&apos;).strip()</span><br><span class="line">	if name != &apos;han&apos;:</span><br><span class="line">		raise HException</span><br><span class="line">except HException:</span><br><span class="line">	print(&apos;No valid name sepecfied...&apos;)</span><br></pre></td></tr></table></figure>
 
           
         
@@ -505,7 +533,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/12/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/33/">33</a><a class="extend next" rel="next" href="/page/14/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/12/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/34/">34</a><a class="extend next" rel="next" href="/page/14/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -552,7 +580,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">33</span>
+                    <span class="site-state-item-count">34</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>

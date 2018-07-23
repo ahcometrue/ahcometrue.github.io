@@ -307,7 +307,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/30/Linux杂记/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/02/redis源码2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="韩">
@@ -326,8 +326,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/30/Linux杂记/" itemprop="url">
-                  Linux杂记
+                <a class="post-title-link" href="/2017/11/02/redis源码2/" itemprop="url">
+                  Redis源码-压缩列表
                 </a>
               
             
@@ -353,12 +353,24 @@
                 
               
 
-              <time title="创建时间：2017-10-30 15:05:26 / 修改时间：15:52:42" itemprop="dateCreated datePublished" datetime="2017-10-30T15:05:26+08:00">2017-10-30</time>
+              <time title="创建时间：2017-11-02 12:18:43" itemprop="dateCreated datePublished" datetime="2017-11-02T12:18:43+08:00">2017-11-02</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-06-25 23:06:23" itemprop="dateModified" datetime="2018-06-25T23:06:23+08:00">2018-06-25</time>
               
             
           </span>
@@ -375,7 +387,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
 
                 
                 
@@ -411,29 +423,7 @@
       
         
           
-            <ul>
-<li>错误信息</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//将会返回上次的错误信息</span><br><span class="line">$ %boast</span><br></pre></td></tr></table></figure>
-<ul>
-<li>用户进程数限制</li>
-</ul>
-<p><code>/etc/security/limits.conf</code></p>
-<ul>
-<li>查看本机用户</li>
-</ul>
-<p><code>/etc/passwd</code></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//用户名:密码:UID:GID:用户全名:home目录:shell</span><br><span class="line">root:x:0:0:root:/root:/bin/bash</span><br><span class="line">bin:x:1:1:bin:/bin:/sbin/nologin</span><br><span class="line">daemon:x:2:2:daemon:/sbin:/sbin/nologin</span><br><span class="line">adm:x:3:4:adm:/var/adm:/sbin/nologin</span><br><span class="line">lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin</span><br><span class="line">sync:x:5:0:sync:/sbin:/bin/sync</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br></pre></td></tr></table></figure>
-<ul>
-<li>查看本机用户组</li>
-</ul>
-<p><code>/etc/group</code></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">//组名:用户组密码:GID:用户组内的用户名</span><br><span class="line">root:x:0:</span><br><span class="line">bin:x:1:bin,daemon</span><br><span class="line">daemon:x:2:bin,daemon</span><br><span class="line">sys:x:3:bin,adm</span><br><span class="line">adm:x:4:adm,daemon</span><br><span class="line">tty:x:5:</span><br><span class="line">disk:x:6:</span><br><span class="line">lp:x:7:daemon</span><br><span class="line">mem:x:8:</span><br><span class="line">kmem:x:9:</span><br><span class="line">wheel:x:10:</span><br><span class="line">mail:x:12:mail,postfix</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br></pre></td></tr></table></figure>
-<ul>
-<li>文件属性</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//d目录</span><br><span class="line">//rwx拥有者权限</span><br><span class="line">//r-x所属用户组权限</span><br><span class="line">//r-x其他权限</span><br><span class="line">//3 连接数</span><br><span class="line">//root root 拥有者 所属用户组</span><br><span class="line">drwxr-xr-x.  3 root root  4096 Sep  1 18:52 rust_study</span><br></pre></td></tr></table></figure>
-<p><code>连接数</code> Linux所使用的文件系统是一种基于iNode的文件系统，每一个新创建的文件都会被分配一个iNode，它指向的是文件所在磁盘中的物理位置。连接数其实就是iNode的引用计数。</p>
+            <p>预告……</p>
 
           
         
@@ -476,7 +466,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/20/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><span class="page-number current">21</span><a class="page-number" href="/page/22/">22</a><span class="space">&hellip;</span><a class="page-number" href="/page/33/">33</a><a class="extend next" rel="next" href="/page/22/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/20/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><span class="page-number current">21</span><a class="page-number" href="/page/22/">22</a><span class="space">&hellip;</span><a class="page-number" href="/page/34/">34</a><a class="extend next" rel="next" href="/page/22/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -523,7 +513,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">33</span>
+                    <span class="site-state-item-count">34</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
