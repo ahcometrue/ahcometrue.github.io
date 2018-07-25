@@ -370,7 +370,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-07-25 17:01:25" itemprop="dateModified" datetime="2018-07-25T17:01:25+08:00">2018-07-25</time>
+                <time title="修改时间：2018-07-25 17:18:08" itemprop="dateModified" datetime="2018-07-25T17:18:08+08:00">2018-07-25</time>
               
             
           </span>
@@ -628,6 +628,21 @@
 </li>
 </ol>
 <p>方法：（整数）<strong>除8取余法，即每次将整数部分除以8，余数为该位权上的数，而商继续除以8，余数又为上一个位权上的数，这个步骤一直持续下去，直到商为0为止，最后读数时候，从最后一个余数起，一直到最前面的一个余数。</strong><br>（小数）<strong>乘8取整法，即将小数部分乘以8，然后取整数部分，剩下的小数部分继续乘以8，然后取整数部分，剩下的小数部分又乘以8，一直取到小数部分为零为止。如果永远不能为零，就同十进制数的四舍五入一样，暂取个名字叫3舍4入。</strong></p>
+<h4 id="十进制转十六进制"><a href="#十进制转十六进制" class="headerlink" title="十进制转十六进制"></a>十进制转十六进制</h4><ul>
+<li>将十进制<code>93.3125</code>转换成八进制：</li>
+</ul>
+<ol>
+<li><p>第一步计算<code>93</code>:</p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">93除以16，商5余13。</span><br><span class="line">5除以16，商0余5。</span><br><span class="line">从后往前读余数：513 = 5D</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>第二步计算<code>0.3125</code>：</p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">0.3125乘以16，得5.0，整数部分是5，小数部分是0</span><br><span class="line">从前往后读整数部分：5</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>拼接在一起为：<code>5D.5</code></p>
+</li>
+</ol>
+<p>方法：<strong>同十进制转八进制、二进制，此时除数为16。</strong></p>
+<h3 id="十六进制转其他进制"><a href="#十六进制转其他进制" class="headerlink" title="十六进制转其他进制"></a>十六进制转其他进制</h3><h4 id="十六进制转二进制"><a href="#十六进制转二进制" class="headerlink" title="十六进制转二进制"></a>十六进制转二进制</h4><p>方法：<strong>十六进制转换成二进制与二进制转换成十六进制相反。</strong></p>
 
           
         
