@@ -353,12 +353,24 @@
                 
               
 
-              <time title="创建时间：2018-07-23 10:55:02 / 修改时间：19:31:06" itemprop="dateCreated datePublished" datetime="2018-07-23T10:55:02+08:00">2018-07-23</time>
+              <time title="创建时间：2018-07-23 10:55:02" itemprop="dateCreated datePublished" datetime="2018-07-23T10:55:02+08:00">2018-07-23</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-07-25 17:01:25" itemprop="dateModified" datetime="2018-07-25T17:01:25+08:00">2018-07-25</time>
               
             
           </span>
@@ -547,23 +559,75 @@
 <h4 id="二进制转十六进制"><a href="#二进制转十六进制" class="headerlink" title="二进制转十六进制"></a>二进制转十六进制</h4><ul>
 <li>将二进制数<code>1.10101</code>转换成十六进制。</li>
 </ul>
-<p>$$<br>1.10101 = 0001.\; 1010 \;1000 = 1.A8<br>$$</p>
+<ol>
+<li><p>第一步计算<code>1</code>：<br>$$<br>1 = 0001 = 0\times2^3 + 0\times2^2 + 0\times2^1 + 1\times2^0  = 1<br>$$</p>
+</li>
+<li><p>第二步计算<code>0.10101</code>：<br>$$<br>10101 = 1010\;1000 = 1\times2^3 + 0\times2^2 + 1\times2^1 + 0\times2^0 \; 1\times2^3 + 0\times2^2 + 0\times2^1 + 0\times2^0= 10 \; 8 = A8<br>$$</p>
+</li>
+<li>拼接在一起为：<code>1.A8</code></li>
+</ol>
 <p>方法：<strong>取四合一法，因为每四位二进制数对应一位十六进制数，所以，以小数点为界，整数位则将二进制数从右向左每4位一隔开，不足4位的在左边用0填补即可；小数位则将二进制数从左向右每4位一隔开，不足4位的在右边用0填补即可。</strong></p>
-<h3 id="八进制转其他进制"><a href="#八进制转其他进制" class="headerlink" title="八进制转其他进制"></a>八进制转其他进制</h3><ul>
+<h3 id="八进制转其他进制"><a href="#八进制转其他进制" class="headerlink" title="八进制转其他进制"></a>八进制转其他进制</h3><h4 id="八进制转二进制"><a href="#八进制转二进制" class="headerlink" title="八进制转二进制"></a>八进制转二进制</h4><ul>
 <li>将八进制数<code>67.54</code>转换成二进制。</li>
 </ul>
-<p>$$<br>67.54 = xxx\;xxx.xxx\;xxx = 110\;111.101\;100 = 110111.1011<br>$$</p>
+<ol>
+<li><p>第一步计算<code>67</code>：<br> $$<br> 67 = xxx\;xxx = x\times2^2 + x\times2^1+ x\times2^0\;x\times2^2 + x\times2^1+ x\times2^0 = 110\;111<br> $$</p>
+</li>
+<li><p>第二步计算<code>0.54</code>：<br> $$<br> 54 = xxx\;xxx = x\times2^2 + x\times2^1+ x\times2^0\;x\times2^2 + x\times2^1+ x\times2^0 =  101\;100 = 1011<br> $$</p>
+</li>
+<li><p>拼接在一起为：<code>110 111. 1011</code></p>
+</li>
+</ol>
 <p>方法：<strong>取一分三法，即将一位八进制数分解成三位二进制数，用三位二进制按权相加去凑这位八进制数，小数点位置照旧。</strong></p>
-<ul>
+<h4 id="八进制转十六进制"><a href="#八进制转十六进制" class="headerlink" title="八进制转十六进制"></a>八进制转十六进制</h4><ul>
 <li>将八进制<code>67.54</code>转换成十六进制。</li>
 </ul>
-<p>$$<br>67.54 = (110111.1011)_{2} = (37.B)_{16}<br>$$</p>
+<ol>
+<li>第一步先转换为二进制：<br>$$<br>67.54 = 110111.1011<br>$$</li>
+<li>第二步计算<code>110111</code>：<br>$$<br>110111 = 0011\;0111 = 0\times2^3+0\times2^2+1\times2^1+1\times2^0\;0\times2^3+1\times2^2+1\times2^1+1\times2^0 = 37<br>$$</li>
+<li>第三步计算<code>0.1011</code>：<br>$$<br>1011 = 1\times2^3+0\times2^2+1\times2^1+1\times2^0 = 11 = B<br>$$</li>
+<li>拼接在一起为：<code>37.B</code></li>
+</ol>
 <p>方法：<strong>一般不能互相直接转换，一般是将八进制（或十六进制）转换为二进制，然后再将二进制转换为十六进制（或八进制），小数点位置不变。那么相应的转换请参照上面二进制与八进制的转换和二进制与十六进制的转。</strong></p>
-<ul>
+<h4 id="八进制转十进制"><a href="#八进制转十进制" class="headerlink" title="八进制转十进制"></a>八进制转十进制</h4><ul>
 <li>将八进制<code>67.54</code>转换成十进制</li>
 </ul>
-<p>$$<br>67.54 = 6\times8^1+7\times8^0. 5\times8^{-1}+4\times8^{-2} = 55.6875<br>$$</p>
+<ol>
+<li>第一步计算<code>67</code>:<br> $$<br> 67 = 6\times8^1+7\times8^0 = 55<br> $$</li>
+<li><p>第二步计算<code>0.54</code>：<br> $$<br> 54 = 5\times8^{-1}+4\times8^{-2} = 6875<br> $$</p>
+</li>
+<li><p>拼接在一起为：<code>55.6875</code></p>
+</li>
+</ol>
 <p>方法：<strong>同二进制转换成十进制。以小数点为界，整数位从最后一位（从右向左）开始算，依次列为第0、1、2、3………n，然后将第n位的数（0-7）乘以8的n-1次方，然后相加即可得到整数位的十进制数；小数位则从左向右开始算，依次列为第1、2、3……..n，然后将第n位的数（0-7）乘以8的-n次方，然后相加即可得到小数位的十进制数（按权相加法）。</strong></p>
+<h3 id="十进制转其他进制"><a href="#十进制转其他进制" class="headerlink" title="十进制转其他进制"></a>十进制转其他进制</h3><h4 id="十进制转二进制"><a href="#十进制转二进制" class="headerlink" title="十进制转二进制"></a>十进制转二进制</h4><ul>
+<li>将十进制<code>7.125</code>转换成二进制</li>
+</ul>
+<ol>
+<li><p>第一步计算<code>7</code>：</p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">7除以2，商3余1。</span><br><span class="line">3除以2，商1余1。</span><br><span class="line">1除以2，商0余1。</span><br><span class="line">从后往前读余数：111</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>第二步计算<code>0.125</code>：</p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">0.125乘以2，得0.25，整数部分是0，小数部分是0.25</span><br><span class="line">0.25乘以2，得0.5，整数部分是0，小数部分是0.5</span><br><span class="line">0.5乘以2，得1.0，整数部分是1，小数部分是0</span><br><span class="line">从前往后读整数部分：001</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>拼接在一起为：<code>111.001</code></p>
+</li>
+</ol>
+<p>方法：（整数）<strong>除2取余法，即每次将整数部分除以2，余数为该位权上的数，而商继续除以2，余数又为上一个位权上的数，这个步骤一直持续下去，直到商为0为止，最后读数时候，从最后一个余数读起，一直到最前面的一个余数。</strong><br>（小数）<strong>乘2取整法，即将小数部分乘以2，然后取整数部分，剩下的小数部分继续乘以2，然后取整数部分，剩下的小数部分又乘以2，一直取到小数部分<br>为零为止。如果永远不能为零，就同十进制数的四舍五入一样，按照要求保留多少位小数时，就根据后面一位是0还是1，取舍，如果是零，舍掉，如果是1，向入一位。换句话说就是0舍1入。读数要从前面的整数读到后面的整数。</strong></p>
+<h4 id="十进制转八进制"><a href="#十进制转八进制" class="headerlink" title="十进制转八进制"></a>十进制转八进制</h4><ul>
+<li>将十进制<code>93.3125</code>转换成八进制：</li>
+</ul>
+<ol>
+<li><p>第一步计算<code>93</code>:</p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">93除以8，商11余5。</span><br><span class="line">11除以8，商1余3。</span><br><span class="line">1除以8，商0余1。</span><br><span class="line">从后往前读余数：135</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>第二步计算<code>0.3125</code>：</p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">0.3125乘以8，得2.5，整数部分是2，小数部分是0.5</span><br><span class="line">0.5乘以8，得4.0，整数部分是4，小数部分是0</span><br><span class="line">从前往后读整数部分：24</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>拼接在一起为：<code>135.24</code></p>
+</li>
+</ol>
+<p>方法：（整数）<strong>除8取余法，即每次将整数部分除以8，余数为该位权上的数，而商继续除以8，余数又为上一个位权上的数，这个步骤一直持续下去，直到商为0为止，最后读数时候，从最后一个余数起，一直到最前面的一个余数。</strong><br>（小数）<strong>乘8取整法，即将小数部分乘以8，然后取整数部分，剩下的小数部分继续乘以8，然后取整数部分，剩下的小数部分又乘以8，一直取到小数部分为零为止。如果永远不能为零，就同十进制数的四舍五入一样，暂取个名字叫3舍4入。</strong></p>
 
           
         
