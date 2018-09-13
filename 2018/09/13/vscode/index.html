@@ -108,20 +108,25 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="小菜园">
-<meta property="og:url" content="http://yoursite.com/page/30/index.html">
+  <meta name="description" content="快捷键两键（ctrl + ） 向后浏览ctrl + -  打开终端ctrl +`  历史打开记录ctrl + tab  跳到指定行号ctrl + g   两键（cmd + ） 开启侧边栏cmd + b  打开文件cmd + p  分割编辑器窗口cmd + \  编辑器窗口切换cmd + 1cmd + 2cmd + 3  选择当前行cmd + i  回到文件开始cmd + up  回到文件结束cmd">
+<meta name="keywords" content="工具">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vscode">
+<meta property="og:url" content="http://yoursite.com/2018/09/13/vscode/index.html">
 <meta property="og:site_name" content="小菜园">
+<meta property="og:description" content="快捷键两键（ctrl + ） 向后浏览ctrl + -  打开终端ctrl +`  历史打开记录ctrl + tab  跳到指定行号ctrl + g   两键（cmd + ） 开启侧边栏cmd + b  打开文件cmd + p  分割编辑器窗口cmd + \  编辑器窗口切换cmd + 1cmd + 2cmd + 3  选择当前行cmd + i  回到文件开始cmd + up  回到文件结束cmd">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-09-13T07:55:31.262Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="小菜园">
+<meta name="twitter:title" content="vscode">
+<meta name="twitter:description" content="快捷键两键（ctrl + ） 向后浏览ctrl + -  打开终端ctrl +`  历史打开记录ctrl + tab  跳到指定行号ctrl + g   两键（cmd + ） 开启侧边栏cmd + b  打开文件cmd + p  分割编辑器窗口cmd + \  编辑器窗口切换cmd + 1cmd + 2cmd + 3  选择当前行cmd + i  回到文件开始cmd + up  回到文件结束cmd">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/page/30/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/09/13/vscode/"/>
 
 
 
@@ -131,7 +136,7 @@
   };
 </script>
 
-  <title>小菜园</title>
+  <title>vscode | 小菜园</title>
   
 
 
@@ -188,8 +193,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -290,9 +294,9 @@
           
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -307,7 +311,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/20/php扩展开发/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/13/vscode/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="韩">
@@ -324,11 +328,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/02/20/php扩展开发/" itemprop="url">
-                  PHP扩展开发初试
-                </a>
+          <h1 class="post-title" itemprop="name headline">vscode
               
             
           </h1>
@@ -353,24 +353,12 @@
                 
               
 
-              <time title="创建时间：2017-02-20 15:33:12" itemprop="dateCreated datePublished" datetime="2017-02-20T15:33:12+08:00">2017-02-20</time>
+              <time title="创建时间：2018-09-13 10:35:57 / 修改时间：15:55:31" itemprop="dateCreated datePublished" datetime="2018-09-13T10:35:57+08:00">2018-09-13</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2017-10-24 23:41:16" itemprop="dateModified" datetime="2017-10-24T23:41:16+08:00">2017-10-24</time>
               
             
           </span>
@@ -387,7 +375,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/PHP/" itemprop="url" rel="index"><span itemprop="name">PHP</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/后花园/" itemprop="url" rel="index"><span itemprop="name">后花园</span></a></span>
 
                 
                 
@@ -421,28 +409,68 @@
       
 
       
-        
-          
-            <h4 id="工具准备"><a href="#工具准备" class="headerlink" title="工具准备"></a>工具准备</h4><ul>
-<li>MAC Pro 2016</li>
-<li>PHP版本PHP 7.1.2</li>
-<li>PHP源码 <a href="https://github.com/php/php-src.git" target="_blank" rel="noopener">https://github.com/php/php-src.git</a> 当前commit 8f8fb92cd0a2ef917</li>
-<li>autoconf工具 （brew install autoconf安装）</li>
+        <h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><h4 id="两键（ctrl-）"><a href="#两键（ctrl-）" class="headerlink" title="两键（ctrl + ）"></a>两键（ctrl + ）</h4><ul>
+<li><p>向后浏览<br><code>ctrl + -</code></p>
+</li>
+<li><p>打开终端<br><code>ctrl +</code>`</p>
+</li>
+<li><p>历史打开记录<br><code>ctrl + tab</code></p>
+</li>
+<li><p>跳到指定行号<br><code>ctrl + g</code></p>
+</li>
 </ul>
-<h4 id="创建扩展骨架"><a href="#创建扩展骨架" class="headerlink" title="创建扩展骨架"></a>创建扩展骨架</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 源码路径</span></span><br><span class="line"><span class="comment">## /Users/hg/Sites/php-src/</span></span><br><span class="line">-&gt; <span class="built_in">cd</span> /Users/hg/Sites/php-src/ext</span><br><span class="line"><span class="comment">## 扩展名称helloworld</span></span><br><span class="line">-&gt; ./ext_skel --extname=helloworld --proto=helloworld.def</span><br></pre></td></tr></table></figure>
-<p>执行ext_skel后会创建helloworld目录<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-&gt; <span class="built_in">cd</span> helloworld</span><br><span class="line">-&gt; <span class="built_in">pwd</span></span><br><span class="line">/Users/hg/Sites/php-src/ext/helloworld</span><br><span class="line">-&gt; ls</span><br><span class="line">CREDITS          EXPERIMENTAL     config.m4        config.w32       helloworld.c     helloworld.php   php_helloworld.h tests</span><br></pre></td></tr></table></figure></p>
-<h4 id="修改config-m4"><a href="#修改config-m4" class="headerlink" title="修改config.m4"></a>修改config.m4</h4><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">## 当前目录 /Users/hg/Sites/php-src/ext/helloworld/</span><br><span class="line">##动态编译选项，通过.<span class="keyword">so</span>的方式链接，去掉dnl注释</span><br><span class="line">dnl If your extension references something external, use with:</span><br><span class="line"></span><br><span class="line">dnl PHP_ARG_WITH(helloworld, <span class="keyword">for</span> helloworld support,</span><br><span class="line">dnl Make sure that the comment <span class="keyword">is</span> aligned:</span><br><span class="line">dnl [  --with-helloworld             Include helloworld support])</span><br><span class="line"></span><br><span class="line">##静态编译选项，通过enable来启用，去掉dnl注释</span><br><span class="line">dnl Otherwise use enable:</span><br><span class="line"></span><br><span class="line">dnl PHP_ARG_ENABLE(helloworld, whether <span class="keyword">to</span> enable helloworld support,</span><br><span class="line">dnl Make sure that the comment <span class="keyword">is</span> aligned:</span><br><span class="line">dnl [  --enable-helloworld           Enable helloworld support])</span><br></pre></td></tr></table></figure>
-<p>使用动态编译<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PHP_ARG_WITH(helloworld, <span class="keyword">for</span> helloworld support,</span><br><span class="line">Make sure that the comment <span class="keyword">is</span> aligned:</span><br><span class="line">[  --with-helloworld             Include helloworld support])</span><br></pre></td></tr></table></figure></p>
-<h4 id="创建helloWorld函数"><a href="#创建helloWorld函数" class="headerlink" title="创建helloWorld函数"></a>创建helloWorld函数</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">-&gt; vim helloworld.c</span><br><span class="line"></span><br><span class="line">PHP_FUNCTION(confirm_helloworld_compiled)</span><br><span class="line">&#123;</span><br><span class="line">    ....</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">#### 这是新增的函数</span></span><br><span class="line">PHP_FUNCTION(sayHello)</span><br><span class="line">&#123;</span><br><span class="line">        php_printf(<span class="string">"Hello World!\n"</span>);</span><br><span class="line">        RETURN_TRUE;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const zend_function_entry helloworld_functions[] = &#123;</span><br><span class="line">	PHP_FE(confirm_helloworld_compiled,	NULL)		/* For testing, remove later. */</span><br><span class="line">    PHP_FE(sayHello, NULL) <span class="comment">## 这是新增一行</span></span><br><span class="line">	PHP_FE_END	/* Must be the last line <span class="keyword">in</span> helloworld_functions[] */</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h4 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h4><blockquote>
-<p>因为我的电脑里有多个版本的php，所以指定了phpize和php-config</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 本地php安装路径</span></span><br><span class="line">-&gt;<span class="built_in">pwd</span></span><br><span class="line">/Users/hg/Sites/php-src/ext/helloworld/</span><br><span class="line">-&gt; /usr/<span class="built_in">local</span>/Cellar/php71/7.1.2_13/bin/phpize</span><br><span class="line">-&gt; ./configure --with-php-config=usr/<span class="built_in">local</span>/Cellar/php71/7.1.2_13/bin/php-config</span><br><span class="line">-&gt; make</span><br><span class="line">-&gt; make install</span><br><span class="line">Installing shared extensions:     /usr/<span class="built_in">local</span>/Cellar/php71/7.1.2_13/lib/php/extensions/no-debug-non-zts-20160303/</span><br></pre></td></tr></table></figure>
-<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-&gt; <span class="built_in">pwd</span></span><br><span class="line">/Users/hg/Sites/php-src/ext/helloworld/</span><br><span class="line">-&gt; php -d enable_dl=On -r <span class="string">"dl('helloworld.so');sayHello();"</span></span><br><span class="line">Hello World!</span><br></pre></td></tr></table></figure>
-<h4 id="配置php-ini"><a href="#配置php-ini" class="headerlink" title="配置php.ini"></a>配置php.ini</h4><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">extension=/usr/local/Cellar/php71/<span class="number">7.1</span>.<span class="number">2</span>_13/lib/php/extensions/<span class="keyword">no</span>-<span class="keyword">debug</span>-non-zts-<span class="number">20160303</span>/helloworld.<span class="keyword">so</span></span><br></pre></td></tr></table></figure>
-<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">echo</span> sayHello();</span><br></pre></td></tr></table></figure>
-          
-        
+<h4 id="两键（cmd-）"><a href="#两键（cmd-）" class="headerlink" title="两键（cmd + ）"></a>两键（cmd + ）</h4><ul>
+<li><p>开启侧边栏<br><code>cmd + b</code></p>
+</li>
+<li><p>打开文件<br><code>cmd + p</code></p>
+</li>
+<li><p>分割编辑器窗口<br><code>cmd + \</code></p>
+</li>
+<li><p>编辑器窗口切换<br><code>cmd + 1</code><br><code>cmd + 2</code><br><code>cmd + 3</code></p>
+</li>
+<li><p>选择当前行<br><code>cmd + i</code></p>
+</li>
+<li><p>回到文件开始<br><code>cmd + up</code></p>
+</li>
+<li><p>回到文件结束<br><code>cmd + down</code></p>
+</li>
+</ul>
+<h4 id="两键（opt-）"><a href="#两键（opt-）" class="headerlink" title="两键（opt + ）"></a>两键（opt + ）</h4><ul>
+<li>上下移动一行<br><code>opt + up</code><br><code>opt + down</code></li>
+</ul>
+<h4 id="三键（cmd-shift-）"><a href="#三键（cmd-shift-）" class="headerlink" title="三键（cmd + shift + ）"></a>三键（cmd + shift + ）</h4><ul>
+<li><p>打开markdown预览<br><code>cmd + shift + v</code></p>
+</li>
+<li><p>打开底部<br><code>cmd + shift + u</code></p>
+</li>
+<li><p>切换到资源管理器栏<br><code>cmd + shift + e</code></p>
+</li>
+<li><p>打开新的编辑器窗口<br><code>cmd + shift + n</code></p>
+</li>
+<li><p>关闭编辑器窗口</p>
+</li>
+</ul>
+<p><code>cmd + shift + w</code></p>
+<ul>
+<li><p>括号匹配<br><code>cmd + shift + \</code></p>
+</li>
+<li><p>符号查找<br><code>cmd + shift + o</code></p>
+</li>
+<li><p>修整行尾空格<br><code>cmd + shift + x</code></p>
+</li>
+<li><p>调出安装命令栏<br><code>cmd + shift + p</code></p>
+</li>
+</ul>
+<h4 id="三键（opt-cmd-）"><a href="#三键（opt-cmd-）" class="headerlink" title="三键（opt + cmd + ）"></a>三键（opt + cmd + ）</h4><ul>
+<li>多游标选择<br><code>opt + cmd + up</code><br><code>opt + cmd + down</code></li>
+</ul>
+<h4 id="三键（opt-shift-）"><a href="#三键（opt-shift-）" class="headerlink" title="三键（opt + shift + ）"></a>三键（opt + shift + ）</h4><ul>
+<li>复制一行<br><code>opt + shift + up</code><br><code>opt + shift +down</code></li>
+</ul>
+<h4 id="三键以上组合"><a href="#三键以上组合" class="headerlink" title="三键以上组合"></a>三键以上组合</h4><ul>
+<li>缩小/扩大选择<br><code>ctrl + shift + cmd + left</code><br><code>ctrl + shift + cmd + right</code></li>
+</ul>
+
       
     </div>
 
@@ -460,14 +488,36 @@
 
     <footer class="post-footer">
       
-
+        <div class="post-tags">
+          
+            <a href="/tags/工具/" rel="tag"># 工具</a>
+          
+        </div>
       
 
       
+      
+      
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/23/进制转换/" rel="next" title="进制转换">
+                <i class="fa fa-chevron-left"></i> 进制转换
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
       
-        <div class="post-eof"></div>
+
+      
       
     </footer>
   </div>
@@ -477,18 +527,24 @@
   </article>
 
 
-    
-  </section>
 
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/29/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/29/">29</a><span class="page-number current">30</span><a class="page-number" href="/page/31/">31</a><span class="space">&hellip;</span><a class="page-number" href="/page/35/">35</a><a class="extend next" rel="next" href="/page/31/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
-
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
           
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTM3Ni8xMTkxMg=="></div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -509,8 +565,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -646,6 +711,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#快捷键"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x5FEB;&#x6377;&#x952E;" class="headerlink" title="&#x5FEB;&#x6377;&#x952E;"></a>&#x5FEB;&#x6377;&#x952E;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#两键（ctrl-）"><span class="nav-number">1.0.1.</span> <span class="nav-text"><a href="#&#x4E24;&#x952E;&#xFF08;ctrl-&#xFF09;" class="headerlink" title="&#x4E24;&#x952E;&#xFF08;ctrl + &#xFF09;"></a>&#x4E24;&#x952E;&#xFF08;ctrl + &#xFF09;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#两键（cmd-）"><span class="nav-number">1.0.2.</span> <span class="nav-text"><a href="#&#x4E24;&#x952E;&#xFF08;cmd-&#xFF09;" class="headerlink" title="&#x4E24;&#x952E;&#xFF08;cmd + &#xFF09;"></a>&#x4E24;&#x952E;&#xFF08;cmd + &#xFF09;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#两键（opt-）"><span class="nav-number">1.0.3.</span> <span class="nav-text"><a href="#&#x4E24;&#x952E;&#xFF08;opt-&#xFF09;" class="headerlink" title="&#x4E24;&#x952E;&#xFF08;opt + &#xFF09;"></a>&#x4E24;&#x952E;&#xFF08;opt + &#xFF09;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三键（cmd-shift-）"><span class="nav-number">1.0.4.</span> <span class="nav-text"><a href="#&#x4E09;&#x952E;&#xFF08;cmd-shift-&#xFF09;" class="headerlink" title="&#x4E09;&#x952E;&#xFF08;cmd + shift + &#xFF09;"></a>&#x4E09;&#x952E;&#xFF08;cmd + shift + &#xFF09;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三键（opt-cmd-）"><span class="nav-number">1.0.5.</span> <span class="nav-text"><a href="#&#x4E09;&#x952E;&#xFF08;opt-cmd-&#xFF09;" class="headerlink" title="&#x4E09;&#x952E;&#xFF08;opt + cmd + &#xFF09;"></a>&#x4E09;&#x952E;&#xFF08;opt + cmd + &#xFF09;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三键（opt-shift-）"><span class="nav-number">1.0.6.</span> <span class="nav-text"><a href="#&#x4E09;&#x952E;&#xFF08;opt-shift-&#xFF09;" class="headerlink" title="&#x4E09;&#x952E;&#xFF08;opt + shift + &#xFF09;"></a>&#x4E09;&#x952E;&#xFF08;opt + shift + &#xFF09;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三键以上组合"><span class="nav-number">1.0.7.</span> <span class="nav-text"><a href="#&#x4E09;&#x952E;&#x4EE5;&#x4E0A;&#x7EC4;&#x5408;" class="headerlink" title="&#x4E09;&#x952E;&#x4EE5;&#x4E0A;&#x7EC4;&#x5408;"></a>&#x4E09;&#x952E;&#x4EE5;&#x4E0A;&#x7EC4;&#x5408;</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -779,6 +860,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
 
   
 
@@ -797,6 +882,17 @@
 
 
 
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
   
 
 
