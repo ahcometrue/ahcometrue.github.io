@@ -307,7 +307,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/23/进制转换/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/13/vscode/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="韩">
@@ -326,8 +326,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/23/进制转换/" itemprop="url">
-                  进制转换
+                <a class="post-title-link" href="/2018/09/13/vscode/" itemprop="url">
+                  vscode
                 </a>
               
             
@@ -353,7 +353,7 @@
                 
               
 
-              <time title="创建时间：2018-07-23 10:55:02" itemprop="dateCreated datePublished" datetime="2018-07-23T10:55:02+08:00">2018-07-23</time>
+              <time title="创建时间：2018-09-13 10:35:57" itemprop="dateCreated datePublished" datetime="2018-09-13T10:35:57+08:00">2018-09-13</time>
             
 
             
@@ -370,7 +370,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-07-25 17:18:50" itemprop="dateModified" datetime="2018-07-25T17:18:50+08:00">2018-07-25</time>
+                <time title="修改时间：2018-09-15 08:36:23" itemprop="dateModified" datetime="2018-09-15T08:36:23+08:00">2018-09-15</time>
               
             
           </span>
@@ -387,7 +387,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机组成原理/" itemprop="url" rel="index"><span itemprop="name">计算机组成原理</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/后花园/" itemprop="url" rel="index"><span itemprop="name">后花园</span></a></span>
 
                 
                 
@@ -423,226 +423,67 @@
       
         
           
-            <script type="text/javascript" src="/lib/math/MathJax.js?config=default"></script>
-
-<h3 id="进制概述"><a href="#进制概述" class="headerlink" title="进制概述"></a>进制概述</h3><p>维基百科中：是一种计数方式。利用这种记数法，可以使用有限种数字符号来表示所有的数值。一种进位制中可以使用的数字符号的数目称为这种进位制的<code>基数</code>或<code>底数</code>。若一个进位制的基数为n，即可称之为n进位制，简称n进制。</p>
-<p>十进制是逢十进一，十六进制是逢十六进一，二进制就是逢二进一，以此类推，x进制就是逢x进位。</p>
-<p><strong>位权</strong>: 简称“权”，数制中每一固定位置对应的单位值。<br>例如十进制数 111，三个“1”放在不同的位置，所代表的意义也不同。从左到右分别为 100，10，1。还可以表示为：1×10<sup>2</sup>，1×10<sup>1</sup>，1×10<sup>0</sup>。<br>这里面10<sup>x</sup> 就叫做权，二进制则为2<sup>x</sup>，八进制为8<sup>x</sup>，以此类推。</p>
-<p><strong>基数</strong>: 是指一种进制中组成的基本数字，也就是不能再进行拆分的数字。二进制是0和1；八进制是0-7；十进制是0-9；十六进制是0-9和A-F。可简单记忆：假设是n进制的话，基数就是【0，n-1】的数字。</p>
-<p>基数的个数和进制值相同。二进制有两个基数，十进制有十个基数。</p>
-<p><strong>运算规则</strong>: 进位或错位规则。例如对于二进制来说，该规则就是“满二进一，借一当二”；对十进制来说，该规则就是“满十进一，借一当十”；其他进制一次类推。</p>
-<p>在10进制中有10个数字(0 - 9)，比如:<br>$$<br>2506D = 2\times 10^{3}+5\times 10^{2}+0\times 10^{1}+6\times 10^{0}<br>$$</p>
-<p>在16进制中有16个数字(0–9 和 A–F)，比如:<br>$$<br>171B = 1\times 16^{3}+7\times 16^{2}+1\times 16^{1}+B\times 16^{0}<br>$$</p>
-<p>一般说来，b进制有b个数字，如果a<sub>3</sub>a<sub>2</sub>a<sub>2</sub>a<sub>0</sub>是其中四个数字序列，那么就有:<br>$$<br>a_3a_2a_1a_0=a_3\times b^3+a_2\times b^2+a_1\times b^1+a_0\times b^0<br>$$</p>
-<h3 id="进制基数对照表"><a href="#进制基数对照表" class="headerlink" title="进制基数对照表"></a>进制基数对照表</h3><table>
-<thead>
-<tr>
-<th>二进制（B）</th>
-<th>八进制（O）</th>
-<th>十进制（D）</th>
-<th>十六进制（H）</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0000</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-</tr>
-<tr>
-<td>0001</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>0010</td>
-<td>2</td>
-<td>2</td>
-<td>2</td>
-</tr>
-<tr>
-<td>0011</td>
-<td>3</td>
-<td>3</td>
-<td>3</td>
-</tr>
-<tr>
-<td>0100</td>
-<td>4</td>
-<td>4</td>
-<td>4</td>
-</tr>
-<tr>
-<td>0101</td>
-<td>5</td>
-<td>5</td>
-<td>5</td>
-</tr>
-<tr>
-<td>0110</td>
-<td>6</td>
-<td>6</td>
-<td>6</td>
-</tr>
-<tr>
-<td>0111</td>
-<td>7</td>
-<td>7</td>
-<td>7</td>
-</tr>
-<tr>
-<td>1000</td>
-<td>10</td>
-<td>8</td>
-<td>8</td>
-</tr>
-<tr>
-<td>1001</td>
-<td>11</td>
-<td>9</td>
-<td>9</td>
-</tr>
-<tr>
-<td>1010</td>
-<td>12</td>
-<td>10</td>
-<td>A</td>
-</tr>
-<tr>
-<td>1011</td>
-<td>13</td>
-<td>11</td>
-<td>B</td>
-</tr>
-<tr>
-<td>1100</td>
-<td>14</td>
-<td>12</td>
-<td>C</td>
-</tr>
-<tr>
-<td>1101</td>
-<td>15</td>
-<td>13</td>
-<td>D</td>
-</tr>
-<tr>
-<td>1110</td>
-<td>16</td>
-<td>14</td>
-<td>E</td>
-</tr>
-<tr>
-<td>1111</td>
-<td>17</td>
-<td>15</td>
-<td>F</td>
-</tr>
-</tbody>
-</table>
-<h3 id="二进制转其他进制"><a href="#二进制转其他进制" class="headerlink" title="二进制转其他进制"></a>二进制转其他进制</h3><h4 id="二进制转八进制"><a href="#二进制转八进制" class="headerlink" title="二进制转八进制"></a>二进制转八进制</h4><p>首先，我们需要了解一个数学关系，即2<sup>3</sup> = 8，2<sup>4</sup>=16，而八进制和十六进制是用这<br>关系衍生而来的，即用三位二进制表示一位八进制，用四位二进制表示一位十六进制数。</p>
+            <h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><h4 id="两键（ctrl-）"><a href="#两键（ctrl-）" class="headerlink" title="两键（ctrl + ）"></a>两键（ctrl + ）</h4><ul>
+<li><p>向后浏览<br><code>ctrl + -</code></p>
+</li>
+<li><p>打开终端<br><code>ctrl +</code>`</p>
+</li>
+<li><p>历史打开记录<br><code>ctrl + tab</code></p>
+</li>
+<li><p>跳到指定行号<br><code>ctrl + g</code></p>
+</li>
+</ul>
+<h4 id="两键（cmd-）"><a href="#两键（cmd-）" class="headerlink" title="两键（cmd + ）"></a>两键（cmd + ）</h4><ul>
+<li><p>开启侧边栏<br><code>cmd + b</code></p>
+</li>
+<li><p>打开文件<br><code>cmd + p</code></p>
+</li>
+<li><p>分割编辑器窗口<br><code>cmd + \</code></p>
+</li>
+<li><p>编辑器窗口切换<br><code>cmd + 1</code><br><code>cmd + 2</code><br><code>cmd + 3</code></p>
+</li>
+<li><p>选择当前行<br><code>cmd + i</code></p>
+</li>
+<li><p>回到文件开始<br><code>cmd + up</code></p>
+</li>
+<li><p>回到文件结束<br><code>cmd + down</code></p>
+</li>
+</ul>
+<h4 id="两键（opt-）"><a href="#两键（opt-）" class="headerlink" title="两键（opt + ）"></a>两键（opt + ）</h4><ul>
+<li>上下移动一行<br><code>opt + up</code><br><code>opt + down</code></li>
+</ul>
+<h4 id="三键（cmd-shift-）"><a href="#三键（cmd-shift-）" class="headerlink" title="三键（cmd + shift + ）"></a>三键（cmd + shift + ）</h4><ul>
+<li><p>打开markdown预览<br><code>cmd + shift + v</code></p>
+</li>
+<li><p>打开底部<br><code>cmd + shift + u</code></p>
+</li>
+<li><p>切换到资源管理器栏<br><code>cmd + shift + e</code></p>
+</li>
+<li><p>打开新的编辑器窗口<br><code>cmd + shift + n</code></p>
+</li>
+<li><p>关闭编辑器窗口</p>
+</li>
+</ul>
+<p><code>cmd + shift + w</code></p>
 <ul>
-<li>将二进制数<code>10010</code>转换成八进制。</li>
+<li><p>括号匹配<br><code>cmd + shift + \</code></p>
+</li>
+<li><p>符号查找<br><code>cmd + shift + o</code></p>
+</li>
+<li><p>修整行尾空格<br><code>cmd + shift + x</code></p>
+</li>
+<li><p>调出安装命令栏<br><code>cmd + shift + p</code></p>
+</li>
 </ul>
-<p>$$<br>10010 = 010 010 = 0\times2^2+1\times2^1+0\times2^0\;\;0\times2^2+1\times2^1+0\times2^0 = 22<br>$$</p>
-<ul>
-<li>将二进制数<code>0.101010</code>转换成八进制。<br>$$<br>0.101 010 = 0.\; 1\times2^2+0\times2^1+1\times2^0\;\;0\times2^2+1\times2^1+0\times2^0 = 0.52<br>$$</li>
+<h4 id="三键（opt-cmd-）"><a href="#三键（opt-cmd-）" class="headerlink" title="三键（opt + cmd + ）"></a>三键（opt + cmd + ）</h4><ul>
+<li>多游标选择<br><code>opt + cmd + up</code><br><code>opt + cmd + down</code></li>
 </ul>
-<p>方法：<strong>因为每三位二进制数对应一位八进制数，所以，以小数点为界，整数位则将二进制数从右向左每3位一隔开，不足3位的在左边用0填补即可；小数位则将二进制数从左向右每3位一隔开，不足3位的在右边用0填补即可。</strong></p>
-<h4 id="二进制转十进制"><a href="#二进制转十进制" class="headerlink" title="二进制转十进制"></a>二进制转十进制</h4><ul>
-<li>将二进制数<code>101.101</code>转换成十进制。</li>
+<h4 id="三键（opt-shift-）"><a href="#三键（opt-shift-）" class="headerlink" title="三键（opt + shift + ）"></a>三键（opt + shift + ）</h4><ul>
+<li>复制一行<br><code>opt + shift + up</code><br><code>opt + shift +down</code></li>
 </ul>
-<p>$$<br>101.101 = 1\times2^2+0\times2^1+1\times2^0. 1\times2^{-1}+0\times2^{-2}+1\times2^{-3} = 5.625<br>$$</p>
-<p>方法：<strong>以小数点为界，整数位从最后一位（从右向左）开始算，依次列为第0、1、2、3………n，然后将第n位的数（0或1）乘以2<sup>n-1</sup>    次方，然后相加即可得到整数位的十进制数；小数位则从左向右开始算，依次列为第1、2、3……..n，然后将第n位的数（0或1）乘以2<sup>-n</sup>次方，然后相加即可得到小数位的十进制数（按权相加法）。</strong></p>
-<h4 id="二进制转十六进制"><a href="#二进制转十六进制" class="headerlink" title="二进制转十六进制"></a>二进制转十六进制</h4><ul>
-<li>将二进制数<code>1.10101</code>转换成十六进制。</li>
+<h4 id="三键以上组合"><a href="#三键以上组合" class="headerlink" title="三键以上组合"></a>三键以上组合</h4><ul>
+<li>缩小/扩大选择<br><code>ctrl + shift + cmd + left</code><br><code>ctrl + shift + cmd + right</code></li>
 </ul>
-<ol>
-<li><p>第一步计算<code>1</code>：<br>$$<br>1 = 0001 = 0\times2^3 + 0\times2^2 + 0\times2^1 + 1\times2^0  = 1<br>$$</p>
-</li>
-<li><p>第二步计算<code>0.10101</code>：<br>$$<br>10101 = 1010\;1000 = 1\times2^3 + 0\times2^2 + 1\times2^1 + 0\times2^0 \; 1\times2^3 + 0\times2^2 + 0\times2^1 + 0\times2^0= 10 \; 8 = A8<br>$$</p>
-</li>
-<li>拼接在一起为：<code>1.A8</code></li>
-</ol>
-<p>方法：<strong>取四合一法，因为每四位二进制数对应一位十六进制数，所以，以小数点为界，整数位则将二进制数从右向左每4位一隔开，不足4位的在左边用0填补即可；小数位则将二进制数从左向右每4位一隔开，不足4位的在右边用0填补即可。</strong></p>
-<h3 id="八进制转其他进制"><a href="#八进制转其他进制" class="headerlink" title="八进制转其他进制"></a>八进制转其他进制</h3><h4 id="八进制转二进制"><a href="#八进制转二进制" class="headerlink" title="八进制转二进制"></a>八进制转二进制</h4><ul>
-<li>将八进制数<code>67.54</code>转换成二进制。</li>
-</ul>
-<ol>
-<li><p>第一步计算<code>67</code>：<br> $$<br> 67 = xxx\;xxx = x\times2^2 + x\times2^1+ x\times2^0\;x\times2^2 + x\times2^1+ x\times2^0 = 110\;111<br> $$</p>
-</li>
-<li><p>第二步计算<code>0.54</code>：<br> $$<br> 54 = xxx\;xxx = x\times2^2 + x\times2^1+ x\times2^0\;x\times2^2 + x\times2^1+ x\times2^0 =  101\;100 = 1011<br> $$</p>
-</li>
-<li><p>拼接在一起为：<code>110 111. 1011</code></p>
-</li>
-</ol>
-<p>方法：<strong>取一分三法，即将一位八进制数分解成三位二进制数，用三位二进制按权相加去凑这位八进制数，小数点位置照旧。</strong></p>
-<h4 id="八进制转十六进制"><a href="#八进制转十六进制" class="headerlink" title="八进制转十六进制"></a>八进制转十六进制</h4><ul>
-<li>将八进制<code>67.54</code>转换成十六进制。</li>
-</ul>
-<ol>
-<li>第一步先转换为二进制：<br>$$<br>67.54 = 110111.1011<br>$$</li>
-<li>第二步计算<code>110111</code>：<br>$$<br>110111 = 0011\;0111 = 0\times2^3+0\times2^2+1\times2^1+1\times2^0\;0\times2^3+1\times2^2+1\times2^1+1\times2^0 = 37<br>$$</li>
-<li>第三步计算<code>0.1011</code>：<br>$$<br>1011 = 1\times2^3+0\times2^2+1\times2^1+1\times2^0 = 11 = B<br>$$</li>
-<li>拼接在一起为：<code>37.B</code></li>
-</ol>
-<p>方法：<strong>一般不能互相直接转换，一般是将八进制（或十六进制）转换为二进制，然后再将二进制转换为十六进制（或八进制），小数点位置不变。那么相应的转换请参照上面二进制与八进制的转换和二进制与十六进制的转。</strong></p>
-<h4 id="八进制转十进制"><a href="#八进制转十进制" class="headerlink" title="八进制转十进制"></a>八进制转十进制</h4><ul>
-<li>将八进制<code>67.54</code>转换成十进制</li>
-</ul>
-<ol>
-<li>第一步计算<code>67</code>:<br> $$<br> 67 = 6\times8^1+7\times8^0 = 55<br> $$</li>
-<li><p>第二步计算<code>0.54</code>：<br> $$<br> 54 = 5\times8^{-1}+4\times8^{-2} = 6875<br> $$</p>
-</li>
-<li><p>拼接在一起为：<code>55.6875</code></p>
-</li>
-</ol>
-<p>方法：<strong>同二进制转换成十进制。以小数点为界，整数位从最后一位（从右向左）开始算，依次列为第0、1、2、3………n，然后将第n位的数（0-7）乘以8的n-1次方，然后相加即可得到整数位的十进制数；小数位则从左向右开始算，依次列为第1、2、3……..n，然后将第n位的数（0-7）乘以8的-n次方，然后相加即可得到小数位的十进制数（按权相加法）。</strong></p>
-<h3 id="十进制转其他进制"><a href="#十进制转其他进制" class="headerlink" title="十进制转其他进制"></a>十进制转其他进制</h3><h4 id="十进制转二进制"><a href="#十进制转二进制" class="headerlink" title="十进制转二进制"></a>十进制转二进制</h4><ul>
-<li>将十进制<code>7.125</code>转换成二进制</li>
-</ul>
-<ol>
-<li><p>第一步计算<code>7</code>：</p>
- <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">7除以2，商3余1。</span><br><span class="line">3除以2，商1余1。</span><br><span class="line">1除以2，商0余1。</span><br><span class="line">从后往前读余数：111</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>第二步计算<code>0.125</code>：</p>
- <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">0.125乘以2，得0.25，整数部分是0，小数部分是0.25</span><br><span class="line">0.25乘以2，得0.5，整数部分是0，小数部分是0.5</span><br><span class="line">0.5乘以2，得1.0，整数部分是1，小数部分是0</span><br><span class="line">从前往后读整数部分：001</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>拼接在一起为：<code>111.001</code></p>
-</li>
-</ol>
-<p>方法：（整数）<strong>除2取余法，即每次将整数部分除以2，余数为该位权上的数，而商继续除以2，余数又为上一个位权上的数，这个步骤一直持续下去，直到商为0为止，最后读数时候，从最后一个余数读起，一直到最前面的一个余数。</strong><br>（小数）<strong>乘2取整法，即将小数部分乘以2，然后取整数部分，剩下的小数部分继续乘以2，然后取整数部分，剩下的小数部分又乘以2，一直取到小数部分<br>为零为止。如果永远不能为零，就同十进制数的四舍五入一样，按照要求保留多少位小数时，就根据后面一位是0还是1，取舍，如果是零，舍掉，如果是1，向入一位。换句话说就是0舍1入。读数要从前面的整数读到后面的整数。</strong></p>
-<h4 id="十进制转八进制"><a href="#十进制转八进制" class="headerlink" title="十进制转八进制"></a>十进制转八进制</h4><ul>
-<li>将十进制<code>93.3125</code>转换成八进制：</li>
-</ul>
-<ol>
-<li><p>第一步计算<code>93</code>:</p>
- <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">93除以8，商11余5。</span><br><span class="line">11除以8，商1余3。</span><br><span class="line">1除以8，商0余1。</span><br><span class="line">从后往前读余数：135</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>第二步计算<code>0.3125</code>：</p>
- <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">0.3125乘以8，得2.5，整数部分是2，小数部分是0.5</span><br><span class="line">0.5乘以8，得4.0，整数部分是4，小数部分是0</span><br><span class="line">从前往后读整数部分：24</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>拼接在一起为：<code>135.24</code></p>
-</li>
-</ol>
-<p>方法：（整数）<strong>除8取余法，即每次将整数部分除以8，余数为该位权上的数，而商继续除以8，余数又为上一个位权上的数，这个步骤一直持续下去，直到商为0为止，最后读数时候，从最后一个余数起，一直到最前面的一个余数。</strong><br>（小数）<strong>乘8取整法，即将小数部分乘以8，然后取整数部分，剩下的小数部分继续乘以8，然后取整数部分，剩下的小数部分又乘以8，一直取到小数部分为零为止。如果永远不能为零，就同十进制数的四舍五入一样，暂取个名字叫3舍4入。</strong></p>
-<h4 id="十进制转十六进制"><a href="#十进制转十六进制" class="headerlink" title="十进制转十六进制"></a>十进制转十六进制</h4><ul>
-<li>将十进制<code>93.3125</code>转换成八进制：</li>
-</ul>
-<ol>
-<li><p>第一步计算<code>93</code>:</p>
- <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">93除以16，商5余13。</span><br><span class="line">5除以16，商0余5。</span><br><span class="line">从后往前读余数：513 = 5D</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>第二步计算<code>0.3125</code>：</p>
- <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">0.3125乘以16，得5.0，整数部分是5，小数部分是0</span><br><span class="line">从前往后读整数部分：5</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>拼接在一起为：<code>5D.5</code></p>
-</li>
-</ol>
-<p>方法：<strong>同十进制转八进制、二进制，此时除数为16。</strong></p>
-<h3 id="十六进制转其他进制"><a href="#十六进制转其他进制" class="headerlink" title="十六进制转其他进制"></a>十六进制转其他进制</h3><h4 id="十六进制转二进制"><a href="#十六进制转二进制" class="headerlink" title="十六进制转二进制"></a>十六进制转二进制</h4><p>方法：<strong>十六进制转换成二进制与二进制转换成十六进制相反。</strong></p>
 
           
         
@@ -685,7 +526,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/32/">32</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/33/">33</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -732,7 +573,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-count">33</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>

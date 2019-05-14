@@ -307,7 +307,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/02/php源码学习2/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/29/linux-awk/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="韩">
@@ -326,8 +326,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/07/02/php源码学习2/" itemprop="url">
-                  PHP源码学习-用户代码的执行
+                <a class="post-title-link" href="/2017/08/29/linux-awk/" itemprop="url">
+                  Linux命令-awk
                 </a>
               
             
@@ -353,7 +353,7 @@
                 
               
 
-              <time title="创建时间：2017-07-02 15:29:14" itemprop="dateCreated datePublished" datetime="2017-07-02T15:29:14+08:00">2017-07-02</time>
+              <time title="创建时间：2017-08-29 15:01:11" itemprop="dateCreated datePublished" datetime="2017-08-29T15:01:11+08:00">2017-08-29</time>
             
 
             
@@ -370,7 +370,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2017-10-24 23:41:03" itemprop="dateModified" datetime="2017-10-24T23:41:03+08:00">2017-10-24</time>
+                <time title="修改时间：2019-05-14 19:53:04" itemprop="dateModified" datetime="2019-05-14T19:53:04+08:00">2019-05-14</time>
               
             
           </span>
@@ -387,7 +387,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/PHP/" itemprop="url" rel="index"><span itemprop="name">PHP</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
 
                 
                 
@@ -423,25 +423,90 @@
       
         
           
-            <h2 id="生命周期和Zend引擎"><a href="#生命周期和Zend引擎" class="headerlink" title="生命周期和Zend引擎"></a>生命周期和Zend引擎</h2><h4 id="一切的开始：SAPI接口"><a href="#一切的开始：SAPI接口" class="headerlink" title="一切的开始：SAPI接口"></a>一切的开始：SAPI接口</h4><p>SAPI指的PHP具体应用的编程接口，脚本执行的开始都是以SAPI接口实现开始的。</p>
-<h4 id="开始和结束"><a href="#开始和结束" class="headerlink" title="开始和结束"></a>开始和结束</h4><p>PHP执行以后经过两个主要阶段：处理请求之前的开始阶段和请求之后的结束阶段。<br>开始阶段有两个过程：第一过程是模块初始化阶段（MINIT），在整个SAPI生命周期内（例如Apache启动以后的整个生命周期内或命令行程序整个执行过程中），该过程只进行一次。第二个过程是模块激活阶段（RINIT），该过程发生在请求阶段，例如：通过URL请求某个页面，则在每次请求之前都会进行模块激活。例如：PHP注册了一些扩展模块，则在MINIT阶段会回调所有模块的MINIT函数。模块在这个阶段可以进行一些初试化工作，例如：注册常量、定义模块使用的类等。模块在实时可以通过如下宏来实现这些回调函数：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">PHP_MINIT_FUNCTION(myphpextension)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 注册常量或者类等初始化操作</span></span><br><span class="line">    <span class="keyword">return</span> SUCCESS; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>请求到达之后PHP初始化执行脚本的基本环境，例如：创建一个执行环境，包括保存PHP运行过程中变量名称和值内容的符号表、当前所有的函数以及类等信息的符号表。然后php会调用所有模块的RINIT函数，在这个阶段各个模块也可以执行一些相关的操作。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">PHP_RINIT_FUNCTION(myphpextension)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 例如记录请求开始时间</span></span><br><span class="line">    <span class="comment">// 随后在请求结束的时候记录结束时间。这样我们就能够记录下处理请求所花费的时间了</span></span><br><span class="line">    <span class="keyword">return</span> SUCCESS; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>请求处理完后就进入了结束阶段，一般脚本执行到行尾或通过调用<code>exit()</code>或<code>die()</code>函数，PHP都将进入结束阶段。和开始阶段对应，结束阶段也分为两个环节：一个在请求结束后停用模块(RSHUTDOWN,对应RINIT)，一个在SAPI生命周期结束（web服务器退出或命令行脚本执行完毕退出）时关闭模块（MSHUTDOWN，对应MINIT）。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">PHP_RSHUTDOWN_FUNCTION(myphpextension)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 例如记录请求结束时间，并把相应的信息写入到日至文件中。</span></span><br><span class="line">    <span class="keyword">return</span> SUCCESS; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h4 id="单进程SAPI生命周期"><a href="#单进程SAPI生命周期" class="headerlink" title="单进程SAPI生命周期"></a>单进程SAPI生命周期</h4><p>CLI/CGI模式的PHP属于单进程的SAPI模式。这类的请求处理一次请求后就关闭。</p>
-<h6 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h6><p>在调用每个模块的模块初始化前，会有一个初始化的过程，包括：</p>
-<ul>
-<li>初始化若干全局变量<br>在这里的初始化全局变量大多数情况下是将其设置为<code>NULL</code>，有些除外，比如设置<code>zuf</code>（<code>zend_utility_functions</code>）,以<code>zuf.printf_function = php_printf</code>为例，这里的<code>php_printf</code>在<code>zend_startup</code>函数中会被赋值给<code>zend_printf</code>作为全局函数指针使用，而<code>zend_printf</code>函数通常会作为常规字符串输出使用，比如显示程序调用栈的<code>debug_print_backtrace</code>就是使用它打印相关信息。</li>
-<li>初始化若干常量<br>这里的常量是PHP自己的一些常量，这些常量要么是硬编码在程序中，比如<code>PHP_VERSION</code>，要么是写在配置头文件中，比如<code>PEAR_EXTENSION_DIR</code>，这些是写在config.w32.h文件中。</li>
-<li>初始化Zend引擎和核心组件<br>前面提到的<code>zend_startup</code>函数的作用就是初始化zend引擎，这里的初始化操作包括内存管理初始化、全局使用的函数指针初始化（如前面所说的<code>zend_printf</code>等），对PHP源文件进行词法分析、语法分析、中间代码执行的函数指针的赋值，初始化若干<code>hashTable</code>（如函数表、常量表等），为ini文件解析做准备，为PHP源文件解析做准备，注册内置函数（如<code>strlen</code>、<code>define</code>等），注册标准常量（如<code>E_ALL</code>，<code>TRUE</code>，<code>NULL</code>等）、注册GLOBALS全局变量等。</li>
-<li>解析php.ini<br>php_init_config函数的作用是读取php.ini文件，设置配置参数，加载zend扩展并注册PHP扩展函数。此函数分为以下几步：初始化参数配置表，调用当前模式下的ini初始化配置，如CLI模式下，会做如下初始化：<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">INI_DEFAULT(<span class="string">"report_zend_debug"</span>, <span class="string">"0"</span>);</span><br><span class="line">INI_DEFAULT(<span class="string">"display_errors"</span>, <span class="string">"1"</span>);</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>不过在其他模式下却没有这样的初始化操作。接下来的各种操作都是查找ini文件：</p>
-<ol>
-<li>判断是否有<code>php_ini_path_override</code>，在CLI模式下可以通过-c参数指定此路径（在php的命令参数中-c表示在指定路径中查找ini文件）。</li>
-<li>如果没有<code>php_ini_path_override</code>，判断<code>php_ini_ignore</code>是否为空（忽略php.ini配置，这里也就CLI模式下有用，使用-n参数）。</li>
-<li>如果不忽略ini配置，则开始处理<code>php_ini_search_path</code>（查找ini文件的路径），这些路径包括CWD（当前路径，不过这种不适用CLI模式）、执行脚本所在目录、环境变量PATH和PHPRC和配置文件中的<code>PHP_CONFIG_FILE_PAYH</code>的值。</li>
-</ol>
+            <p>前段时间导一些运营数据，使用awk进行了一些格式化处理、计算等，今天刚好有点空闲就记录巩固下</p>
+<h3 id="Help-Help"><a href="#Help-Help" class="headerlink" title="Help Help"></a>Help Help</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@hg ~]<span class="comment"># awk --help</span></span><br><span class="line">用法: awk [POSIX 或 GNU 风格选项] -f 脚本文件 [--] 文件 ...</span><br><span class="line">用法: awk [POSIX 或 GNU 风格选项] [--] <span class="string">'程序'</span> 文件 ...</span><br><span class="line"></span><br><span class="line">gawk 是一个模式扫描及处理语言。缺省情况下它从标准输入读入并写至标准输出。</span><br><span class="line"></span><br><span class="line">范例:</span><br><span class="line">	gawk <span class="string">'&#123; sum += $1 &#125;; END &#123; print sum &#125;'</span> file</span><br><span class="line">	gawk -F: <span class="string">'&#123; print $1 &#125;'</span> /etc/passwd</span><br></pre></td></tr></table></figure>
+<h3 id="敲一敲-瞧一瞧"><a href="#敲一敲-瞧一瞧" class="headerlink" title="敲一敲 瞧一瞧"></a>敲一敲 瞧一瞧</h3><h4 id="小试牛刀"><a href="#小试牛刀" class="headerlink" title="小试牛刀"></a>小试牛刀</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@hg ~]<span class="comment"># awk '&#123;print $0&#125;' /etc/passwd</span></span><br><span class="line">root:x:0:0:root:/root:/bin/bash</span><br><span class="line">bin:x:1:1:bin:/bin:/sbin/nologin</span><br><span class="line">daemon:x:2:2:daemon:/sbin:/sbin/nologin</span><br><span class="line">adm:x:3:4:adm:/var/adm:/sbin/nologin</span><br><span class="line">lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin</span><br><span class="line">sync:x:5:0:sync:/sbin:/bin/sync</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br></pre></td></tr></table></figure>
+<p><code>&#39;{....}&#39;</code> 可执行的程序</p>
+<p><code>$0</code> 变量，标示当前行；<code>$1</code>，当前行第一列，<code>$2</code>，当前行第二列，依此类对</p>
+<p><code>print</code> 输出</p>
+<h4 id="分割符"><a href="#分割符" class="headerlink" title="分割符"></a>分割符</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@hg ~]<span class="comment"># awk -F ':' '&#123;print $1&#125;' /etc/passwd</span></span><br><span class="line">root</span><br><span class="line">bin</span><br><span class="line">daemon</span><br><span class="line">adm</span><br><span class="line">lp</span><br><span class="line">sync</span><br><span class="line">shutdown</span><br><span class="line">halt</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br></pre></td></tr></table></figure>
+<h4 id="awk内置变量的使用"><a href="#awk内置变量的使用" class="headerlink" title="awk内置变量的使用"></a>awk内置变量的使用</h4><p><code>$0</code> 表示文本处理时的当前行</p>
+<p><code>$1</code> 表示文本行被分割的第一个字段</p>
+<p><code>$n</code> 表示文本行被分割的第n个字段</p>
+<p><code>NR</code> 表示文件中的行号，表示当前是第几行</p>
+<p><code>NF</code> 表示文件中的当前行个数(列数)</p>
+<p><code>FS</code> 表示awk的输入分隔符，默认分隔符为空格和制表符</p>
+<p><code>OFS</code> 表示awk的输出分隔符，默认为空格</p>
+<p><code>FILENAME</code> 表示当前文件的名称</p>
+<h4 id="赋值和运算"><a href="#赋值和运算" class="headerlink" title="赋值和运算"></a>赋值和运算</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">~/Sites awk <span class="string">'&#123;print $0&#125;'</span> 1.txt</span><br><span class="line">han 10 1991</span><br><span class="line">yan 10 1993</span><br><span class="line">jie 10 1993</span><br></pre></td></tr></table></figure>
+<p>把第三列使用”<em>*</em>“代替</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">~/Sites awk <span class="string">'&#123;print $1, $2, $3 ="***"&#125;'</span> 1.txt</span><br><span class="line">han 10 ***</span><br><span class="line">yan 10 ***</span><br><span class="line">jie 10 ***</span><br></pre></td></tr></table></figure>
+<p>把第二列累加求和</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">~/Sites awk <span class="string">'&#123;sum +=$2&#125;;END &#123;print sum&#125;'</span> 1.txt</span><br><span class="line">30</span><br></pre></td></tr></table></figure>
+<p>把第一列为‘han’的行，第二列和第三列用“<em>*</em>”代替</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">~/Sites awk <span class="string">'$1 == "han" &#123;print $1, $2 = "***", $3 = "***"&#125; $1 != "han" &#123;print $0&#125;'</span> 1.txt</span><br><span class="line">han *** ***</span><br><span class="line">yan 10 1993</span><br><span class="line">jie 10 1993</span><br></pre></td></tr></table></figure>
+<h4 id="函数介绍"><a href="#函数介绍" class="headerlink" title="函数介绍"></a>函数介绍</h4><table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>简介</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>gsub(r, s)</td>
+<td>在整个$0中用s替代r</td>
+</tr>
+<tr>
+<td>gsub(r, s, t)</td>
+<td>在整个t中用s替代r</td>
+</tr>
+<tr>
+<td>index(s, t)</td>
+<td>返回s中字符串t的第一位置</td>
+</tr>
+<tr>
+<td>length(s)</td>
+<td>返回s长度</td>
+</tr>
+<tr>
+<td>match(s, r)</td>
+<td>测试s是否包含匹配r的字符串</td>
+</tr>
+<tr>
+<td>split(s, a, fs)</td>
+<td>在fs上将s分成序列a</td>
+</tr>
+<tr>
+<td>sprint(fmt, exp)</td>
+<td>返回经fmt格式化后的exp</td>
+</tr>
+<tr>
+<td>sub(r, s)</td>
+<td>用$0中最左边最长的子串代替s</td>
+</tr>
+<tr>
+<td>substr(s, p)</td>
+<td>返回字符串s中从p开始的后缀部分</td>
+</tr>
+<tr>
+<td>substr(s, p, n)</td>
+<td>返回字符串s中从p开始长度为n的后缀部分</td>
+</tr>
+</tbody>
+</table>
+<h4 id="函数小试"><a href="#函数小试" class="headerlink" title="函数小试"></a>函数小试</h4><p>把文件中“3”替换成“*”</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">~/Sites awk <span class="string">'gsub("3", "*") &#123;print $0&#125;'</span> 1.txt</span><br><span class="line">yan 10 199*</span><br><span class="line">jie 10 199*</span><br></pre></td></tr></table></figure>
+<p>查找包含“j”的行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">~/Sites awk <span class="string">'/j/ &#123;print $0&#125;'</span> 1.txt</span><br><span class="line">jie 10 1993</span><br></pre></td></tr></table></figure>
+<p>分割</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~/Sites awk <span class="string">'&#123;print $1&#125;'</span> | awk <span class="string">'&#123;split($0, a, ":"); print a[3]&#125;'</span> 1.txt</span><br></pre></td></tr></table></figure>
+<p>去重</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//按第一列进行去重</span><br><span class="line">cat php_sort.log | awk <span class="string">'!a[$1]++&#123;print $0&#125;'</span> &gt; php_uniq.log</span><br></pre></td></tr></table></figure>
+<p>加单引号</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//在第一列、第二列加单引号</span><br><span class="line">awk <span class="string">'&#123;print "\047" $1 "\047" "\047" $2 "\047"&#125;'</span> file.csv</span><br></pre></td></tr></table></figure>
+<p>双引号替换成单引号</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">'gsub("\"", "\047") &#123;print $0&#125;'</span> file.csv</span><br></pre></td></tr></table></figure>
 
           
         
@@ -484,7 +549,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/24/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><span class="page-number current">25</span><a class="page-number" href="/page/26/">26</a><span class="space">&hellip;</span><a class="page-number" href="/page/32/">32</a><a class="extend next" rel="next" href="/page/26/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/24/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><span class="page-number current">25</span><a class="page-number" href="/page/26/">26</a><span class="space">&hellip;</span><a class="page-number" href="/page/33/">33</a><a class="extend next" rel="next" href="/page/26/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -531,7 +596,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-count">33</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
