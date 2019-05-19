@@ -190,7 +190,9 @@
 
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left 
   page-home">
-    <div class="headband"></div>
+    <div class="headband">
+        <a href="https://github.com/ahcometrue"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_darkblue_121621.png?resize=149%2C149" alt="Fork me on GitHub"></a>
+    </div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
@@ -454,66 +456,18 @@
       
         
           
-            <p>心痒难耐就研究了下Hbase，算是对NoSQL知识的一点扩充吧。</p>
-<h3 id="系统信息"><a href="#系统信息" class="headerlink" title="系统信息"></a>系统信息</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">系统环境：腾讯云主机</span><br><span class="line">系统版本：CentOS Linux release 7.5.1804</span><br></pre></td></tr></table></figure>
-<h3 id="软件包准备"><a href="#软件包准备" class="headerlink" title="软件包准备"></a>软件包准备</h3><p>java安装包： <a href="http://download.oracle.com/otn-pub/java/jdk/8u172-b11/a58eab1ec242421181065cdc37240b08/jdk-8u172-linux-x64.rpm?AuthParam=1529832388_57ec8562a1b96efef55463680b946e13" target="_blank" rel="noopener">jdk-8u172-linux-x64.rpm</a></p>
-<p>Hbase：<a href="http://mirrors.hust.edu.cn/apache/hbase/2.0.1/hbase-2.0.1-bin.tar.gz" target="_blank" rel="noopener">hbase-2.0.1-bin.tar.gz</a></p>
-<p>Phoenix：<a href="//mirrors.hust.edu.cn/apache/phoenix/apache-phoenix-5.0.0-alpha-HBase-2.0/bin/apache-phoenix-5.0.0-alpha-HBase-2.0-bin.tar.gz">apache-phoenix-5.0.0-alpha-HBase-2.0-bin.tar.gz</a></p>
-<h3 id="安装Java"><a href="#安装Java" class="headerlink" title="安装Java"></a>安装Java</h3><blockquote>
-<p>默认安装到 /usr/java/中</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># rpm -ivh jdk-8u172-linux-x64.rpm</span></span><br></pre></td></tr></table></figure>
-<h4 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># java -version</span></span><br><span class="line">java version <span class="string">"1.8.0_172"</span></span><br><span class="line">Java(TM) SE Runtime Environment (build 1.8.0_172-b11)</span><br><span class="line">Java HotSpot(TM) 64-Bit Server VM (build 25.172-b11, mixed mode)</span><br></pre></td></tr></table></figure>
-<h4 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile</span><br></pre></td></tr></table></figure>
-<ul>
-<li>向文件追加一下内容：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">JAVA_HOME=/usr/java/jdk1.8.0_172-amd64</span><br><span class="line">JRE_HOME=/usr/java/jdk1.8.0_172-amd64/jre</span><br><span class="line">PATH=<span class="variable">$PATH</span>:<span class="variable">$JAVA_HOME</span>/bin:<span class="variable">$JRE_HOME</span>/bin</span><br><span class="line">CLASSPATH=.:<span class="variable">$JAVA_HOME</span>/lib/dt.jar:<span class="variable">$JAVA_HOME</span>/lib/tools.jar:<span class="variable">$JRE_HOME</span>/lib</span><br><span class="line"><span class="built_in">export</span> JAVA_HOME JRE_HOME PATH CLASSPATH</span><br></pre></td></tr></table></figure>
-<ul>
-<li>使修改立即生效</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># source /etc/profile</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>查看PATH值</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># echo $PATH</span></span><br><span class="line">/usr/java/jdk1.8.0_172-amd64/jre/bin:/root/bin</span><br></pre></td></tr></table></figure>
-<ul>
-<li>查看JAVA_HOME</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># echo $JAVA_HOME</span></span><br><span class="line">/usr/java/jdk1.8.0_172-amd64</span><br></pre></td></tr></table></figure>
-<h3 id="安装Hbase"><a href="#安装Hbase" class="headerlink" title="安装Hbase"></a>安装Hbase</h3><blockquote>
-<p>将文件解压到目录：/root/hbase</p>
-</blockquote>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxf hbase-2.0.1-bin.tar.gz</span><br></pre></td></tr></table></figure>
-<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim hbase-2.0.1/conf/hbase-env.sh</span><br></pre></td></tr></table></figure>
-<p>找到JAVA_HOME，打开JAVA_HOME行的注释并修改</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/java/jdk1.8.0_172-amd64/</span><br></pre></td></tr></table></figure>
-<p>保存退出</p>
-<p>保存数据的目录配置：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim hbase-2.0.1/conf/hbase-site.xml</span><br></pre></td></tr></table></figure>
-<p>在configuration标签中添加：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.rootdir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>file:///root/hbase/data/hbase<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.zookeeper.property.dataDir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>/root/hbase/data/zookeeper<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h4 id="验证-1"><a href="#验证-1" class="headerlink" title="验证"></a>验证</h4><p>启动Hbase</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/root/hbase/hbase-2.0.1/bin/start-hbase.sh</span><br></pre></td></tr></table></figure>
-<p>没有报错即配置OK</p>
-<h3 id="安装Phoenix"><a href="#安装Phoenix" class="headerlink" title="安装Phoenix"></a>安装Phoenix</h3><blockquote>
-<p>将文件解压到目录：/root/phoenix</p>
-</blockquote>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar zxfv apache-phoenix-5.0.0-alpha-HBase-2.0-bin.tar.gz</span><br></pre></td></tr></table></figure>
-<p>拷贝<code>phoenix-5.0.0-alpha-HBase-2.0-server.jar</code>到Hbase下lib目录中</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /root/phoenix/phoenix-5.0.0-alpha-HBase-2.0-server.jar /root/hbase/hbase-2.0.1/lib/</span><br></pre></td></tr></table></figure>
-<h4 id="验证-2"><a href="#验证-2" class="headerlink" title="验证"></a>验证</h4><p>重启Hbase</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> /root/hbase/hbase-2.0.1/bin/stop-hbase.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> /root/hbase/hbase-2.0.1/bin/start-hbase.sh</span></span><br></pre></td></tr></table></figure>
-<p>重启成功后，启动Phoenix</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/root/phoenix/bin/sqlline.py localhost</span><br></pre></td></tr></table></figure>
-<p>当出现版本号<code>sqlline version 1.2.0</code>说明启动成功</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">Building list of tables and columns for tab-completion (set fastconnect to true to skip)...</span><br><span class="line">92/92 (100%) Done</span><br><span class="line">Done</span><br><span class="line">sqlline version 1.2.0</span><br><span class="line">0: jdbc:phoenix:localhost&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="使用Phoenix"><a href="#使用Phoenix" class="headerlink" title="使用Phoenix"></a>使用Phoenix</h3><ul>
-<li>使用<code>!table</code>命令</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">0: jdbc:phoenix:localhost&gt; !table</span><br><span class="line">+------------+--------------+-------------+---------------+----------+------------+----------------------------+-----------------+--------------+-----------------+---------------+-+</span><br><span class="line">| TABLE_CAT  | TABLE_SCHEM  | TABLE_NAME  |  TABLE_TYPE   | REMARKS  | TYPE_NAME  | SELF_REFERENCING_COL_NAME  | REF_GENERATION  | INDEX_STATE  | IMMUTABLE_ROWS  | SALT_BUCKETS  | |</span><br><span class="line">+------------+--------------+-------------+---------------+----------+------------+----------------------------+-----------------+--------------+-----------------+---------------+-+</span><br><span class="line">|            | SYSTEM       | CATALOG     | SYSTEM TABLE  |          |            |                            |                 |              | false           | null          | |</span><br><span class="line">|            | SYSTEM       | FUNCTION    | SYSTEM TABLE  |          |            |                            |                 |              | false           | null          | |</span><br><span class="line">|            | SYSTEM       | SEQUENCE    | SYSTEM TABLE  |          |            |                            |                 |              | false           | null          | |</span><br><span class="line">|            | SYSTEM       | STATS       | SYSTEM TABLE  |          |            |                            |                 |              | false           | null          | |</span><br><span class="line">+------------+--------------+-------------+---------------+----------+------------+----------------------------+-----------------+--------------+-----------------+---------------+-+</span><br></pre></td></tr></table></figure>
-
-          
+          心痒难耐就研究了下Hbase，算是对NoSQL知识的一点扩充吧。
+系统信息12系统环境：腾讯云主机系统版本：CentOS Linux release 7.5.1804
+软件包准备java安装包： jdk-8u172-linux-x64.rpm
+Hbase：hbase-2.0.1-bin.tar.gz
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/06/25/hbase/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1198,7 +1152,7 @@
         onPopupClose();
       }
     });
-  </script>
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 
@@ -1236,6 +1190,5 @@
 
   
 
-  <a href="https://github.com/ahcometrue"><img width="149" height="149" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_darkblue_121621.png?resize=149%2C149" class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 </html>

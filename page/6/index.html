@@ -190,7 +190,9 @@
 
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left 
   page-home">
-    <div class="headband"></div>
+    <div class="headband">
+        <a href="https://github.com/ahcometrue"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_darkblue_121621.png?resize=149%2C149" alt="Fork me on GitHub"></a>
+    </div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
@@ -454,253 +456,21 @@
       
         
           
-            <script type="text/javascript" src="/lib/math/MathJax.js?config=default"></script>
-
-
-<p>受元器件质量、电路故障或噪音干扰等因素的影响，计算机在对数据进行传输、处理以及存储过程中，往往出现误差。为了纠正或发现错误，人们提出了基于编码的解决方案。</p>
-<h3 id="奇偶校验"><a href="#奇偶校验" class="headerlink" title="奇偶校验"></a>奇偶校验</h3><p><strong>映射规则</strong>：校验码中1的数量是偶数或者奇数。</p>
-<p>奇偶校验是两种校验方式，接收方和发送方确认其中一种校验方式后，进行奇偶校验。</p>
-<p>比如被校验的数据是：10110101。如果采用奇校验，根据规则编码之后的码流为：<red style="color:#f00"><strong>0</strong></red>10110101。在高位添加校验码0。</p>
-<h4 id="实例分析"><a href="#实例分析" class="headerlink" title="实例分析"></a>实例分析</h4><ol>
-<li><p>采用奇校验，正确码流为<code>010110101</code>。(5个<code>1</code>)</p>
-<ol>
-<li>错1位：01011010<red style="color:#f00"><strong>0</strong></red>，接收方计算出是偶数(4)个<code>1</code>与预期不符，说明码流有问题。</li>
-<li>错2位：0101101<red style="color:#f00"><strong>10</strong></red>，接收方计算出奇数(5)个<code>1</code>，虽然与预期相符，但码流的确不正确。</li>
-<li>错3位：010110<red style="color:#f00"><strong>010</strong></red>，接收方计算出是偶数(4)个<code>1</code>与预期不符，说明码流有问题。</li>
-</ol>
-</li>
-</ol>
-<ol>
-<li><p>采用偶校验，正确码流为<code>110110101</code>。(6个<code>1</code>)</p>
-<ol>
-<li>错1位：11011010<red style="color:#f00"><strong>0</strong></red>，接收方计算出是奇数(5)个<code>1</code>与预期不符，说明码流有问题。</li>
-<li>错2位：1101101<red style="color:#f00"><strong>10</strong></red>，接收方计算出偶数(6)个<code>1</code>，虽然与预期相符，但码流的确不正确。</li>
-<li>错3位：110110<red style="color:#f00"><strong>010</strong></red>，接收方计算出是奇数(5)个<code>1</code>与预期不符，说明码流有问题。</li>
-</ol>
-</li>
-</ol>
-<p><strong>综上：奇偶校验只能发现为奇数出错，且无法发现出错的位置。</strong></p>
-<h3 id="海明码校验"><a href="#海明码校验" class="headerlink" title="海明码校验"></a>海明码校验</h3><p><strong>映射规则</strong>： 将有效信息按某种规律分成若干组，每组安排一个校验位，做奇偶测试，就能提供多位检错信息，以指出最大可能是哪位出错，从而将其纠正。实质上，海明校验是一种多重校验。</p>
-<p><strong>分组规则</strong>：位号为2的幂次方的位（1，2，4，8，16，……）为校验位，余下的（3，5，6，7，9，……）为信息位。</p>
-<p>最小校验位个数需满足公式：$$n\;+\;k\;\leq\;2^k\;-\;1$$</p>
-<blockquote>
-<p>其中<code>n</code>表示信息位个数，<code>k</code>表示校验位个数</p>
-</blockquote>
-<p>比如：信息位n = 7，那么k最小需为4。</p>
-<h4 id="实例分析-1"><a href="#实例分析-1" class="headerlink" title="实例分析"></a>实例分析</h4><h5 id="演算"><a href="#演算" class="headerlink" title="演算"></a>演算</h5><p>码流信息位<code>1010010</code>，使用海明校验码如何进行计算？下面开始演算。</p>
-<p>使用H<sub>i</sub>来表示，海明码码流。</p>
-<ol>
-<li>信息位是7位，根据公式，k = 4。</li>
-<li>根据映射规则，4个校验位分布到：H<sub>1</sub>、H<sub>2</sub>、H<sub>4</sub>、H<sub>8</sub>；7个信息位分布到：H<sub>3</sub>、H<sub>5</sub>、H<sub>6</sub>、H<sub>7</sub>、H<sub>9</sub>、H<sub>10</sub>、H<sub>11</sub>。</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th>H<sub>11</sub></th>
-<th>H<sub>10</sub></th>
-<th>H<sub>9</sub></th>
-<th>H<sub>8</sub></th>
-<th>H<sub>7</sub></th>
-<th>H<sub>6</sub></th>
-<th>H<sub>5</sub></th>
-<th>H<sub>4</sub></th>
-<th>H<sub>3</sub></th>
-<th>H<sub>2</sub></th>
-<th>H<sub>1</sub></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>0</td>
-<td>1</td>
-<td>K<sub>4</sub></td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-<td>K<sub>3</sub></td>
-<td>0</td>
-<td>K<sub>2</sub></td>
-<td>K<sub>1</sub></td>
-</tr>
-</tbody>
-</table>
-<p>校验位对应关系表：</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>1</th>
-<th>2</th>
-<th>4</th>
-<th>8</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>√</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>2</td>
-<td></td>
-<td>√</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>3</td>
-<td>√</td>
-<td>√</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>4</td>
-<td></td>
-<td></td>
-<td>√</td>
-<td></td>
-</tr>
-<tr>
-<td>5</td>
-<td>√</td>
-<td></td>
-<td>√</td>
-<td></td>
-</tr>
-<tr>
-<td>6</td>
-<td></td>
-<td>√</td>
-<td>√</td>
-<td></td>
-</tr>
-<tr>
-<td>7</td>
-<td>√</td>
-<td>√</td>
-<td>√</td>
-<td></td>
-</tr>
-<tr>
-<td>8</td>
-<td></td>
-<td></td>
-<td></td>
-<td>√</td>
-</tr>
-<tr>
-<td>9</td>
-<td>√</td>
-<td></td>
-<td></td>
-<td>√</td>
-</tr>
-<tr>
-<td>10</td>
-<td></td>
-<td>√</td>
-<td></td>
-<td>√</td>
-</tr>
-<tr>
-<td>11</td>
-<td>√</td>
-<td>√</td>
-<td></td>
-<td>√</td>
-</tr>
-</tbody>
-</table>
-<p><strong>问</strong>：为什么是这种对应关系？</p>
-<p><strong>答</strong>：海明码位数 = 海明校验码位数之和。比如：11 = 1 + 2 + 8。7 = 1 + 2 + 4。</p>
-<p>从上表可得知校验位1负责1、3、5、7、9、11位，校验位2负责2、3、6、7、10、11位，等等。</p>
-<p>我们采用<strong>偶校验</strong>：</p>
-<ol>
-<li>第一组：K<sub>1</sub>H<sub>3</sub>H<sub>5</sub>H<sub>7</sub>H<sub>9</sub>H<sub>11</sub>，因H<sub>3</sub>H<sub>5</sub>H<sub>7</sub>H<sub>9</sub>H<sub>11</sub>含有奇数个1，故H<sub>1</sub>（K<sub>1</sub>） 取值 1。</li>
-<li>第二组：K<sub>2</sub>H<sub>3</sub>H<sub>6</sub>H<sub>7</sub>H<sub>10</sub>H<sub>11</sub>，因H<sub>3</sub>H<sub>6</sub>H<sub>7</sub>H<sub>10</sub>H<sub>11</sub>含有奇数个1，故H<sub>2</sub>（K<sub>2</sub>） 取值 1。</li>
-<li>第三组：K<sub>3</sub>H<sub>5</sub>H<sub>6</sub>H<sub>7</sub>，因H<sub>5</sub>H<sub>6</sub>H<sub>7</sub>含有奇数个1，故H<sub>4</sub>（K<sub>3</sub>） 取值 1。</li>
-<li>第四组：K<sub>4</sub>H<sub>9</sub>H<sub>10</sub>H<sub>11</sub>，因H<sub>9</sub>H<sub>10</sub>H<sub>11</sub>，含有偶数个1，故H<sub>8</sub>（K<sub>4</sub>） 取值 0。</li>
-</ol>
-<p>综上可知：</p>
-<table>
-<thead>
-<tr>
-<th>H<sub>11</sub></th>
-<th>H<sub>10</sub></th>
-<th>H<sub>9</sub></th>
-<th>H<sub>8</sub></th>
-<th>H<sub>7</sub></th>
-<th>H<sub>6</sub></th>
-<th>H<sub>5</sub></th>
-<th>H<sub>4</sub></th>
-<th>H<sub>3</sub></th>
-<th>H<sub>2</sub></th>
-<th>H<sub>1</sub></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-</tr>
-</tbody>
-</table>
-<p>即海明码码流为：<code>10100011011</code></p>
-<h5 id="验算"><a href="#验算" class="headerlink" title="验算"></a>验算</h5><p>问：接收方怎么校验码流是否出错？</p>
-<p>答：码流长度为11，根据公式可知，信息位长度：7，校验位长度：4。</p>
-<p>分成4组，G<sub>1</sub>、G<sub>2</sub>、G<sub>3</sub>、G<sub>4</sub>：</p>
-<ol>
-<li>G<sub>1</sub> = K<sub>1</sub>⊕H<sub>3</sub>⊕H<sub>5</sub>⊕H<sub>7</sub>⊕H<sub>9</sub>⊕H<sub>11</sub> = 1⊕0⊕1⊕0⊕1⊕1 = 0</li>
-<li>G<sub>2</sub> = K<sub>2</sub>⊕H<sub>3</sub>⊕H<sub>6</sub>⊕H<sub>7</sub>⊕H<sub>10</sub>⊕H<sub>11</sub> = 1⊕0⊕0⊕0⊕0⊕1⊕1 = 0</li>
-<li>G<sub>3</sub> = K<sub>3</sub>⊕H<sub>5</sub>⊕H<sub>6</sub>⊕H<sub>7</sub> = 1⊕1⊕0⊕0 = 0</li>
-<li>G<sub>4</sub> = K<sub>4</sub>⊕H<sub>9</sub>⊕H<sub>10</sub>⊕H<sub>11</sub> = 0⊕1⊕0⊕1 = 0</li>
-</ol>
-<p>故正确情况下：G<sub>4</sub>G<sub>3</sub>G<sub>2</sub>G<sub>1</sub> = 0000</p>
-<p>如果接收方收到的码流为：10100011<red style="color:#f00"><strong>1</strong></red>11，第3位改变了。</p>
-<p>接收方计算时：</p>
-<ol>
-<li>G<sub>1</sub> = K<sub>1</sub>⊕H<sub>3</sub>⊕H<sub>5</sub>⊕H<sub>7</sub>⊕H<sub>9</sub>⊕H<sub>11</sub> = 1⊕1⊕1⊕0⊕1⊕1 = 1</li>
-<li>G<sub>2</sub> = K<sub>2</sub>⊕H<sub>3</sub>⊕H<sub>6</sub>⊕H<sub>7</sub>⊕H<sub>10</sub>⊕H<sub>11</sub> = 1⊕1⊕0⊕0⊕0⊕1⊕1 = 1</li>
-<li>G<sub>3</sub> = K<sub>3</sub>⊕H<sub>5</sub>⊕H<sub>6</sub>⊕H<sub>7</sub> = 1⊕1⊕0⊕0 = 0</li>
-<li>G<sub>4</sub> = K<sub>4</sub>⊕H<sub>9</sub>⊕H<sub>10</sub>⊕H<sub>11</sub> = 0⊕1⊕0⊕1 = 0</li>
-</ol>
-<p>此时 G<sub>4</sub>G<sub>3</sub>G<sub>2</sub>G<sub>1</sub> = 0011，接收方可知是错误的码流。</p>
-<p>又由于0011(B) = 3(D)，可知是第三位出错了，把第三位取反即可纠正。</p>
-<h3 id="循环冗余校验（CRC）"><a href="#循环冗余校验（CRC）" class="headerlink" title="循环冗余校验（CRC）"></a>循环冗余校验（CRC）</h3><p>基本思想是在要发送的码流后面附件一个数（这个数就是校验码同时也是一个二进制序列码），这个校验码不是随意指定的，他要满足接收方和发送方能与某个特定数整除（采用“模2除法”计算出），生成一个新的码流发送给接收端。到达接收端后，再把接收的新码流除以（采用“模2除法”）这个选定数，所以结果没有余数说明码流在传输过程中没有出错，反之出错。</p>
-<p>“模2除法”与“算术除法”类似，无进位、无借位，同0异1。如100101除以1110，结果得到商为11，余数为1。</p>
-<p>CRC校验原理就是以下几个步骤：</p>
-<ol>
-<li><p>先选择一个除数，这个除数通常以多项式方式表示。</p>
-</li>
-<li><p>假设除数位数为<code>k</code>位二进制，要发送的码流为<code>n</code>位二进制；在要发送的码流后面追加上<code>k-1</code>位<code>0</code>，此时用新的码流(长度为：<code>n + k - 1</code>)以“模2除法”除以除数，所得的余数就是CRC校验码。余数需要满足：<strong>余数的位数一定要比除数位有且只能少一位</strong>。</p>
-</li>
-<li><p>再把这个校验码写到原码流（n位）的后面，替换之前的<code>k-1</code>位的<code>0</code>,发送给接收端；接送端再以“模2除法”除以除数，如果没有余数说明没有出错，反之出错。</p>
-</li>
-</ol>
-<p><strong>选定的除数需满足最高位和最低位必须均为<code>1</code></strong></p>
-<h4 id="实例分析-2"><a href="#实例分析-2" class="headerlink" title="实例分析"></a>实例分析</h4><p>例题：CRC生成多项式为G（X） = X<sup>4</sup> + X<sup>3</sup> + 1，求二进制<code>10110011</code>的CRC校验码。</p>
-<ol>
-<li>由多项式G（X） = X<sup>4</sup> + X<sup>3</sup> + 1，除数一共<code>5</code>位（最高次幂加1，即4 + 1 = 5），多项式只列出二进制值为1的位，也就是这个二进制的第4位、第3位、第0位的二进制均为1，其它位均为0），可得除数为<code>11001</code>。</li>
-<li>因为生成多项式的位数为5，得知CRC校验码的位数为4。码流<code>10110011</code>，在后面加4个<code>0</code>，成为10110011<red style="color:#f00"><strong>0000</strong></red>，然后把这个数做“模2除法”除以<code>11001</code>，得到的余数（即CRC码）为<red style="color:#f00"><strong>0100</strong></red>。</li>
-<li>把计算得来的余数<red style="color:#f00"><strong>0100</strong></red>替换10110011<red style="color:#f00"><strong>0000</strong></red>后面的4个<code>0</code>，变成10110011<red style="color:#f00"><strong>0100</strong></red>。把这个新的码流发送给接收端。</li>
-<li>接收端把这个码流再用上面选定的除数<code>11001</code>以“模2除法”方式去除，如果余数为<code>0</code>，证明无误；不为<code>0</code>，证明有误。</li>
-</ol>
-
           
+
+
+受元器件质量、电路故障或噪音干扰等因素的影响，计算机在对数据进行传输、处理以及存储过程中，往往出现误差。为了纠正或发现错误，人们提出了基于编码的解决方案。
+奇偶校验映射规则：校验码中1的数量是偶数或者奇数。
+奇偶校验是两种校验方式，接收方和发送方确认其中一种校验方式后，进行奇偶校验。
+比如被校
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/09/差错校验/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1385,7 +1155,7 @@
         onPopupClose();
       }
     });
-  </script>
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 
@@ -1423,6 +1193,5 @@
 
   
 
-  <a href="https://github.com/ahcometrue"><img width="149" height="149" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_darkblue_121621.png?resize=149%2C149" class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 </html>

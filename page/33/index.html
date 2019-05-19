@@ -190,7 +190,9 @@
 
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left 
   page-home">
-    <div class="headband"></div>
+    <div class="headband">
+        <a href="https://github.com/ahcometrue"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_darkblue_121621.png?resize=149%2C149" alt="Fork me on GitHub"></a>
+    </div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
@@ -454,8 +456,15 @@
       
         
           
-            <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Date    : 2015-06-01 10:30:06</span></span><br><span class="line"><span class="comment"># @Author  : HG (hg0728@qq.com)</span></span><br><span class="line"><span class="comment"># @Version : 1.0</span></span><br><span class="line"><span class="keyword">import</span> urllib2</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getHtml</span><span class="params">(url)</span>:</span>   <span class="comment">#获取html源码</span></span><br><span class="line">    page = urllib2.urlopen(url)</span><br><span class="line">    html = page.read()</span><br><span class="line">    <span class="keyword">return</span> html</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">urlPages</span><span class="params">(page)</span>:</span>     <span class="comment">#翻页</span></span><br><span class="line">    url = <span class="string">'http://www.cnblogs.com/sitehome/p/'</span> + str(page)</span><br><span class="line">    <span class="comment">#print url</span></span><br><span class="line">    <span class="keyword">return</span> url</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">findList</span><span class="params">(html)</span>:</span>     <span class="comment">#正则匹配列表</span></span><br><span class="line">    myItems = re.findall(<span class="string">'&lt;h3&gt;&lt;a class="titlelnk" href="(.*?)" target="_blank"&gt;(.*?)&lt;/a&gt;&lt;/h3&gt;'</span>, html, re.S)</span><br><span class="line">    <span class="keyword">return</span> myItems</span><br><span class="line"> </span><br><span class="line"><span class="keyword">for</span> page <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">200</span>+<span class="number">1</span>):    <span class="comment">#抓取的页数</span></span><br><span class="line">    html = getHtml(urlPages(page))</span><br><span class="line">    items = findList(html)</span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> items:</span><br><span class="line">        s = item[<span class="number">0</span>] +<span class="string">' '</span>+ item[<span class="number">1</span>] + <span class="string">'\n'</span></span><br><span class="line">        <span class="keyword">print</span> item[<span class="number">0</span>]</span><br><span class="line">        file_object = open(<span class="string">'thefile.txt'</span>, <span class="string">'a'</span>)</span><br><span class="line">        file_object.write(s)</span><br><span class="line">        file_object.close()</span><br></pre></td></tr></table></figure>
-          
+          1234567891011121314151617181920212223242526272829303132#!/usr/bin/env python# -*- coding: utf-8 -*-# @Date    : 2015-06-01 10:30:06# @Author  : HG (hg
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/06/01/python初学小试/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1140,7 +1149,7 @@
         onPopupClose();
       }
     });
-  </script>
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 
@@ -1178,6 +1187,5 @@
 
   
 
-  <a href="https://github.com/ahcometrue"><img width="149" height="149" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_darkblue_121621.png?resize=149%2C149" class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 </html>

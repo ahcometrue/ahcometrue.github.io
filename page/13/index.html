@@ -190,7 +190,9 @@
 
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left 
   page-home">
-    <div class="headband"></div>
+    <div class="headband">
+        <a href="https://github.com/ahcometrue"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_darkblue_121621.png?resize=149%2C149" alt="Fork me on GitHub"></a>
+    </div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
@@ -454,32 +456,16 @@
       
         
           
-            <p>对于<code>Ownership</code>的手动归还，非常不方便，Rust允许使用<code>reference</code>来解决这个问题。</p>
-<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">main</span></span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> s1 = <span class="built_in">String</span>::from(<span class="string">"hello"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> len = calculate_length(&amp;s1);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">"The length of '&#123;&#125;' is &#123;&#125;."</span>, s1, len);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">calculate_length</span></span>(s: &amp;<span class="built_in">String</span>) -&gt; <span class="built_in">usize</span> &#123;</span><br><span class="line">    s.len()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>reference是什么？borrow借，就是所有权没有改变，只是借用一下。可以比喻成我有一本书，这本书我拥有所有权<br>你借用我的书，我给我允许你在书上写写画画，你才能写写画画。当你使用完毕，必须归还。</p>
-<p>可变引用(我允许你更改)</p>
-<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">main</span></span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">mut</span> s = <span class="built_in">String</span>::from(<span class="string">"hello"</span>);</span><br><span class="line"></span><br><span class="line">    change(&amp;<span class="keyword">mut</span> s);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">change</span></span>(some_string: &amp;<span class="keyword">mut</span> <span class="built_in">String</span>) &#123;</span><br><span class="line">    some_string.push_str(<span class="string">", world"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>可变引用是有很多限制的(我把书借给你，不能同时有多个人写写画画)</p>
-<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="keyword">mut</span> s = <span class="built_in">String</span>::from(<span class="string">"hello"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> r1 = &amp;<span class="keyword">mut</span> s;</span><br><span class="line"><span class="keyword">let</span> r2 = &amp;<span class="keyword">mut</span> s;</span><br></pre></td></tr></table></figure>
-<p>报错：</p>
-<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">error[E0499]: cannot borrow `s` <span class="keyword">as</span> mutable more than <span class="keyword">once</span> at a time</span><br><span class="line"> --&gt; borrow_twice.rs:<span class="number">5</span>:<span class="number">19</span></span><br><span class="line">  |</span><br><span class="line"><span class="number">4</span> |     <span class="keyword">let</span> r1 = &amp;<span class="keyword">mut</span> s;</span><br><span class="line">  |                   - first mutable borrow occurs here</span><br><span class="line"><span class="number">5</span> |     <span class="keyword">let</span> r2 = &amp;<span class="keyword">mut</span> s;</span><br><span class="line">  |                   ^ second mutable borrow occurs here</span><br><span class="line"><span class="number">6</span> | &#125;</span><br><span class="line">  | - first borrow ends here</span><br></pre></td></tr></table></figure>
-<p>这时候产生了数据竞争，是Rust的一种限制。</p>
-<ul>
-<li>所有的引用的作用域必须小于所有者(owner)的作用域</li>
-<li>你可以有多个不可变的引用(&amp;T)，但</li>
-<li>同时只能有一个可变的引用(&amp;mut T)</li>
-<li>不能同时有可变引用和不可变引用</li>
-</ul>
-<p>可以使用作用域来允许拥护多个可变引用：</p>
-<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="keyword">mut</span> s = <span class="built_in">String</span>::from(<span class="string">"hello"</span>);</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">let</span> r1 = &amp;<span class="keyword">mut</span> s;</span><br><span class="line"></span><br><span class="line">&#125; <span class="comment">// r1 goes out of scope here, so we can make a new reference with no problems.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> r2 = &amp;<span class="keyword">mut</span> s;</span><br></pre></td></tr></table></figure>
-<p>对于下面这个引用，rust是不能编译通过的。</p>
-<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="keyword">mut</span> s = <span class="built_in">String</span>::from(<span class="string">"hello"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> r1 = &amp;s; <span class="comment">// no problem</span></span><br><span class="line"><span class="keyword">let</span> r2 = &amp;s; <span class="comment">// no problem</span></span><br><span class="line"><span class="keyword">let</span> r3 = &amp;<span class="keyword">mut</span> s; <span class="comment">// BIG PROBLEM</span></span><br></pre></td></tr></table></figure>
-<p>报错：</p>
-<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">error[E0502]: cannot borrow `s` <span class="keyword">as</span> mutable because it is also borrowed <span class="keyword">as</span></span><br><span class="line">immutable</span><br><span class="line"> --&gt; borrow_thrice.rs:<span class="number">6</span>:<span class="number">19</span></span><br><span class="line">  |</span><br><span class="line"><span class="number">4</span> |     <span class="keyword">let</span> r1 = &amp;s; <span class="comment">// no problem</span></span><br><span class="line">  |               - immutable borrow occurs here</span><br><span class="line"><span class="number">5</span> |     <span class="keyword">let</span> r2 = &amp;s; <span class="comment">// no problem</span></span><br><span class="line"><span class="number">6</span> |     <span class="keyword">let</span> r3 = &amp;<span class="keyword">mut</span> s; <span class="comment">// BIG PROBLEM</span></span><br><span class="line">  |                   ^ mutable borrow occurs here</span><br><span class="line"><span class="number">7</span> | &#125;</span><br><span class="line">  | - immutable borrow ends here</span><br></pre></td></tr></table></figure>
-<p>为什么？我们不能在拥有不可变的引用同时拥有可变引用。</p>
-<p>我把书借给A，A看着看着内容变了，这个时候谁能忍！！！！rust语言闪光点之一就是这个reference</p>
-
-          
+          对于Ownership的手动归还，非常不方便，Rust允许使用reference来解决这个问题。
+1234567891011fn main() &#123;    let s1 = String::from("hello");    let len = calculate_length(&amp;s
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/01/30/rust-references/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1164,7 +1150,7 @@
         onPopupClose();
       }
     });
-  </script>
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 
@@ -1202,6 +1188,5 @@
 
   
 
-  <a href="https://github.com/ahcometrue"><img width="149" height="149" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_darkblue_121621.png?resize=149%2C149" class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 </html>

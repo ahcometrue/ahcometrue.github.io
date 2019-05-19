@@ -190,7 +190,9 @@
 
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left 
   page-home">
-    <div class="headband"></div>
+    <div class="headband">
+        <a href="https://github.com/ahcometrue"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_darkblue_121621.png?resize=149%2C149" alt="Fork me on GitHub"></a>
+    </div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
@@ -454,52 +456,18 @@
       
         
           
-            <p>现在是越来越喜欢Rust了，敲了很多PHP代码，然而对多线程的了解却少之又少。</p>
-<h2 id="Rust并发为什么可以做的好？"><a href="#Rust并发为什么可以做的好？" class="headerlink" title="Rust并发为什么可以做的好？"></a>Rust并发为什么可以做的好？</h2><p>摘自官方文档的说明：</p>
-<blockquote>
-<p>Initially, the Rust team thought that ensuring memory safety and preventing concurrency problems were two separate challenges to be solved with different methods. Over time, the team discovered that the ownership and type systems are a powerful set of tools to help manage memory safety and concurrency problems! By leveraging ownership and type checking, many concurrency errors are compile-time errors in Rust rather than runtime errors. Therefore, rather than making you spend lots of time trying to reproduce the exact circumstances under which a runtime concurrency bug occurs, incorrect code will refuse to compile and present an error explaining the problem. As a result, you can fix your code while you’re working on it rather than potentially after it has been shipped to production. We’ve nicknamed this aspect of Rust fearless concurrency. Fearless concurrency allows you to write code that is free of subtle bugs and is easy to refactor without introducing new bugs.</p>
-</blockquote>
-<p>重点是这句：</p>
-<blockquote>
-<p>ownership and type systems are a powerful set of tools to help manage memory safety and concurrency problems</p>
-</blockquote>
-<p>所有权和类型系统的设计解决了内存安全和并发问题。</p>
-<h2 id="线程小试"><a href="#线程小试" class="headerlink" title="线程小试"></a>线程小试</h2><h3 id="使用spawn创建新线程"><a href="#使用spawn创建新线程" class="headerlink" title="使用spawn创建新线程"></a>使用<code>spawn</code>创建新线程</h3><ul>
-<li>例子000：</li>
-</ul>
-<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> std::thread;</span><br><span class="line"><span class="keyword">use</span> std::time::Duration;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">main</span></span>() &#123;</span><br><span class="line">    thread::spawn(|| &#123;</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span>..<span class="number">10</span> &#123;</span><br><span class="line">            <span class="built_in">println!</span>(<span class="string">"hi number &#123;&#125; from the spawned thread!"</span>, i);</span><br><span class="line">            thread::sleep(Duration::from_millis(<span class="number">1</span>));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span>..<span class="number">5</span> &#123;</span><br><span class="line">        <span class="built_in">println!</span>(<span class="string">"hi number &#123;&#125; from the main thread!"</span>, i);</span><br><span class="line">        thread::sleep(Duration::from_millis(<span class="number">1</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>主线程只循环次数低于新线程，所以主线程结束后新线程随即也会结束。</p>
-<ul>
-<li>结果：</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">hi number 1 from the main thread!</span><br><span class="line">hi number 1 from the spawned thread!</span><br><span class="line">hi number 2 from the spawned thread!</span><br><span class="line">hi number 2 from the main thread!</span><br><span class="line">hi number 3 from the spawned thread!</span><br><span class="line">hi number 3 from the main thread!</span><br><span class="line">hi number 4 from the main thread!</span><br><span class="line">hi number 4 from the spawned thread!</span><br></pre></td></tr></table></figure>
-<p>由于新线程需要系统的调度，并不能确保执行顺序一致，那么如何保证数据的安全性不被更改呢？后面我们将使用<code>lock</code>的方式进行保证。</p>
-<h3 id="使用join等待所有线程结束"><a href="#使用join等待所有线程结束" class="headerlink" title="使用join等待所有线程结束"></a>使用<code>join</code>等待所有线程结束</h3><p>由于主线程结束，示例000中的代码大部分时候不光会提早结束新建线程，甚至不能实际保证新建线程会被执行。其原因在于无法保证线程运行的顺序！<br><code>thread::spawn</code>返回值类型是<code>JoinHandle</code>，是一个拥有所有权的值，当对其调用<code>join</code>方法是，它会等待其线程结束。</p>
-<ul>
-<li>例子：001<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> std::thread;</span><br><span class="line"><span class="keyword">use</span> std::time::Duration;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">main</span></span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> handle = thread::spawn(|| &#123;</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span>..<span class="number">10</span> &#123;</span><br><span class="line">            <span class="built_in">println!</span>(<span class="string">"hi number &#123;&#125; from the spawned thread!"</span>, i);</span><br><span class="line">            thread::sleep(Duration::from_millis(<span class="number">1</span>));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span>..<span class="number">5</span> &#123;</span><br><span class="line">        <span class="built_in">println!</span>(<span class="string">"hi number &#123;&#125; from the main thread!"</span>, i);</span><br><span class="line">        thread::sleep(Duration::from_millis(<span class="number">1</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    handle.join().unwrap();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>通过调用handle的<code>join</code>会阻塞当前线程直到handle所代表的线程结束。</p>
-<ul>
-<li>结果：<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">hi number 1 from the main thread!</span><br><span class="line">hi number 1 from the spawned thread!</span><br><span class="line">hi number 2 from the main thread!</span><br><span class="line">hi number 2 from the spawned thread!</span><br><span class="line">hi number 3 from the main thread!</span><br><span class="line">hi number 3 from the spawned thread!</span><br><span class="line">hi number 4 from the main thread!</span><br><span class="line">hi number 4 from the spawned thread!</span><br><span class="line">hi number 5 from the spawned thread!</span><br><span class="line">hi number 6 from the spawned thread!</span><br><span class="line">hi number 7 from the spawned thread!</span><br><span class="line">hi number 8 from the spawned thread!</span><br><span class="line">hi number 9 from the spawned thread!</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>如果把<code>handle.join().unwrap()</code>放到主线程之前会发生什么？</p>
-<ul>
-<li>结果：<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">hi number 1 from the spawned thread!</span><br><span class="line">hi number 2 from the spawned thread!</span><br><span class="line">hi number 3 from the spawned thread!</span><br><span class="line">hi number 4 from the spawned thread!</span><br><span class="line">hi number 5 from the spawned thread!</span><br><span class="line">hi number 6 from the spawned thread!</span><br><span class="line">hi number 7 from the spawned thread!</span><br><span class="line">hi number 8 from the spawned thread!</span><br><span class="line">hi number 9 from the spawned thread!</span><br><span class="line">hi number 1 from the main thread!</span><br><span class="line">hi number 2 from the main thread!</span><br><span class="line">hi number 3 from the main thread!</span><br><span class="line">hi number 4 from the main thread!</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="线程与move闭包"><a href="#线程与move闭包" class="headerlink" title="线程与move闭包"></a>线程与<code>move</code>闭包</h3><p><code>move</code>闭包与<code>thread::spawn</code>一起使用允许我们在一个线程中使用另一个线程的数据。<br><code>move</code>关键字可以强制闭包获取值的所有权，覆盖了rust默认保守的借用：其也不允许我们违反所有权规则。</p>
-<ul>
-<li>列子：002</li>
-</ul>
-<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> std::thread;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">main</span></span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> v = <span class="built_in">vec!</span>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> handle = thread::spawn(<span class="keyword">move</span> || &#123;</span><br><span class="line">        <span class="built_in">println!</span>(<span class="string">"Here's a vector: &#123;:?&#125;"</span>, v);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    handle.join().unwrap();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>结果：<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Here's a vector: [1, 2, 3]</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
+          现在是越来越喜欢Rust了，敲了很多PHP代码，然而对多线程的了解却少之又少。
+Rust并发为什么可以做的好？摘自官方文档的说明：
 
-          
+Initially, the Rust team thought that ensuring memory safety and preventing concurr
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/06/12/rust-thread/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1184,7 +1152,7 @@
         onPopupClose();
       }
     });
-  </script>
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 
@@ -1222,6 +1190,5 @@
 
   
 
-  <a href="https://github.com/ahcometrue"><img width="149" height="149" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_darkblue_121621.png?resize=149%2C149" class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 </html>

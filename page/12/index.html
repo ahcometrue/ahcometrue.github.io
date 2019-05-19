@@ -190,7 +190,9 @@
 
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left 
   page-home">
-    <div class="headband"></div>
+    <div class="headband">
+        <a href="https://github.com/ahcometrue"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_darkblue_121621.png?resize=149%2C149" alt="Fork me on GitHub"></a>
+    </div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
@@ -454,19 +456,20 @@
       
         
           
-            <h2 id="前景介绍"><a href="#前景介绍" class="headerlink" title="前景介绍"></a>前景介绍</h2><p>有一项目是提供一个命令行式的对数据库进行CRUD、用户登录、操作日志记录<br>等需求。刚好最近在研究rust，就找些lib进行开发，由于对rust不是很熟悉，先从研究别人的源码进行学习是我一贯的作风。</p>
-<p>项目地址：<a href="https://github.com/phsym/shrust" target="_blank" rel="noopener">GitHub</a></p>
-<h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h2><ol>
-<li>自定义错误类型枚举</li>
-</ol>
-<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> std::fmt;</span><br><span class="line"><span class="keyword">use</span> std::error::Error;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#[derive(Debug)]</span></span><br><span class="line"><span class="keyword">pub</span> <span class="class"><span class="keyword">enum</span> <span class="title">ExecError</span></span> &#123;</span><br><span class="line">    Empty,</span><br><span class="line">    Quit,</span><br><span class="line">    MissingArgs,</span><br><span class="line">    UnknownCommand(<span class="built_in">String</span>),</span><br><span class="line">    InvalidHistory(<span class="built_in">usize</span>),</span><br><span class="line">    Other(<span class="built_in">Box</span>&lt;Error&gt;),</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">use</span> ExecError::*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">impl</span> fmt::Display <span class="keyword">for</span> ExecError &#123;</span><br><span class="line">    <span class="function"><span class="keyword">fn</span> <span class="title">fmt</span></span>(&amp;<span class="keyword">self</span>, format: &amp;<span class="keyword">mut</span> fmt::Formatter) -&gt; fmt::<span class="built_in">Result</span> &#123;</span><br><span class="line">        <span class="keyword">match</span> <span class="keyword">self</span> &#123;</span><br><span class="line">            &amp;Empty =&gt; <span class="built_in">write!</span>(format, <span class="string">"No command provided"</span>),</span><br><span class="line">            &amp;Quit =&gt; <span class="built_in">write!</span>(format, <span class="string">"Quit"</span>),</span><br><span class="line">            &amp;UnknownCommand(<span class="keyword">ref</span> cmd) =&gt; <span class="built_in">write!</span>(format, <span class="string">"Unknown Command &#123;&#125;"</span>, cmd),</span><br><span class="line">            &amp;InvalidHistory(i) =&gt; <span class="built_in">write!</span>(format, <span class="string">"Invalid history entry &#123;&#125;"</span>, i),</span><br><span class="line">            &amp;MissingArgs =&gt; <span class="built_in">write!</span>(format, <span class="string">"Not enough arguments"</span>),</span><br><span class="line">            &amp;Other(<span class="keyword">ref</span> e) =&gt; <span class="built_in">write!</span>(format, <span class="string">"&#123;&#125;"</span>, e)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">main</span></span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> error = ExecError::Empty;</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">"&#123;:?&#125;"</span>, <span class="built_in">format!</span>(<span class="string">"&#123;&#125;"</span>, error));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> cmd = <span class="string">"Hello"</span>.to_string();</span><br><span class="line">    <span class="keyword">let</span> error = ExecError::UnknownCommand(cmd);</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">"&#123;:?&#125;"</span>, <span class="built_in">format!</span>(<span class="string">"&#123;&#125;"</span>, error));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>分析：</p>
-</blockquote>
-<p><code>Box&lt;Error&gt;</code> 使用智能指针，类型是<code>Error</code>。Box允许你将值放在堆上而不是栈上。    </p>
-<p><code>ref</code> Wraps a borrowed reference to a value in a <code>RefCell</code> box. A wrapper type for an immutably borrowed value from a <code>RefCell&lt;T&gt;</code> 从一个不可变的<code>RefCell</code>中借来的引用存放在<code>RefCell</code>中，产生一个新的 <code>RefCell</code></p>
+          前景介绍有一项目是提供一个命令行式的对数据库进行CRUD、用户登录、操作日志记录等需求。刚好最近在研究rust，就找些lib进行开发，由于对rust不是很熟悉，先从研究别人的源码进行学习是我一贯的作风。
+项目地址：GitHub
+源码分析
+自定义错误类型枚举
 
-          
+12345678910111213141
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/31/rust-interactive-commanc-line/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1151,7 +1154,7 @@
         onPopupClose();
       }
     });
-  </script>
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 
@@ -1189,6 +1192,5 @@
 
   
 
-  <a href="https://github.com/ahcometrue"><img width="149" height="149" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_darkblue_121621.png?resize=149%2C149" class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 </html>

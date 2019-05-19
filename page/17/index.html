@@ -190,7 +190,9 @@
 
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left 
   page-home">
-    <div class="headband"></div>
+    <div class="headband">
+        <a href="https://github.com/ahcometrue"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_darkblue_121621.png?resize=149%2C149" alt="Fork me on GitHub"></a>
+    </div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
@@ -454,76 +456,37 @@
       
         
           
-            <p>最近研究了下python的异常处理，现记录下。python的异常设计还是不错的。</p>
-<h3 id="常见异常"><a href="#常见异常" class="headerlink" title="常见异常"></a>常见异常</h3><table>
-<thead>
-<tr>
-<th>常见异常</th>
-<th>解释</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>IOError</td>
-<td>输入\输出异常；基本是无法打开文件</td>
-</tr>
-<tr>
-<td>ImportError</td>
-<td>无法引入模块或包；基本上是路径问题或名称错误</td>
-</tr>
-<tr>
-<td>IndexError</td>
-<td>下表索引超出序列边界</td>
-</tr>
-<tr>
-<td>KeyError</td>
-<td>试图访问字典里不存在的键</td>
-</tr>
-<tr>
-<td>NameError</td>
-<td>使用一个还未被赋予对象的变量</td>
-</tr>
-<tr>
-<td>IndentationError</td>
-<td>语法错误(的子类)；代码没有正确对齐</td>
-</tr>
-<tr>
-<td>SyntaxError</td>
-<td>python代码非法，代码不能编译</td>
-</tr>
-<tr>
-<td>KeyboardInterrupt</td>
-<td>Ctrl+C被按下</td>
-</tr>
-<tr>
-<td>EOFError</td>
-<td>Ctrl+D被按下</td>
-</tr>
-<tr>
-<td>UnboundLocalError</td>
-<td>试图访问一个还未被设置的局部变量，基本上是由于另一个同名的全局变量，导致以为正在访问它</td>
-</tr>
-<tr>
-<td>AttrbuteError</td>
-<td>试图访问一个对象没有的属性</td>
-</tr>
-<tr>
-<td>ValueError</td>
-<td>传入一个调用者不期望的值，即使值的类型是正确的</td>
-</tr>
-<tr>
-<td>TypeError</td>
-<td>传入对象的类型与要求的不符合</td>
-</tr>
-</tbody>
-</table>
-<h3 id="异常的捕捉"><a href="#异常的捕捉" class="headerlink" title="异常的捕捉"></a>异常的捕捉</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">	a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">	a[<span class="number">3</span>]</span><br><span class="line"><span class="keyword">except</span> IndexError:</span><br><span class="line">	print(<span class="string">'IndexError'</span>)</span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">	print(<span class="string">'finally'</span>)</span><br></pre></td></tr></table></figure>
-<p>except后面可以不再加异常也可加多个异常。</p>
-<p>else: 没有发现异常是会执行<br>finally: 无论是否发生异常都会执行</p>
-<h3 id="定制自己的异常"><a href="#定制自己的异常" class="headerlink" title="定制自己的异常"></a>定制自己的异常</h3><p>虽然python内置的异常已经很多，但有时我们需要实现自己的异常功能。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">class HException(Exception):</span><br><span class="line">	pass</span><br><span class="line">try:</span><br><span class="line">	name = raw_input(&apos;name:&apos;).strip()</span><br><span class="line">	if name != &apos;han&apos;:</span><br><span class="line">		raise HException</span><br><span class="line">except HException:</span><br><span class="line">	print(&apos;No valid name sepecfied...&apos;)</span><br></pre></td></tr></table></figure>
+          最近研究了下python的异常处理，现记录下。python的异常设计还是不错的。
+常见异常
 
-          
+
+常见异常
+解释
+
+
+
+
+IOError
+输入\输出异常；基本是无法打开文件
+
+
+ImportError
+无法引入模块或包；基本上是路径问题或名称错误
+
+
+IndexError
+下表索引超出序列边界
+
+
+K
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/12/15/python异常处理/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1208,7 +1171,7 @@
         onPopupClose();
       }
     });
-  </script>
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 
@@ -1246,6 +1209,5 @@
 
   
 
-  <a href="https://github.com/ahcometrue"><img width="149" height="149" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_darkblue_121621.png?resize=149%2C149" class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 </html>

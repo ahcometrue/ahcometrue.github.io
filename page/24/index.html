@@ -190,7 +190,9 @@
 
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left 
   page-home">
-    <div class="headband"></div>
+    <div class="headband">
+        <a href="https://github.com/ahcometrue"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_darkblue_121621.png?resize=149%2C149" alt="Fork me on GitHub"></a>
+    </div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
@@ -454,22 +456,21 @@
       
         
           
-            <p>Python虚拟环境是一个可以相互隔离的虚拟环境，所有的依赖都可以放在当前项目的虚拟环境中，这样可以进行多个Python项目的开发。</p>
-<ul>
-<li><p>创建虚拟环境</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> python3 -m venv .tensorflow    <span class="comment"># 在当前目录创建.tensorflow</span></span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>激活虚拟环境</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">source</span> .tensorflow/bin/activate</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>退出虚拟环境</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> deactivate</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>venv的详细使用参数</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">usage: venv [-h] [--system-site-packages] [--symlinks] [--clear]</span><br><span class="line">            [--upgrade] [--without-pip] ENV_DIR [ENV_DIR ...]</span><br><span class="line"></span><br><span class="line">Creates virtual Python environments in one or more target directories.</span><br><span class="line"></span><br><span class="line">positional arguments:</span><br><span class="line">  ENV_DIR             A directory to create the environment in.</span><br><span class="line"></span><br><span class="line">optional arguments:</span><br><span class="line">  -h, --help             show this help message and exit</span><br><span class="line">  --system-site-packages Give access to the global site-packages dir to the</span><br><span class="line">                         virtual environment.</span><br><span class="line">  --symlinks             Try to use symlinks rather than copies, when symlinks</span><br><span class="line">                         are not the default for the platform.</span><br><span class="line">  --copies               Try to use copies rather than symlinks, even when</span><br><span class="line">                         symlinks are the default for the platform.</span><br><span class="line">  --clear                Delete the environment directory if it already exists.</span><br><span class="line">                         If not specified and the directory exists, an error is</span><br><span class="line">                         raised.</span><br><span class="line">  --upgrade              Upgrade the environment directory to use this version</span><br><span class="line">                         of Python, assuming Python has been upgraded in-place.</span><br><span class="line">  --without-pip          Skips installing or upgrading pip in the virtual</span><br><span class="line">                         environment (pip is bootstrapped by default)</span><br></pre></td></tr></table></figure></li>
-</ul>
+          Python虚拟环境是一个可以相互隔离的虚拟环境，所有的依赖都可以放在当前项目的虚拟环境中，这样可以进行多个Python项目的开发。
 
-          
+创建虚拟环境
+1$ python3 -m venv .tensorflow    # 在当前目录创建.tensorflow
+
+激活虚拟环境
+1$ source .t
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/10/28/python虚拟环境创建/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1154,7 +1155,7 @@
         onPopupClose();
       }
     });
-  </script>
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 
@@ -1192,6 +1193,5 @@
 
   
 
-  <a href="https://github.com/ahcometrue"><img width="149" height="149" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_darkblue_121621.png?resize=149%2C149" class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 </html>
