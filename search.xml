@@ -5,7 +5,7 @@
     <url>%2F2019%2F05%2F29%2Fmysql-%E7%B4%A2%E5%BC%95%2F</url>
     <content type="text"><![CDATA[常见的索引模型索引的出现是为了提高查询效率，但实现索引的方式却有很多种。索引模型可以看作是种数据结构，常见的有哈希表、有序数组和搜索树。 InnoDB的索引模型 主键索引的叶子节点存的是整行数据。在InnoDB里，主键索引也被称为聚簇索引（clusterd index）。 非主键索引的叶子节点内容时主键的值。在InnoDB里，非主键索引也被称为二级索引（secondary index）。 覆盖索引如果被查询的索引已经覆盖了我们的查询，我们称为覆盖索引。覆盖索引可以减少树的搜索次数，显著提升查询性能，所以覆盖索引是一个常用的性能优化手段。 最左前缀原则索引下推索引的维护重建普通索引可以使用12alter table T drop index k;alter table T add index(k); 如果重建主键索引1alter table T engine=InnoDB]]></content>
       <categories>
-        <category>MySQL</category>
+        <category>Mysql</category>
       </categories>
   </entry>
   <entry>
@@ -13,7 +13,7 @@
     <url>%2F2019%2F05%2F27%2Fmysql-%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%2F</url>
     <content type="text"><![CDATA[在MySQL中事务支持是在引擎层实现的。 隔离性与隔离级别当数据库上有多个事务同时执行的时候，就可能出现脏读(dirty read)、不可重复读(non-repeatable read)、幻读(phantom read)的问题，为了解决这些问题，就有了“隔离级别”的概念。 ACID（Atomicity、Consisency、Isolation、Durability，即原子性、一致性、隔离性、持久性） SQL标准的隔离级别包括： 读未提交(read uncommitted)：一个事务还没提交时，它所做的变更就能被别的事务看到。 读提交(read committed)：一个事务提交后，它做的变更才会被其他事务看到。 可重复读(repeatable read)：一个事务执行过程中看到的数据，总是跟这个事务在启动时看到的数据是一致的。当然在可重复读隔离级别下，未提交的变更对其他事务是不可见的。 串行化(serializable)：对于同一行记录，“写”会“加锁”，“读”会加“读锁”。当出现读写锁冲突的时候，后访问的事务必须等待前一个事务执行完成，才能继续执行。 这四种隔离级别，并行性能依次降低，安全性依次提高。 在实现上，数据库里会创建一个视图，访问的时候以视图的逻辑结果为准。在可重复读隔离级别下，这个视图是在事务启动时创建的，在整个事务存在期间都用这个视图。在读提交隔离级别下，这个视图是在每个SQL语句开始执行的时候创建的。这里需要注意的是，读未提交隔离级别下直接返回记录上的最新值，没有视图概念；而串行化隔离级别下直接用加锁的方式来避免并行访问。 1234567891011mysql&gt; show variables like &apos;transaction_isolation&apos;;+-----------------------+----------------+| Variable_name | Value |+-----------------------+----------------+| transaction_isolation | READ-COMMITTED |+-----------------------+----------------+ 事务隔离的实现在MySQL中，实际上每条记录在更新的时候都会记录一条回滚操作。记录上的最新值，通过回滚操作，都可以得到前一个状态的值。 对于同一条记录可以存在多个版本，这就是数据库的多版本并发控制(MVCC)。 回滚日志是系统来判断，当没有事务再需要用到这些回滚日志时，回滚日志会被删除。就是当系统里没有比这个回滚日志更早的read-view的时候。 事务的启动时机begin/start transaction命令并不是一个事务的起点，在执行它们之后的第一个操作InnoDB表的语句，事务才真正启动。如果想马上启动一个事务，可以使用start transaction with consistent snapshot命令。 第一种启动方式，一致性视图是在执行第一个读语句时创建的； 第二种启动方式，一致性视图是在执行start transaction with consistent snapshot时创建的。 12345678+----+------+| id | c |+----+------+| 1 | 4 || 2 | 5 || 3 | 6 || 4 | 7 |+----+------+ 事务A 事务B 普通 begin; begin; select * from t where id =1 =&gt; (c = 4) select * from where id = 1 =&gt; (c = 4) update t set c = c +1 where id =1 select * from t where id =1 =&gt; (c = 5) update t set c = c + 2 where id =1 select * from t where id = 1 =&gt; (c = 7) select * from t where id = 1 =&gt; (c = 5) update t set c = c + 5 where id = 1 （等待事务B结束） select * from t where id =1 =&gt; (c = 5) commit; select * from t where id =1 =&gt; (c = 7) (自动提交) select * from t where id = 1 =&gt; (c = 12) commit; select * from t where id =1 =&gt; (c = 12) select * from t where id =1 =&gt; (c = 12) select * from t where id =1 =&gt; (c = 12) 一个事务A要更新一行，如果刚好有另外一个事务B拥有这一行的行锁，事务A会被锁住，需等待事务B的结束，再次执行事务A，进行更新数据。 事务的启动方式 显示启动事务语句，begin 或 start transaction。配套的提交语句是commit，回滚语句是rollback。 set autocommit = 0，这个命令会将这个线程的自动提交关掉。这个事务持续存在直到你主动执行commit或rollback语句，或者快开连接。 查询超过60s的事务1select * from information_schema.innodb_trx where TIME_TO_SEC(timediff(now(),trx_started))&gt;60]]></content>
       <categories>
-        <category>MySQL</category>
+        <category>Mysql</category>
       </categories>
   </entry>
   <entry>
