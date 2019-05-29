@@ -109,14 +109,13 @@
 
 
   <meta name="description" content="在MySQL中事务支持是在引擎层实现的。 隔离性与隔离级别当数据库上有多个事务同时执行的时候，就可能出现脏读(dirty read)、不可重复读(non-repeatable read)、幻读(phantom read)的问题，为了解决这些问题，就有了“隔离级别”的概念。 ACID（Atomicity、Consisency、Isolation、Durability，即原子性、一致性、隔离性、持久性">
-<meta name="keywords" content="事务隔离">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mysql-事务隔离">
 <meta property="og:url" content="http://yoursite.com/2019/05/27/mysql-事务隔离/index.html">
 <meta property="og:site_name" content="小菜园">
 <meta property="og:description" content="在MySQL中事务支持是在引擎层实现的。 隔离性与隔离级别当数据库上有多个事务同时执行的时候，就可能出现脏读(dirty read)、不可重复读(non-repeatable read)、幻读(phantom read)的问题，为了解决这些问题，就有了“隔离级别”的概念。 ACID（Atomicity、Consisency、Isolation、Durability，即原子性、一致性、隔离性、持久性">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-05-27T07:29:02.954Z">
+<meta property="og:updated_time" content="2019-05-29T09:16:11.115Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mysql-事务隔离">
 <meta name="twitter:description" content="在MySQL中事务支持是在引擎层实现的。 隔离性与隔离级别当数据库上有多个事务同时执行的时候，就可能出现脏读(dirty read)、不可重复读(non-repeatable read)、幻读(phantom read)的问题，为了解决这些问题，就有了“隔离级别”的概念。 ACID（Atomicity、Consisency、Isolation、Durability，即原子性、一致性、隔离性、持久性">
@@ -386,12 +385,24 @@
                 
               
 
-              <time title="创建时间：2019-05-27 14:33:32 / 修改时间：15:29:02" itemprop="dateCreated datePublished" datetime="2019-05-27T14:33:32+08:00">2019-05-27</time>
+              <time title="创建时间：2019-05-27 14:33:32" itemprop="dateCreated datePublished" datetime="2019-05-27T14:33:32+08:00">2019-05-27</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-29 17:16:11" itemprop="dateModified" datetime="2019-05-29T17:16:11+08:00">2019-05-29</time>
               
             
           </span>
@@ -408,7 +419,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Mysql/" itemprop="url" rel="index"><span itemprop="name">Mysql</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a></span>
 
                 
                 
@@ -462,6 +473,95 @@
 <h2 id="事务隔离的实现"><a href="#事务隔离的实现" class="headerlink" title="事务隔离的实现"></a>事务隔离的实现</h2><p>在MySQL中，实际上每条记录在更新的时候都会记录一条回滚操作。记录上的最新值，通过回滚操作，都可以得到前一个状态的值。</p>
 <p>对于同一条记录可以存在多个版本，这就是数据库的多版本并发控制(MVCC)。</p>
 <p>回滚日志是系统来判断，当没有事务再需要用到这些回滚日志时，回滚日志会被删除。就是当系统里没有比这个回滚日志更早的<code>read-view</code>的时候。</p>
+<h4 id="事务的启动时机"><a href="#事务的启动时机" class="headerlink" title="事务的启动时机"></a>事务的启动时机</h4><p><code>begin</code>/<code>start transaction</code>命令并不是一个事务的起点，在执行它们之后的第一个操作InnoDB表的语句，事务才真正启动。如果想马上启动一个事务，可以使用<code>start transaction with consistent snapshot</code>命令。</p>
+<blockquote>
+<p>第一种启动方式，一致性视图是在执行第一个<strong>读</strong>语句时创建的；</p>
+<p>第二种启动方式，一致性视图是在执行<code>start transaction with consistent snapshot</code>时创建的。</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">+<span class="comment">----+------+</span></span><br><span class="line">| id | c    |</span><br><span class="line">+<span class="comment">----+------+</span></span><br><span class="line">|  1 |    4 |</span><br><span class="line">|  2 |    5 |</span><br><span class="line">|  3 |    6 |</span><br><span class="line">|  4 |    7 |</span><br><span class="line">+<span class="comment">----+------+</span></span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">事务A</th>
+<th style="text-align:left">事务B</th>
+<th style="text-align:left">普通</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">begin;</td>
+<td style="text-align:left">begin;</td>
+<td style="text-align:left">select * from t where id =1 =&gt; (c = 4)</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">select * from where id = 1 =&gt; (c = 4)</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">update t set c = c +1 where id =1</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">select * from t where id =1 =&gt; (c = 5)</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">update t set c = c + 2 where id =1</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">select * from t where id = 1 =&gt; (c = 7)</td>
+<td style="text-align:left">select * from t where id = 1 =&gt; (c = 5)</td>
+</tr>
+<tr>
+<td style="text-align:left">update t set c = c + 5 where id = 1 （等待事务B结束）</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">select * from t where id =1 =&gt; (c = 5)</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">commit;</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">select * from t where id =1 =&gt; (c = 7)</td>
+</tr>
+<tr>
+<td style="text-align:left">自动提交</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">select * from t where id = 1 =&gt; (c = 12)</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">commit;</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">select * from t where id =1 =&gt; (c = 12)</td>
+<td style="text-align:left">select * from t where id =1 =&gt; (c = 12)</td>
+<td style="text-align:left">select * from t where id =1 =&gt; (c = 12)</td>
+</tr>
+</tbody>
+</table>
+<p>一个事务A要更新一行，如果刚好有另外一个事务B拥有这一行的行锁，事务A会被锁住，需等待事务B的结束，再次执行事务A，进行更新数据。</p>
 <h2 id="事务的启动方式"><a href="#事务的启动方式" class="headerlink" title="事务的启动方式"></a>事务的启动方式</h2><ol>
 <li><p>显示启动事务语句，<code>begin</code> 或 <code>start transaction</code>。配套的提交语句是<code>commit</code>，回滚语句是<code>rollback</code>。</p>
 </li>
@@ -487,12 +587,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/事务隔离/" rel="tag"># 事务隔离</a>
-          
-        </div>
-      
 
       
       
@@ -511,6 +605,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/29/mysql-索引/" rel="prev" title="mysql-索引">
+                mysql-索引 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -593,7 +691,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">34</span>
+                    <span class="site-state-item-count">35</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -683,9 +781,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-count">20</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -721,7 +817,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#隔离性与隔离级别"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x9694;&#x79BB;&#x6027;&#x4E0E;&#x9694;&#x79BB;&#x7EA7;&#x522B;" class="headerlink" title="&#x9694;&#x79BB;&#x6027;&#x4E0E;&#x9694;&#x79BB;&#x7EA7;&#x522B;"></a>&#x9694;&#x79BB;&#x6027;&#x4E0E;&#x9694;&#x79BB;&#x7EA7;&#x522B;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事务隔离的实现"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x4E8B;&#x52A1;&#x9694;&#x79BB;&#x7684;&#x5B9E;&#x73B0;" class="headerlink" title="&#x4E8B;&#x52A1;&#x9694;&#x79BB;&#x7684;&#x5B9E;&#x73B0;"></a>&#x4E8B;&#x52A1;&#x9694;&#x79BB;&#x7684;&#x5B9E;&#x73B0;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事务的启动方式"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x4E8B;&#x52A1;&#x7684;&#x542F;&#x52A8;&#x65B9;&#x5F0F;" class="headerlink" title="&#x4E8B;&#x52A1;&#x7684;&#x542F;&#x52A8;&#x65B9;&#x5F0F;"></a>&#x4E8B;&#x52A1;&#x7684;&#x542F;&#x52A8;&#x65B9;&#x5F0F;</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#隔离性与隔离级别"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x9694;&#x79BB;&#x6027;&#x4E0E;&#x9694;&#x79BB;&#x7EA7;&#x522B;" class="headerlink" title="&#x9694;&#x79BB;&#x6027;&#x4E0E;&#x9694;&#x79BB;&#x7EA7;&#x522B;"></a>&#x9694;&#x79BB;&#x6027;&#x4E0E;&#x9694;&#x79BB;&#x7EA7;&#x522B;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事务隔离的实现"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x4E8B;&#x52A1;&#x9694;&#x79BB;&#x7684;&#x5B9E;&#x73B0;" class="headerlink" title="&#x4E8B;&#x52A1;&#x9694;&#x79BB;&#x7684;&#x5B9E;&#x73B0;"></a>&#x4E8B;&#x52A1;&#x9694;&#x79BB;&#x7684;&#x5B9E;&#x73B0;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#事务的启动时机"><span class="nav-number">2.0.1.</span> <span class="nav-text"><a href="#&#x4E8B;&#x52A1;&#x7684;&#x542F;&#x52A8;&#x65F6;&#x673A;" class="headerlink" title="&#x4E8B;&#x52A1;&#x7684;&#x542F;&#x52A8;&#x65F6;&#x673A;"></a>&#x4E8B;&#x52A1;&#x7684;&#x542F;&#x52A8;&#x65F6;&#x673A;</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事务的启动方式"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x4E8B;&#x52A1;&#x7684;&#x542F;&#x52A8;&#x65B9;&#x5F0F;" class="headerlink" title="&#x4E8B;&#x52A1;&#x7684;&#x542F;&#x52A8;&#x65B9;&#x5F0F;"></a>&#x4E8B;&#x52A1;&#x7684;&#x542F;&#x52A8;&#x65B9;&#x5F0F;</span></a></li></ol></div>
             
 
           </div>
