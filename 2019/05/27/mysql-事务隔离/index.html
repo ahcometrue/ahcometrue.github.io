@@ -15,10 +15,10 @@
 
 
 <html class="theme-next gemini use-motion" lang="zh-CN">
-<head>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 
 
@@ -32,8 +32,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -56,9 +56,9 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
@@ -125,7 +125,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/05/27/mysql-事务隔离/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/05/27/mysql-事务隔离/">
 
 
 
@@ -237,7 +237,7 @@
           
           <li class="menu-item menu-item-home">
     <a href="/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
   </li>
         
         
@@ -245,7 +245,7 @@
           
           <li class="menu-item menu-item-tags">
     <a href="/tags/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
   </li>
         
         
@@ -253,7 +253,7 @@
           
           <li class="menu-item menu-item-categories">
     <a href="/categories/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
   </li>
         
         
@@ -261,7 +261,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
   </li>
 
       
@@ -271,7 +271,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
         </li>
       
     </ul>
@@ -291,9 +291,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -347,7 +345,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="韩">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content>
       <meta itemprop="image" content="/uploads/avatar.jpeg">
     </span>
 
@@ -408,7 +406,7 @@
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
             
               <span class="post-meta-divider">|</span>
             
@@ -479,6 +477,7 @@
 <p>第二种启动方式，一致性视图是在执行<code>start transaction with consistent snapshot</code>时创建的。</p>
 </blockquote>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">+<span class="comment">----+------+</span></span><br><span class="line">| id | c    |</span><br><span class="line">+<span class="comment">----+------+</span></span><br><span class="line">|  1 |    4 |</span><br><span class="line">|  2 |    5 |</span><br><span class="line">|  3 |    6 |</span><br><span class="line">|  4 |    7 |</span><br><span class="line">+<span class="comment">----+------+</span></span><br></pre></td></tr></table></figure>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -560,6 +559,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>一个事务A要更新一行，如果刚好有另外一个事务B拥有这一行的行锁，事务A会被锁住，需等待事务B的结束，再次执行事务A，进行更新数据。</p>
 <h2 id="事务的启动方式"><a href="#事务的启动方式" class="headerlink" title="事务的启动方式"></a>事务的启动方式</h2><ol>
 <li><p>显示启动事务语句，<code>begin</code> 或 <code>start transaction</code>。配套的提交语句是<code>commit</code>，回滚语句是<code>rollback</code>。</p>
@@ -675,9 +675,7 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image"
-                src="/uploads/avatar.jpeg"
-                alt="韩" />
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpeg" alt="韩">
             
               <p class="site-author-name" itemprop="name">韩</p>
               <p class="site-description motion-element" itemprop="description"></p>
@@ -690,7 +688,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">35</span>
+                    <span class="site-state-item-count">36</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -725,7 +723,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">10</span>
+                      
+                    
+                    <span class="site-state-item-count">11</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -816,7 +816,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#隔离性与隔离级别"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x9694;&#x79BB;&#x6027;&#x4E0E;&#x9694;&#x79BB;&#x7EA7;&#x522B;" class="headerlink" title="&#x9694;&#x79BB;&#x6027;&#x4E0E;&#x9694;&#x79BB;&#x7EA7;&#x522B;"></a>&#x9694;&#x79BB;&#x6027;&#x4E0E;&#x9694;&#x79BB;&#x7EA7;&#x522B;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事务隔离的实现"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x4E8B;&#x52A1;&#x9694;&#x79BB;&#x7684;&#x5B9E;&#x73B0;" class="headerlink" title="&#x4E8B;&#x52A1;&#x9694;&#x79BB;&#x7684;&#x5B9E;&#x73B0;"></a>&#x4E8B;&#x52A1;&#x9694;&#x79BB;&#x7684;&#x5B9E;&#x73B0;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#事务的启动时机"><span class="nav-number">2.0.1.</span> <span class="nav-text"><a href="#&#x4E8B;&#x52A1;&#x7684;&#x542F;&#x52A8;&#x65F6;&#x673A;" class="headerlink" title="&#x4E8B;&#x52A1;&#x7684;&#x542F;&#x52A8;&#x65F6;&#x673A;"></a>&#x4E8B;&#x52A1;&#x7684;&#x542F;&#x52A8;&#x65F6;&#x673A;</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事务的启动方式"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x4E8B;&#x52A1;&#x7684;&#x542F;&#x52A8;&#x65B9;&#x5F0F;" class="headerlink" title="&#x4E8B;&#x52A1;&#x7684;&#x542F;&#x52A8;&#x65B9;&#x5F0F;"></a>&#x4E8B;&#x52A1;&#x7684;&#x542F;&#x52A8;&#x65B9;&#x5F0F;</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#隔离性与隔离级别"><span class="nav-number">1.</span> <span class="nav-text">隔离性与隔离级别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事务隔离的实现"><span class="nav-number">2.</span> <span class="nav-text">事务隔离的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#事务的启动时机"><span class="nav-number">2.0.1.</span> <span class="nav-text">事务的启动时机</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#事务的启动方式"><span class="nav-number">3.</span> <span class="nav-text">事务的启动方式</span></a></li></div>
             
 
           </div>
@@ -850,7 +850,7 @@
 
 
 
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.4.3</div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.8.0</div>
 
 
 
@@ -1320,7 +1320,24 @@
         onPopupClose();
       }
     });
-  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
 

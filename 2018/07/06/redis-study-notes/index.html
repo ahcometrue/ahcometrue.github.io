@@ -15,10 +15,10 @@
 
 
 <html class="theme-next gemini use-motion" lang="zh-CN">
-<head>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 
 
@@ -32,8 +32,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -56,9 +56,9 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
@@ -108,25 +108,25 @@
 
 
 
-  <meta name="description" content="昨天在公司做一次redis分享，之前做的源码分享同事反馈实用性太弱算法不好理解，我就来讲讲实战方面的。 设想数据级别在上亿级别，以下key都在同一台redis实例中。 部分数据   id name sex age languages location     1 常 汉子 20 JS + Node + Java + PHP (121.45, 31.20)   2 青 汉子 20 JS + Node">
+  <meta name="description" content="昨天在公司做一次redis分享，之前做的源码分享同事反馈实用性太弱算法不好理解，我就来讲讲实战方面的。 设想数据级别在上亿级别，以下key都在同一台redis实例中。 部分数据    id name sex age languages location     1 常 汉子 20 JS + Node + Java + PHP (121.45, 31.20)   2 青 汉子 20 JS + Nod">
 <meta name="keywords" content="Redis,位图,BitMap">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Redis应用实例">
 <meta property="og:url" content="http://yoursite.com/2018/07/06/redis-study-notes/index.html">
 <meta property="og:site_name" content="小菜园">
-<meta property="og:description" content="昨天在公司做一次redis分享，之前做的源码分享同事反馈实用性太弱算法不好理解，我就来讲讲实战方面的。 设想数据级别在上亿级别，以下key都在同一台redis实例中。 部分数据   id name sex age languages location     1 常 汉子 20 JS + Node + Java + PHP (121.45, 31.20)   2 青 汉子 20 JS + Node">
+<meta property="og:description" content="昨天在公司做一次redis分享，之前做的源码分享同事反馈实用性太弱算法不好理解，我就来讲讲实战方面的。 设想数据级别在上亿级别，以下key都在同一台redis实例中。 部分数据    id name sex age languages location     1 常 汉子 20 JS + Node + Java + PHP (121.45, 31.20)   2 青 汉子 20 JS + Nod">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2018-09-16T07:42:21.083Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis应用实例">
-<meta name="twitter:description" content="昨天在公司做一次redis分享，之前做的源码分享同事反馈实用性太弱算法不好理解，我就来讲讲实战方面的。 设想数据级别在上亿级别，以下key都在同一台redis实例中。 部分数据   id name sex age languages location     1 常 汉子 20 JS + Node + Java + PHP (121.45, 31.20)   2 青 汉子 20 JS + Node">
+<meta name="twitter:description" content="昨天在公司做一次redis分享，之前做的源码分享同事反馈实用性太弱算法不好理解，我就来讲讲实战方面的。 设想数据级别在上亿级别，以下key都在同一台redis实例中。 部分数据    id name sex age languages location     1 常 汉子 20 JS + Node + Java + PHP (121.45, 31.20)   2 青 汉子 20 JS + Nod">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/07/06/redis-study-notes/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/06/redis-study-notes/">
 
 
 
@@ -238,7 +238,7 @@
           
           <li class="menu-item menu-item-home">
     <a href="/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
   </li>
         
         
@@ -246,7 +246,7 @@
           
           <li class="menu-item menu-item-tags">
     <a href="/tags/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
   </li>
         
         
@@ -254,7 +254,7 @@
           
           <li class="menu-item menu-item-categories">
     <a href="/categories/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
   </li>
         
         
@@ -262,7 +262,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
   </li>
 
       
@@ -272,7 +272,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
         </li>
       
     </ul>
@@ -292,9 +292,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -348,7 +346,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="韩">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content>
       <meta itemprop="image" content="/uploads/avatar.jpeg">
     </span>
 
@@ -409,7 +407,7 @@
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
             
               <span class="post-meta-divider">|</span>
             
@@ -456,7 +454,8 @@
       
         <p>昨天在公司做一次redis分享，之前做的源码分享同事反馈实用性太弱算法不好理解，我就来讲讲实战方面的。</p>
 <p>设想数据级别在上亿级别，以下key都在同一台redis实例中。</p>
-<h3 id="部分数据"><a href="#部分数据" class="headerlink" title="部分数据"></a>部分数据</h3><table>
+<h3 id="部分数据"><a href="#部分数据" class="headerlink" title="部分数据"></a>部分数据</h3><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>id</th>
@@ -566,6 +565,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 用户ID =&gt; 用户名</span></span><br><span class="line">$id_name = [</span><br><span class="line">	<span class="number">1</span> =&gt; <span class="string">'常'</span>, <span class="number">2</span> =&gt; <span class="string">'青'</span>, <span class="number">3</span> =&gt; <span class="string">'包'</span>, <span class="number">4</span> =&gt; <span class="string">'喜'</span>, <span class="number">5</span> =&gt; <span class="string">'缪'</span>, <span class="number">6</span> =&gt; <span class="string">'鹏'</span>, <span class="number">7</span> =&gt; <span class="string">'亮'</span>,</span><br><span class="line">	<span class="number">8</span> =&gt; <span class="string">'宏'</span>, <span class="number">9</span> =&gt; <span class="string">'韩'</span>, <span class="number">10</span> =&gt; <span class="string">'胜'</span>, <span class="number">11</span> =&gt; <span class="string">'欣'</span>, <span class="number">12</span> =&gt; <span class="string">'文'</span></span><br><span class="line">];</span><br></pre></td></tr></table></figure>
 <h3 id="产品需求"><a href="#产品需求" class="headerlink" title="产品需求"></a>产品需求</h3><ol>
 <li>如何实现微博中的粉丝、关注关系？</li>
@@ -731,9 +731,7 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image"
-                src="/uploads/avatar.jpeg"
-                alt="韩" />
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpeg" alt="韩">
             
               <p class="site-author-name" itemprop="name">韩</p>
               <p class="site-description motion-element" itemprop="description"></p>
@@ -746,7 +744,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">35</span>
+                    <span class="site-state-item-count">36</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -781,7 +779,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">10</span>
+                      
+                    
+                    <span class="site-state-item-count">11</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -872,7 +872,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#部分数据"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x90E8;&#x5206;&#x6570;&#x636E;" class="headerlink" title="&#x90E8;&#x5206;&#x6570;&#x636E;"></a>&#x90E8;&#x5206;&#x6570;&#x636E;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#产品需求"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x4EA7;&#x54C1;&#x9700;&#x6C42;" class="headerlink" title="&#x4EA7;&#x54C1;&#x9700;&#x6C42;"></a>&#x4EA7;&#x54C1;&#x9700;&#x6C42;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关注关系的实现"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x5173;&#x6CE8;&#x5173;&#x7CFB;&#x7684;&#x5B9E;&#x73B0;" class="headerlink" title="&#x5173;&#x6CE8;&#x5173;&#x7CFB;&#x7684;&#x5B9E;&#x73B0;"></a>&#x5173;&#x6CE8;&#x5173;&#x7CFB;&#x7684;&#x5B9E;&#x73B0;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户标签的聚合"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x7528;&#x6237;&#x6807;&#x7B7E;&#x7684;&#x805A;&#x5408;" class="headerlink" title="&#x7528;&#x6237;&#x6807;&#x7B7E;&#x7684;&#x805A;&#x5408;"></a>&#x7528;&#x6237;&#x6807;&#x7B7E;&#x7684;&#x805A;&#x5408;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#准备数据"><span class="nav-number">4.1.</span> <span class="nav-text"><a href="#&#x51C6;&#x5907;&#x6570;&#x636E;" class="headerlink" title="&#x51C6;&#x5907;&#x6570;&#x636E;"></a>&#x51C6;&#x5907;&#x6570;&#x636E;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决问题"><span class="nav-number">4.2.</span> <span class="nav-text"><a href="#&#x89E3;&#x51B3;&#x95EE;&#x9898;" class="headerlink" title="&#x89E3;&#x51B3;&#x95EE;&#x9898;"></a>&#x89E3;&#x51B3;&#x95EE;&#x9898;</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#距离关系"><span class="nav-number">5.</span> <span class="nav-text"><a href="#&#x8DDD;&#x79BB;&#x5173;&#x7CFB;" class="headerlink" title="&#x8DDD;&#x79BB;&#x5173;&#x7CFB;"></a>&#x8DDD;&#x79BB;&#x5173;&#x7CFB;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#准备数据-1"><span class="nav-number">5.1.</span> <span class="nav-text"><a href="#&#x51C6;&#x5907;&#x6570;&#x636E;-1" class="headerlink" title="&#x51C6;&#x5907;&#x6570;&#x636E;"></a>&#x51C6;&#x5907;&#x6570;&#x636E;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决问题-1"><span class="nav-number">5.2.</span> <span class="nav-text"><a href="#&#x89E3;&#x51B3;&#x95EE;&#x9898;-1" class="headerlink" title="&#x89E3;&#x51B3;&#x95EE;&#x9898;"></a>&#x89E3;&#x51B3;&#x95EE;&#x9898;</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#部分数据"><span class="nav-number">1.</span> <span class="nav-text">部分数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#产品需求"><span class="nav-number">2.</span> <span class="nav-text">产品需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关注关系的实现"><span class="nav-number">3.</span> <span class="nav-text">关注关系的实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户标签的聚合"><span class="nav-number">4.</span> <span class="nav-text">用户标签的聚合</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#准备数据"><span class="nav-number">4.1.</span> <span class="nav-text">准备数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决问题"><span class="nav-number">4.2.</span> <span class="nav-text">解决问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#距离关系"><span class="nav-number">5.</span> <span class="nav-text">距离关系</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#准备数据-1"><span class="nav-number">5.1.</span> <span class="nav-text">准备数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决问题-1"><span class="nav-number">5.2.</span> <span class="nav-text">解决问题</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -906,7 +906,7 @@
 
 
 
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.4.3</div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.8.0</div>
 
 
 
@@ -1376,7 +1376,24 @@
         onPopupClose();
       }
     });
-  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
 

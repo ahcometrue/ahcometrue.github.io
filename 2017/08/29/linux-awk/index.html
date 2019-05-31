@@ -15,10 +15,10 @@
 
 
 <html class="theme-next gemini use-motion" lang="zh-CN">
-<head>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 
 
@@ -32,8 +32,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -56,9 +56,9 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
@@ -126,7 +126,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/08/29/linux-awk/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/08/29/linux-awk/">
 
 
 
@@ -238,7 +238,7 @@
           
           <li class="menu-item menu-item-home">
     <a href="/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
   </li>
         
         
@@ -246,7 +246,7 @@
           
           <li class="menu-item menu-item-tags">
     <a href="/tags/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
   </li>
         
         
@@ -254,7 +254,7 @@
           
           <li class="menu-item menu-item-categories">
     <a href="/categories/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
   </li>
         
         
@@ -262,7 +262,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
   </li>
 
       
@@ -272,7 +272,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
         </li>
       
     </ul>
@@ -292,9 +292,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -348,7 +346,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="韩">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content>
       <meta itemprop="image" content="/uploads/avatar.jpeg">
     </span>
 
@@ -409,7 +407,7 @@
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
             
               <span class="post-meta-divider">|</span>
             
@@ -476,7 +474,8 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">~/Sites awk <span class="string">'&#123;sum +=$2&#125;;END &#123;print sum&#125;'</span> 1.txt</span><br><span class="line">30</span><br></pre></td></tr></table></figure>
 <p>把第一列为‘han’的行，第二列和第三列用“<em>*</em>”代替</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">~/Sites awk <span class="string">'$1 == "han" &#123;print $1, $2 = "***", $3 = "***"&#125; $1 != "han" &#123;print $0&#125;'</span> 1.txt</span><br><span class="line">han *** ***</span><br><span class="line">yan 10 1993</span><br><span class="line">jie 10 1993</span><br></pre></td></tr></table></figure>
-<h4 id="函数介绍"><a href="#函数介绍" class="headerlink" title="函数介绍"></a>函数介绍</h4><table>
+<h4 id="函数介绍"><a href="#函数介绍" class="headerlink" title="函数介绍"></a>函数介绍</h4><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>函数名</th>
@@ -526,6 +525,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <h4 id="函数小试"><a href="#函数小试" class="headerlink" title="函数小试"></a>函数小试</h4><p>把文件中“3”替换成“*”</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">~/Sites awk <span class="string">'gsub("3", "*") &#123;print $0&#125;'</span> 1.txt</span><br><span class="line">yan 10 199*</span><br><span class="line">jie 10 199*</span><br></pre></td></tr></table></figure>
 <p>查找包含“j”的行</p>
@@ -653,9 +653,7 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image"
-                src="/uploads/avatar.jpeg"
-                alt="韩" />
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpeg" alt="韩">
             
               <p class="site-author-name" itemprop="name">韩</p>
               <p class="site-description motion-element" itemprop="description"></p>
@@ -668,7 +666,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">35</span>
+                    <span class="site-state-item-count">36</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -703,7 +701,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">10</span>
+                      
+                    
+                    <span class="site-state-item-count">11</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -794,7 +794,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Help-Help"><span class="nav-number">1.</span> <span class="nav-text"><a href="#Help-Help" class="headerlink" title="Help Help"></a>Help Help</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#敲一敲-瞧一瞧"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x6572;&#x4E00;&#x6572;-&#x77A7;&#x4E00;&#x77A7;" class="headerlink" title="&#x6572;&#x4E00;&#x6572; &#x77A7;&#x4E00;&#x77A7;"></a>&#x6572;&#x4E00;&#x6572; &#x77A7;&#x4E00;&#x77A7;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#小试牛刀"><span class="nav-number">2.1.</span> <span class="nav-text"><a href="#&#x5C0F;&#x8BD5;&#x725B;&#x5200;" class="headerlink" title="&#x5C0F;&#x8BD5;&#x725B;&#x5200;"></a>&#x5C0F;&#x8BD5;&#x725B;&#x5200;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分割符"><span class="nav-number">2.2.</span> <span class="nav-text"><a href="#&#x5206;&#x5272;&#x7B26;" class="headerlink" title="&#x5206;&#x5272;&#x7B26;"></a>&#x5206;&#x5272;&#x7B26;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#awk内置变量的使用"><span class="nav-number">2.3.</span> <span class="nav-text"><a href="#awk&#x5185;&#x7F6E;&#x53D8;&#x91CF;&#x7684;&#x4F7F;&#x7528;" class="headerlink" title="awk&#x5185;&#x7F6E;&#x53D8;&#x91CF;&#x7684;&#x4F7F;&#x7528;"></a>awk&#x5185;&#x7F6E;&#x53D8;&#x91CF;&#x7684;&#x4F7F;&#x7528;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#赋值和运算"><span class="nav-number">2.4.</span> <span class="nav-text"><a href="#&#x8D4B;&#x503C;&#x548C;&#x8FD0;&#x7B97;" class="headerlink" title="&#x8D4B;&#x503C;&#x548C;&#x8FD0;&#x7B97;"></a>&#x8D4B;&#x503C;&#x548C;&#x8FD0;&#x7B97;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数介绍"><span class="nav-number">2.5.</span> <span class="nav-text"><a href="#&#x51FD;&#x6570;&#x4ECB;&#x7ECD;" class="headerlink" title="&#x51FD;&#x6570;&#x4ECB;&#x7ECD;"></a>&#x51FD;&#x6570;&#x4ECB;&#x7ECD;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数小试"><span class="nav-number">2.6.</span> <span class="nav-text"><a href="#&#x51FD;&#x6570;&#x5C0F;&#x8BD5;" class="headerlink" title="&#x51FD;&#x6570;&#x5C0F;&#x8BD5;"></a>&#x51FD;&#x6570;&#x5C0F;&#x8BD5;</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Help-Help"><span class="nav-number">1.</span> <span class="nav-text">Help Help</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#敲一敲-瞧一瞧"><span class="nav-number">2.</span> <span class="nav-text">敲一敲 瞧一瞧</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#小试牛刀"><span class="nav-number">2.1.</span> <span class="nav-text">小试牛刀</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分割符"><span class="nav-number">2.2.</span> <span class="nav-text">分割符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#awk内置变量的使用"><span class="nav-number">2.3.</span> <span class="nav-text">awk内置变量的使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#赋值和运算"><span class="nav-number">2.4.</span> <span class="nav-text">赋值和运算</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数介绍"><span class="nav-number">2.5.</span> <span class="nav-text">函数介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数小试"><span class="nav-number">2.6.</span> <span class="nav-text">函数小试</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -828,7 +828,7 @@
 
 
 
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.4.3</div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.8.0</div>
 
 
 
@@ -1298,7 +1298,24 @@
         onPopupClose();
       }
     });
-  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
 

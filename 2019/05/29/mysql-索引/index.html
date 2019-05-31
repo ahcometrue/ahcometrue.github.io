@@ -15,10 +15,10 @@
 
 
 <html class="theme-next gemini use-motion" lang="zh-CN">
-<head>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 
 
@@ -32,8 +32,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -56,9 +56,9 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
@@ -108,24 +108,24 @@
 
 
 
-  <meta name="description" content="常见的索引模型索引的出现是为了提高查询效率，但实现索引的方式却有很多种。索引模型可以看作是种数据结构，常见的有哈希表、有序数组和搜索树。 InnoDB的索引模型 主键索引的叶子节点存的是整行数据。在InnoDB里，主键索引也被称为聚簇索引（clusterd index）。 非主键索引的叶子节点内容时主键的值。在InnoDB里，非主键索引也被称为二级索引（secondary index）。  覆盖索">
+  <meta name="description" content="索引的存储分类索引是在MySQL的存储引擎层中实现的，而不是在服务层实现的。所以每种存储引擎的索引都不一定完全相同，也不是所有的存储引擎都支持所有的索引类型。目前MySQL提供了一下4种索引：  B-Tree 索引：最常见的索引类型，大部分引擎都支持B树索引。 HASH索引：只有Memory引擎支持，使用场景简单。 R-Tree索引(空间索引)：空间索引是MyISAM的一种特殊索引类型，主要用于地">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mysql-索引">
 <meta property="og:url" content="http://yoursite.com/2019/05/29/mysql-索引/index.html">
 <meta property="og:site_name" content="小菜园">
-<meta property="og:description" content="常见的索引模型索引的出现是为了提高查询效率，但实现索引的方式却有很多种。索引模型可以看作是种数据结构，常见的有哈希表、有序数组和搜索树。 InnoDB的索引模型 主键索引的叶子节点存的是整行数据。在InnoDB里，主键索引也被称为聚簇索引（clusterd index）。 非主键索引的叶子节点内容时主键的值。在InnoDB里，非主键索引也被称为二级索引（secondary index）。  覆盖索">
+<meta property="og:description" content="索引的存储分类索引是在MySQL的存储引擎层中实现的，而不是在服务层实现的。所以每种存储引擎的索引都不一定完全相同，也不是所有的存储引擎都支持所有的索引类型。目前MySQL提供了一下4种索引：  B-Tree 索引：最常见的索引类型，大部分引擎都支持B树索引。 HASH索引：只有Memory引擎支持，使用场景简单。 R-Tree索引(空间索引)：空间索引是MyISAM的一种特殊索引类型，主要用于地">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-05-29T09:31:26.794Z">
+<meta property="og:updated_time" content="2019-05-31T02:09:24.593Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mysql-索引">
-<meta name="twitter:description" content="常见的索引模型索引的出现是为了提高查询效率，但实现索引的方式却有很多种。索引模型可以看作是种数据结构，常见的有哈希表、有序数组和搜索树。 InnoDB的索引模型 主键索引的叶子节点存的是整行数据。在InnoDB里，主键索引也被称为聚簇索引（clusterd index）。 非主键索引的叶子节点内容时主键的值。在InnoDB里，非主键索引也被称为二级索引（secondary index）。  覆盖索">
+<meta name="twitter:description" content="索引的存储分类索引是在MySQL的存储引擎层中实现的，而不是在服务层实现的。所以每种存储引擎的索引都不一定完全相同，也不是所有的存储引擎都支持所有的索引类型。目前MySQL提供了一下4种索引：  B-Tree 索引：最常见的索引类型，大部分引擎都支持B树索引。 HASH索引：只有Memory引擎支持，使用场景简单。 R-Tree索引(空间索引)：空间索引是MyISAM的一种特殊索引类型，主要用于地">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/05/29/mysql-索引/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/05/29/mysql-索引/">
 
 
 
@@ -237,7 +237,7 @@
           
           <li class="menu-item menu-item-home">
     <a href="/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
   </li>
         
         
@@ -245,7 +245,7 @@
           
           <li class="menu-item menu-item-tags">
     <a href="/tags/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
   </li>
         
         
@@ -253,7 +253,7 @@
           
           <li class="menu-item menu-item-categories">
     <a href="/categories/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
   </li>
         
         
@@ -261,7 +261,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
   </li>
 
       
@@ -271,7 +271,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
         </li>
       
     </ul>
@@ -291,9 +291,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -347,7 +345,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="韩">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content>
       <meta itemprop="image" content="/uploads/avatar.jpeg">
     </span>
 
@@ -385,18 +383,30 @@
                 
               
 
-              <time title="创建时间：2019-05-29 09:54:18 / 修改时间：17:31:26" itemprop="dateCreated datePublished" datetime="2019-05-29T09:54:18+08:00">2019-05-29</time>
+              <time title="创建时间：2019-05-29 09:54:18" itemprop="dateCreated datePublished" datetime="2019-05-29T09:54:18+08:00">2019-05-29</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-31 10:09:24" itemprop="dateModified" datetime="2019-05-31T10:09:24+08:00">2019-05-31</time>
               
             
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
             
               <span class="post-meta-divider">|</span>
             
@@ -441,7 +451,14 @@
       
 
       
-        <h2 id="常见的索引模型"><a href="#常见的索引模型" class="headerlink" title="常见的索引模型"></a>常见的索引模型</h2><p>索引的出现是为了提高查询效率，但实现索引的方式却有很多种。索引模型可以看作是种数据结构，常见的有<code>哈希表</code>、<code>有序数组</code>和<code>搜索树</code>。</p>
+        <h2 id="索引的存储分类"><a href="#索引的存储分类" class="headerlink" title="索引的存储分类"></a>索引的存储分类</h2><p>索引是在MySQL的存储引擎层中实现的，而不是在服务层实现的。所以每种存储引擎的索引都不一定完全相同，也不是所有的存储引擎都支持所有的索引类型。<br>目前MySQL提供了一下4种索引：</p>
+<ul>
+<li>B-Tree 索引：最常见的索引类型，大部分引擎都支持B树索引。</li>
+<li>HASH索引：只有Memory引擎支持，使用场景简单。</li>
+<li>R-Tree索引(空间索引)：空间索引是MyISAM的一种特殊索引类型，主要用于地理空间数据类型。</li>
+<li>Full-text索引(全文索引)：全文索引也是MyISAM的一种特殊索引类型，主要用于全文索引，InnoDB从MYSQL5.6版本提供对全文索引的支持。</li>
+</ul>
+<h2 id="常见的索引模型"><a href="#常见的索引模型" class="headerlink" title="常见的索引模型"></a>常见的索引模型</h2><p>索引的出现是为了提高查询效率，但实现索引的方式却有很多种。索引模型可以看作是种数据结构，常见的有<code>哈希表</code>、<code>有序数组</code>和<code>搜索树</code>。</p>
 <h2 id="InnoDB的索引模型"><a href="#InnoDB的索引模型" class="headerlink" title="InnoDB的索引模型"></a>InnoDB的索引模型</h2><ul>
 <li>主键索引的叶子节点存的是整行数据。在InnoDB里，主键索引也被称为聚簇索引（clusterd index）。</li>
 <li>非主键索引的叶子节点内容时主键的值。在InnoDB里，非主键索引也被称为二级索引（secondary index）。</li>
@@ -485,6 +502,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/31/leetcode-two-sum/" rel="prev" title="两数之和">
+                两数之和 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -552,9 +573,7 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image"
-                src="/uploads/avatar.jpeg"
-                alt="韩" />
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpeg" alt="韩">
             
               <p class="site-author-name" itemprop="name">韩</p>
               <p class="site-description motion-element" itemprop="description"></p>
@@ -567,7 +586,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">35</span>
+                    <span class="site-state-item-count">36</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -602,7 +621,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">10</span>
+                      
+                    
+                    <span class="site-state-item-count">11</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -693,7 +714,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#常见的索引模型"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x5E38;&#x89C1;&#x7684;&#x7D22;&#x5F15;&#x6A21;&#x578B;" class="headerlink" title="&#x5E38;&#x89C1;&#x7684;&#x7D22;&#x5F15;&#x6A21;&#x578B;"></a>&#x5E38;&#x89C1;&#x7684;&#x7D22;&#x5F15;&#x6A21;&#x578B;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#InnoDB的索引模型"><span class="nav-number">2.</span> <span class="nav-text"><a href="#InnoDB&#x7684;&#x7D22;&#x5F15;&#x6A21;&#x578B;" class="headerlink" title="InnoDB&#x7684;&#x7D22;&#x5F15;&#x6A21;&#x578B;"></a>InnoDB&#x7684;&#x7D22;&#x5F15;&#x6A21;&#x578B;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#覆盖索引"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x8986;&#x76D6;&#x7D22;&#x5F15;" class="headerlink" title="&#x8986;&#x76D6;&#x7D22;&#x5F15;"></a>&#x8986;&#x76D6;&#x7D22;&#x5F15;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最左前缀原则"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x6700;&#x5DE6;&#x524D;&#x7F00;&#x539F;&#x5219;" class="headerlink" title="&#x6700;&#x5DE6;&#x524D;&#x7F00;&#x539F;&#x5219;"></a>&#x6700;&#x5DE6;&#x524D;&#x7F00;&#x539F;&#x5219;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索引下推"><span class="nav-number">5.</span> <span class="nav-text"><a href="#&#x7D22;&#x5F15;&#x4E0B;&#x63A8;" class="headerlink" title="&#x7D22;&#x5F15;&#x4E0B;&#x63A8;"></a>&#x7D22;&#x5F15;&#x4E0B;&#x63A8;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索引的维护"><span class="nav-number">6.</span> <span class="nav-text"><a href="#&#x7D22;&#x5F15;&#x7684;&#x7EF4;&#x62A4;" class="headerlink" title="&#x7D22;&#x5F15;&#x7684;&#x7EF4;&#x62A4;"></a>&#x7D22;&#x5F15;&#x7684;&#x7EF4;&#x62A4;</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#索引的存储分类"><span class="nav-number">1.</span> <span class="nav-text">索引的存储分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见的索引模型"><span class="nav-number">2.</span> <span class="nav-text">常见的索引模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#InnoDB的索引模型"><span class="nav-number">3.</span> <span class="nav-text">InnoDB的索引模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#覆盖索引"><span class="nav-number">4.</span> <span class="nav-text">覆盖索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最左前缀原则"><span class="nav-number">5.</span> <span class="nav-text">最左前缀原则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索引下推"><span class="nav-number">6.</span> <span class="nav-text">索引下推</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索引的维护"><span class="nav-number">7.</span> <span class="nav-text">索引的维护</span></a></li></ol></div>
             
 
           </div>
@@ -727,7 +748,7 @@
 
 
 
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.4.3</div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.8.0</div>
 
 
 
@@ -1197,7 +1218,24 @@
         onPopupClose();
       }
     });
-  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
 
