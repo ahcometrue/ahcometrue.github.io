@@ -1,6 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Rust可变Vector]]></title>
+    <url>%2F2019%2F07%2F22%2Frust-mut-vec%2F</url>
+    <content type="text"><![CDATA[12345678910111213141516171819202122232425262728fn write_log(content: &amp;mut Vec&lt;u8&gt;) -&gt; std::io::Result&lt;()&gt; &#123; //ASCII控制字符 10 换行 content.push(10); let filename = "/Users/hg/Sites/youyou_log/1.txt"; let file = OpenOptions::new() .read(true) .write(true) .create(true) .append(true) .open(filename); match file &#123; Ok(mut stream) =&gt; &#123; stream.write_all(&amp;content)?; &#125; Err(err) =&gt; &#123; println!("&#123;:?&#125;", err); &#125; &#125; Ok(())&#125;fn main() &#123; let mut content = recv_msg(&amp;socket); write_log(&amp;mut content).unwrap(); //会影响content的值 println!("&#123;&#125;", String::from_utf8(content).unwrap());&#125;]]></content>
+      <categories>
+        <category>Rust</category>
+      </categories>
+      <tags>
+        <tag>Rust</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title></title>
+    <url>%2F2019%2F06%2F25%2F%E7%99%BE%E8%AF%8D%E6%96%A9%2F</url>
+    <content type="text"><![CDATA[baicizhandoexampleinfo ZBOOKFINISHINFO 选择过的课本表 ZBOOKWORDSORCE 百词斩课本信息表 tb_collect_words 一些单词了列表 baicizhaneverynotice ts_every_notice_info 每天提醒背单词的推送消息 baicizhantopic topic_resource_24 zpk文件路径 24是book_id (整本书的单词) baicizhantopicproblem ts_learn_offline_dotopic_sybc_ids_24 已经学习过的单词 ts_word_cloze_24 完型天空表，只存top_id 具体信息在jiongdailycloze baicizhanuser 存储用户信息jiongdailycloze 拼写组合具体信息表lockdb]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[mysql-两阶段加锁协议]]></title>
+    <url>%2F2019%2F06%2F24%2Fmysql-%E4%B8%A4%E9%98%B6%E6%AE%B5%E5%8A%A0%E9%94%81%E5%8D%8F%E8%AE%AE%2F</url>
+    <content type="text"><![CDATA[2PL（2 Phase Locking），两阶段加锁协议：主要用于单机事务中的一致性和隔离性区别于 2PC（2 Phase Commit），两阶段提交协议：主要用于分布式事务]]></content>
+      <categories>
+        <category>Mysql</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[Mysql-名词浅析]]></title>
+    <url>%2F2019%2F06%2F17%2Fmysql-%E5%90%8D%E7%A7%B0%E6%B5%85%E6%9E%90%2F</url>
+    <content type="text"><![CDATA[两阶段加锁协议（2PL）主要用于单机事务中的一致性与隔离性。 两阶段提交协议（2PC）主要用于分布式事务 多版本并发控制（Multi-Version Concurrency Control，MVCC）可重复读（repeatable read）一个事务执行过程中看到的数据，总是跟这个事务在启动时看到的数据是一致的。当然在可重复读隔离级别下，未提交的变更对其他事务是不可见的。 幻读（phantom read）链接 脏读（dirty read）当前读（current read）更新数据都是先读后写，而这个读，只能读当前的值，成为当前读 快照读（snapshot read）一致性不仅是数据库内部数据状态的一致性还包含数据和日志在逻辑上的一致性 读锁（S锁，共享锁）写锁（X锁，排他锁）间隙锁（Gap Lock）next-key lock记录锁（record locks）互斥锁（lock_mode X）行锁死锁当并发系统中不同线程出现循环资源依赖，涉及的线程都在等待别的线程释放资源是，就会导致这几个线程都进入无线等待的状态。 全局锁对整个数据库实例加锁。命令Flush tables with read lock。主要用在逻辑备份过程中 表锁对表进行加锁。命令lock tables ... read/write 元数据锁（meta data lock，MDL）也是表级锁，不需要显示使用，在访问一个数据表的时候会被自动加上。MDL的作用是保证读写的正确性。 备份线程读提交binlog连接器管理连接，权限验证 查询缓存分析器词法分析，语法分析 优化器执行计划生成，索引选择 执行器操作引擎，返回结果 存储引擎redo log（重做日志）binlog（归档日志）undo log（回滚日志）WAL技术（Write-Ahead-Logging，WAL）write poscheckpointbuffer poolInnoDB 用缓冲池管理内存 覆盖索引可以直接提供查询结果，不需要回表。 索引下推一致性视图（consistent read view）是INNIDB在实现MVCC时用到的，用于支持RC（Read Commited，读提交）和RR（Repeatable Read，可重复读）隔离级别的实现。 change buffer刷脏页数据页DDLDMLDCLOnline DDLOLAP 联机分析处理OLAP（On-Line Analytical Processing）OLTP 联机事务处理OLTP（On-Line Transaction Processing）]]></content>
+      <categories>
+        <category>Mysql</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[整数反转]]></title>
     <url>%2F2019%2F05%2F31%2Fleetcode-reverse-integer%2F</url>
     <content type="text"><![CDATA[[题目链接](https://leetcode-cn.com/problems/reverse-integer/ 题目描述给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。 示例 1: 12输入: 123输出: 321 示例 2: 12输入: -123输出: -321 示例 3: 12输入: 120输出: 21 注意: 假设我们的环境只能存储得下 32 位的有符号整数，则其数值范围为 [−231, 231 − 1]。请根据这个假设，如果反转后整数溢出那么就返回 0。 转字符串法1234567891011121314151617181920212223* 时间复杂度：O(1)* 空间复杂度：O(1)class Solution &#123; /** * @param Integer $x * @return Integer */ function reverse($x) &#123; $max = 2147483648; $absx = abs($x); if ($absx &gt;= $max) &#123; return 0; &#125; $rev = strrev($absx); if ($rev &gt;= $max) &#123; return 0; &#125; return ($x &lt;=&gt; 0) * $rev; &#125;&#125; 运行结果： 1234✔ Accepted ✔ 1032/1032 cases passed (0 ms) ✔ Your runtime beats 100 % of php submissions ✔ Your memory usage beats 44.81 % of php submissions (14.7 MB)]]></content>
@@ -242,8 +274,8 @@
       </categories>
       <tags>
         <tag>源码</tag>
-        <tag>内核</tag>
         <tag>Redis</tag>
+        <tag>内核</tag>
       </tags>
   </entry>
   <entry>
@@ -255,8 +287,8 @@
       </categories>
       <tags>
         <tag>源码</tag>
-        <tag>内核</tag>
         <tag>Redis</tag>
+        <tag>内核</tag>
       </tags>
   </entry>
   <entry>
