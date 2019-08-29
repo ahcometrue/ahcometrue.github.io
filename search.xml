@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[2019年下半年面试准备]]></title>
+    <url>%2F2019%2F08%2F29%2F2019%E5%B9%B4%E4%B8%8B%E5%8D%8A%E5%B9%B4%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%87%2F</url>
+    <content type="text"><![CDATA[MySQL 索引 锁 InnoDB 底层存储结构 分库分表 中间件 Redis 底层数据结构 缓存淘汰机制 备份机制 sentinel、cluster PHP php7与php5的不同之处 php-fpm 消息队列（RocketMQ） 工作原理 存储结构 优缺点 应用场景 再稍微了解下kafka 大型网站 高并发 限流 幂等 可靠性 微服务 Nginx 工作原理 反向代理 缓存 Docker CI/CD 自动化部署 Yaf 架构思想 底层源码 协议 HTTP TCP UDP SOCKET 网络编程 IM 设计 架构 思想 Linux 平均负载 CPU使用率 内存使用率 僵尸进程 磁盘I/O 阻塞、非阻塞、异步、同步]]></content>
+      <categories>
+        <category>后花园</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[gitlab-docker-ansible-自动化部署]]></title>
+    <url>%2F2019%2F08%2F29%2Fgitlab-docker-ansible-%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2%2F</url>
+    <content type="text"></content>
+      <categories>
+        <category>容器</category>
+      </categories>
+      <tags>
+        <tag>自动化</tag>
+        <tag>Docker</tag>
+        <tag>CI/CD</tag>
+        <tag>Ansible</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Rust可变Vector]]></title>
     <url>%2F2019%2F07%2F22%2Frust-mut-vec%2F</url>
     <content type="text"><![CDATA[12345678910111213141516171819202122232425262728fn write_log(content: &amp;mut Vec&lt;u8&gt;) -&gt; std::io::Result&lt;()&gt; &#123; //ASCII控制字符 10 换行 content.push(10); let filename = "/Users/hg/Sites/youyou_log/1.txt"; let file = OpenOptions::new() .read(true) .write(true) .create(true) .append(true) .open(filename); match file &#123; Ok(mut stream) =&gt; &#123; stream.write_all(&amp;content)?; &#125; Err(err) =&gt; &#123; println!("&#123;:?&#125;", err); &#125; &#125; Ok(())&#125;fn main() &#123; let mut content = recv_msg(&amp;socket); write_log(&amp;mut content).unwrap(); //会影响content的值 println!("&#123;&#125;", String::from_utf8(content).unwrap());&#125;]]></content>
@@ -10,11 +32,6 @@
       <tags>
         <tag>Rust</tag>
       </tags>
-  </entry>
-  <entry>
-    <title></title>
-    <url>%2F2019%2F06%2F25%2F%E7%99%BE%E8%AF%8D%E6%96%A9%2F</url>
-    <content type="text"><![CDATA[baicizhandoexampleinfo ZBOOKFINISHINFO 选择过的课本表 ZBOOKWORDSORCE 百词斩课本信息表 tb_collect_words 一些单词了列表 baicizhaneverynotice ts_every_notice_info 每天提醒背单词的推送消息 baicizhantopic topic_resource_24 zpk文件路径 24是book_id (整本书的单词) baicizhantopicproblem ts_learn_offline_dotopic_sybc_ids_24 已经学习过的单词 ts_word_cloze_24 完型天空表，只存top_id 具体信息在jiongdailycloze baicizhanuser 存储用户信息jiongdailycloze 拼写组合具体信息表lockdb]]></content>
   </entry>
   <entry>
     <title><![CDATA[mysql-两阶段加锁协议]]></title>
