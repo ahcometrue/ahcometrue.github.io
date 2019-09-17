@@ -1,47 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[2019年下半年面试准备]]></title>
-    <url>%2F2019%2F08%2F29%2F2019%E5%B9%B4%E4%B8%8B%E5%8D%8A%E5%B9%B4%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%87%2F</url>
-    <content type="text"><![CDATA[MySQL 索引 锁 InnoDB 底层存储结构 分库分表 中间件 Redis 底层数据结构 缓存淘汰机制 备份机制 sentinel、cluster PHP php7与php5的不同之处 php-fpm 消息队列（RocketMQ） 工作原理 存储结构 优缺点 应用场景 再稍微了解下kafka 大型网站 高并发 限流 幂等 可靠性 微服务 Nginx 工作原理 反向代理 缓存 Docker CI/CD 自动化部署 Yaf 架构思想 底层源码 协议 HTTP TCP UDP SOCKET 网络编程 IM 设计 架构 思想 Linux 平均负载 CPU使用率 内存使用率 僵尸进程 磁盘I/O 阻塞、非阻塞、异步、同步]]></content>
-      <categories>
-        <category>后花园</category>
-      </categories>
-  </entry>
-  <entry>
-    <title><![CDATA[gitlab-docker-ansible-自动化部署]]></title>
-    <url>%2F2019%2F08%2F29%2Fgitlab-docker-ansible-%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2%2F</url>
-    <content type="text"></content>
-      <categories>
-        <category>容器</category>
-      </categories>
-      <tags>
-        <tag>自动化</tag>
-        <tag>Docker</tag>
-        <tag>CI/CD</tag>
-        <tag>Ansible</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Rust可变Vector]]></title>
-    <url>%2F2019%2F07%2F22%2Frust-mut-vec%2F</url>
-    <content type="text"><![CDATA[12345678910111213141516171819202122232425262728fn write_log(content: &amp;mut Vec&lt;u8&gt;) -&gt; std::io::Result&lt;()&gt; &#123; //ASCII控制字符 10 换行 content.push(10); let filename = "/Users/hg/Sites/youyou_log/1.txt"; let file = OpenOptions::new() .read(true) .write(true) .create(true) .append(true) .open(filename); match file &#123; Ok(mut stream) =&gt; &#123; stream.write_all(&amp;content)?; &#125; Err(err) =&gt; &#123; println!("&#123;:?&#125;", err); &#125; &#125; Ok(())&#125;fn main() &#123; let mut content = recv_msg(&amp;socket); write_log(&amp;mut content).unwrap(); //会影响content的值 println!("&#123;&#125;", String::from_utf8(content).unwrap());&#125;]]></content>
-      <categories>
-        <category>Rust</category>
-      </categories>
-      <tags>
-        <tag>Rust</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[mysql-两阶段加锁协议]]></title>
-    <url>%2F2019%2F06%2F24%2Fmysql-%E4%B8%A4%E9%98%B6%E6%AE%B5%E5%8A%A0%E9%94%81%E5%8D%8F%E8%AE%AE%2F</url>
-    <content type="text"><![CDATA[2PL（2 Phase Locking），两阶段加锁协议：主要用于单机事务中的一致性和隔离性区别于 2PC（2 Phase Commit），两阶段提交协议：主要用于分布式事务]]></content>
-      <categories>
-        <category>Mysql</category>
-      </categories>
-  </entry>
-  <entry>
     <title><![CDATA[Mysql-名词浅析]]></title>
     <url>%2F2019%2F06%2F17%2Fmysql-%E5%90%8D%E7%A7%B0%E6%B5%85%E6%9E%90%2F</url>
     <content type="text"><![CDATA[两阶段加锁协议（2PL）主要用于单机事务中的一致性与隔离性。 两阶段提交协议（2PC）主要用于分布式事务 多版本并发控制（Multi-Version Concurrency Control，MVCC）可重复读（repeatable read）一个事务执行过程中看到的数据，总是跟这个事务在启动时看到的数据是一致的。当然在可重复读隔离级别下，未提交的变更对其他事务是不可见的。 幻读（phantom read）链接 脏读（dirty read）当前读（current read）更新数据都是先读后写，而这个读，只能读当前的值，成为当前读 快照读（snapshot read）一致性不仅是数据库内部数据状态的一致性还包含数据和日志在逻辑上的一致性 读锁（S锁，共享锁）写锁（X锁，排他锁）间隙锁（Gap Lock）next-key lock记录锁（record locks）互斥锁（lock_mode X）行锁死锁当并发系统中不同线程出现循环资源依赖，涉及的线程都在等待别的线程释放资源是，就会导致这几个线程都进入无线等待的状态。 全局锁对整个数据库实例加锁。命令Flush tables with read lock。主要用在逻辑备份过程中 表锁对表进行加锁。命令lock tables ... read/write 元数据锁（meta data lock，MDL）也是表级锁，不需要显示使用，在访问一个数据表的时候会被自动加上。MDL的作用是保证读写的正确性。 备份线程读提交binlog连接器管理连接，权限验证 查询缓存分析器词法分析，语法分析 优化器执行计划生成，索引选择 执行器操作引擎，返回结果 存储引擎redo log（重做日志）binlog（归档日志）undo log（回滚日志）WAL技术（Write-Ahead-Logging，WAL）write poscheckpointbuffer poolInnoDB 用缓冲池管理内存 覆盖索引可以直接提供查询结果，不需要回表。 索引下推一致性视图（consistent read view）是INNIDB在实现MVCC时用到的，用于支持RC（Read Commited，读提交）和RR（Repeatable Read，可重复读）隔离级别的实现。 change buffer刷脏页数据页DDLDMLDCLOnline DDLOLAP 联机分析处理OLAP（On-Line Analytical Processing）OLTP 联机事务处理OLTP（On-Line Transaction Processing）]]></content>
@@ -80,22 +39,6 @@
       <categories>
         <category>Mysql</category>
       </categories>
-  </entry>
-  <entry>
-    <title><![CDATA[算法-复杂度分析]]></title>
-    <url>%2F2019%2F04%2F16%2F%E7%AE%97%E6%B3%95-%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%901%2F</url>
-    <content type="text"></content>
-  </entry>
-  <entry>
-    <title><![CDATA[redis对象]]></title>
-    <url>%2F2018%2F09%2F16%2Fredis-object%2F</url>
-    <content type="text"><![CDATA[Redis主要的数据结构，如：简单动态字符串、双端链表、字典、压缩列表、整数集合等。但Redis并没有直接使用数据结构来实现键值对数据库， 而是基于这些数据结构实现了一个对象系统。Redis有五大对象，分为：字符串对象、列表对象、哈希对象、集合对象和有序集合对象。]]></content>
-      <categories>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>Redis</tag>
-      </tags>
   </entry>
   <entry>
     <title><![CDATA[vscode语言调试记录]]></title>
@@ -291,8 +234,8 @@
       </categories>
       <tags>
         <tag>源码</tag>
-        <tag>Redis</tag>
         <tag>内核</tag>
+        <tag>Redis</tag>
       </tags>
   </entry>
   <entry>
@@ -304,8 +247,8 @@
       </categories>
       <tags>
         <tag>源码</tag>
-        <tag>Redis</tag>
         <tag>内核</tag>
+        <tag>Redis</tag>
       </tags>
   </entry>
   <entry>
