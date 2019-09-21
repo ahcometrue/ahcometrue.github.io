@@ -447,7 +447,7 @@
 <p><strong>返回值：</strong></p>
 <p>被删除 key 的数量。</p>
 <p><strong>例子：</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">redis&gt;</span> SET name huangz</span><br><span class="line">OK</span><br><span class="line"></span><br><span class="line"><span class="meta">redis&gt;</span> DEL name</span><br><span class="line">(integer) 1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 删除一个不存在的 key</span><br><span class="line"></span><br><span class="line"><span class="meta">redis&gt;</span> EXISTS phone</span><br><span class="line">(integer) 0</span><br><span class="line"></span><br><span class="line"><span class="meta">redis&gt;</span> DEL phone # 失败，没有 key 被删除</span><br><span class="line">(integer) 0</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">redis&gt;</span><span class="bash"> SET name huangz</span></span><br><span class="line">OK</span><br><span class="line"></span><br><span class="line"><span class="meta">redis&gt;</span><span class="bash"> DEL name</span></span><br><span class="line">(integer) 1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除一个不存在的 key</span></span><br><span class="line"></span><br><span class="line"><span class="meta">redis&gt;</span><span class="bash"> EXISTS phone</span></span><br><span class="line">(integer) 0</span><br><span class="line"></span><br><span class="line"><span class="meta">redis&gt;</span><span class="bash"> DEL phone <span class="comment"># 失败，没有 key 被删除</span></span></span><br><span class="line">(integer) 0</span><br></pre></td></tr></table></figure>
 <h2 id="源码解析"><a href="#源码解析" class="headerlink" title="源码解析"></a>源码解析</h2><p>命令所在文件：<code>src/db.c</code></p>
 <p><code>del</code> 和 <code>unlink</code>相似，<code>unlink</code> (有条件的)会另起一个线程（在bio.c中）进行空间回收。而<code>DEL</code>会阻塞。</p>
 <ul>
@@ -505,6 +505,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/21/docker镜像实战/" rel="prev" title="Docker和CI/CD实战">
+                Docker和CI/CD实战 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -585,7 +589,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">37</span>
+                    <span class="site-state-item-count">38</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -624,7 +628,7 @@
                     
                       
                     
-                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -687,7 +691,7 @@
                     
                       
                     
-                    <span class="site-state-item-count">20</span>
+                    <span class="site-state-item-count">22</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
