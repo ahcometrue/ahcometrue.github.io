@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="小菜园">
 <meta property="og:description" content="环境 安装docker、gitlab runner及和gitlab.com的runner绑定就不再赘述了。   gitlab，我使用的是gitlab.com Ubuntu 运行gitlab runner和docker容器  制作DockerfileDockerfile 文件内容 此文件中的 RUN、COPY 默认用户是root  USER nobody 是指定在之后操作命令是基于nobody用户">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-21T07:31:20.374Z">
+<meta property="og:updated_time" content="2019-09-27T12:43:50.911Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker和CI&#x2F;CD实战">
 <meta name="twitter:description" content="环境 安装docker、gitlab runner及和gitlab.com的runner绑定就不再赘述了。   gitlab，我使用的是gitlab.com Ubuntu 运行gitlab runner和docker容器  制作DockerfileDockerfile 文件内容 此文件中的 RUN、COPY 默认用户是root  USER nobody 是指定在之后操作命令是基于nobody用户">
@@ -384,12 +384,24 @@
                 
               
 
-              <time title="创建时间：2019-09-21 07:57:06 / 修改时间：15:31:20" itemprop="dateCreated datePublished" datetime="2019-09-21T07:57:06+08:00">2019-09-21</time>
+              <time title="创建时间：2019-09-21 07:57:06" itemprop="dateCreated datePublished" datetime="2019-09-21T07:57:06+08:00">2019-09-21</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-09-27 20:43:50" itemprop="dateModified" datetime="2019-09-27T20:43:50+08:00">2019-09-27</time>
               
             
           </span>
@@ -457,7 +469,7 @@
 <h4 id="gitlab-ci-yml内容"><a href="#gitlab-ci-yml内容" class="headerlink" title=".gitlab-ci.yml内容"></a>.gitlab-ci.yml内容</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">stages:</span><br><span class="line">- build</span><br><span class="line"></span><br><span class="line">build:</span><br><span class="line">    stage: build</span><br><span class="line">    script:</span><br><span class="line">        - sudo docker build -t ahcometrue/php-nginx-redis:latest .</span><br><span class="line">    tags:</span><br><span class="line">        - pack</span><br></pre></td></tr></table></figure>
 <p>因为存在多个项目，而运行环境只是配置的差别，所以就把<code>ahcometrue/php-nginx-redis</code>作为基础镜像，故出现了一下问题。</p>
 <p>此镜像的权限信息：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">// 进程信息</span><br><span class="line"><span class="meta">$</span> ps aux</span><br><span class="line">PID   USER     TIME  COMMAND</span><br><span class="line">1 nobody    0:00 &#123;supervisord&#125; /usr/bin/python2 /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf</span><br><span class="line">7 nobody    0:00 nginx: master process nginx -g daemon off;</span><br><span class="line">8 nobody    0:00 &#123;php-fpm7&#125; php-fpm: master process (/etc/php7/php-fpm.conf)</span><br><span class="line">9 nobody    0:00 nginx: worker process</span><br><span class="line"></span><br><span class="line">//当前用户</span><br><span class="line"><span class="meta">$</span> whoami</span><br><span class="line">nobody</span><br><span class="line"></span><br><span class="line">//当前用户 用户ID 组ID</span><br><span class="line"><span class="meta">$</span> id</span><br><span class="line">uid=65534(nobody) gid=65534(nobody)</span><br><span class="line"></span><br><span class="line">//nginx配置文件权限</span><br><span class="line"><span class="meta">$</span> ls -al /etc/nginx/</span><br><span class="line">...</span><br><span class="line">-rw-r--r--    1 root     root          2295 Sep 20 03:32 nginx.conf</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">//PHP配置文件权限</span><br><span class="line"><span class="meta">$</span> ls -al /etc/php7/</span><br><span class="line">...</span><br><span class="line">-rw-r--r--    1 root     root          5329 Aug 30 00:13 php-fpm.conf</span><br><span class="line">-rw-r--r--    1 root     root         71982 Aug 30 00:13 php.ini</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> ls -al /etc/php7/conf.d/</span><br><span class="line">-rw-r--r--    1 root     root            27 Sep 20 03:32 zzz_custom.ini</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">// 进程信息</span><br><span class="line"><span class="meta">$</span><span class="bash"> ps aux</span></span><br><span class="line">PID   USER     TIME  COMMAND</span><br><span class="line">1 nobody    0:00 &#123;supervisord&#125; /usr/bin/python2 /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf</span><br><span class="line">7 nobody    0:00 nginx: master process nginx -g daemon off;</span><br><span class="line">8 nobody    0:00 &#123;php-fpm7&#125; php-fpm: master process (/etc/php7/php-fpm.conf)</span><br><span class="line">9 nobody    0:00 nginx: worker process</span><br><span class="line"></span><br><span class="line">//当前用户</span><br><span class="line"><span class="meta">$</span><span class="bash"> whoami</span></span><br><span class="line">nobody</span><br><span class="line"></span><br><span class="line">//当前用户 用户ID 组ID</span><br><span class="line"><span class="meta">$</span><span class="bash"> id</span></span><br><span class="line">uid=65534(nobody) gid=65534(nobody)</span><br><span class="line"></span><br><span class="line">//nginx配置文件权限</span><br><span class="line"><span class="meta">$</span><span class="bash"> ls -al /etc/nginx/</span></span><br><span class="line">...</span><br><span class="line">-rw-r--r--    1 root     root          2295 Sep 20 03:32 nginx.conf</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">//PHP配置文件权限</span><br><span class="line"><span class="meta">$</span><span class="bash"> ls -al /etc/php7/</span></span><br><span class="line">...</span><br><span class="line">-rw-r--r--    1 root     root          5329 Aug 30 00:13 php-fpm.conf</span><br><span class="line">-rw-r--r--    1 root     root         71982 Aug 30 00:13 php.ini</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls -al /etc/php7/conf.d/</span></span><br><span class="line">-rw-r--r--    1 root     root            27 Sep 20 03:32 zzz_custom.ini</span><br></pre></td></tr></table></figure>
 <ol>
 <li><p>再次覆盖<code>nginx.conf</code>、<code>php.ini</code>等文件时权限问题</p>
 </li>
@@ -471,7 +483,7 @@
 <p><strong>第二版本</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">FROM ahcometrue/php-nginx-redis:latest</span><br><span class="line"></span><br><span class="line">ENV BASE_DIR /var/www/html</span><br><span class="line"></span><br><span class="line">COPY . $BASE_DIR</span><br><span class="line"></span><br><span class="line">//以下操作使用root用户</span><br><span class="line">USER root</span><br><span class="line"></span><br><span class="line">RUN cd $BASE_DIR &amp;&amp; \</span><br><span class="line">    cp -f $BASE_DIR/.docker/nginx/nginx.conf /etc/nginx/nginx.conf &amp;&amp; \</span><br><span class="line">    cp -f $BASE_DIR/.docker/php/fpm-pool.conf /etc/php7/php-fpm.d/www.conf &amp;&amp; \</span><br><span class="line">    cp -f $BASE_DIR/.docker/php/php.ini /etc/php7/conf.d/zzz_custom.ini &amp;&amp; \</span><br><span class="line">    cp -f $BASE_DIR/.docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf &amp;&amp; \</span><br></pre></td></tr></table></figure>
 <p>此时镜像正常打包完成，容器可以正常跑起来，然而问题又来了。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> ps aux</span><br><span class="line">PID   USER     TIME  COMMAND</span><br><span class="line">1 root    0:00 &#123;supervisord&#125; /usr/bin/python2 /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf</span><br><span class="line">7 root    0:00 nginx: master process nginx -g daemon off;</span><br><span class="line">8 nobody    0:00 &#123;php-fpm7&#125; php-fpm: master process (/etc/php7/php-fpm.conf)</span><br><span class="line">9 root    0:00 nginx: worker process</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ps aux</span></span><br><span class="line">PID   USER     TIME  COMMAND</span><br><span class="line">1 root    0:00 &#123;supervisord&#125; /usr/bin/python2 /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf</span><br><span class="line">7 root    0:00 nginx: master process nginx -g daemon off;</span><br><span class="line">8 nobody    0:00 &#123;php-fpm7&#125; php-fpm: master process (/etc/php7/php-fpm.conf)</span><br><span class="line">9 root    0:00 nginx: worker process</span><br></pre></td></tr></table></figure>
 <ol>
 <li><p>由于 <code>php-fpm7</code> 在文件中指定的是 <code>nobody</code>运行，而<code>nginx</code>、<code>supervisord</code>、却以<code>root</code>运行(因为在dockerfile中最后切换的用户是<code>root</code>)，此时导致有些日志没有权限写入.</p>
 </li>
@@ -548,6 +560,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/22/kafka学习笔记/" rel="prev" title="kafka学习笔记">
+                kafka学习笔记 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -628,7 +644,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">38</span>
+                    <span class="site-state-item-count">40</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -667,7 +683,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">12</span>
+                      
+                    
+                    <span class="site-state-item-count">13</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -730,7 +748,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">22</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">24</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
